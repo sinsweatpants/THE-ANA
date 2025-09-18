@@ -1,51 +1,13 @@
 
+
 import React from 'react';
 import { TaskType, TaskCategory, CompletionEnhancementOption } from './types'; // Import TaskType and TaskCategory
 
 export const APP_TITLE = "المحلل الدرامي والمبدع المحاكي";
-export const GEMINI_TEXT_MODEL = 'gemini-2.5-flash-preview-04-17'; // Updated to latest recommended model
+export const GEMINI_TEXT_MODEL = 'gemini-2.5-pro';
 export const MIN_FILES_REQUIRED = 1; 
 export const MAX_FILE_SIZE_MB = 20;
 export const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
-
-export const ENHANCED_TASK_DESCRIPTIONS: { [key: string]: string } = {
-  // الوظائف الأساسية المحسنة
-  [TaskType.ANALYSIS]: "تحليل نقدي معمق بالذكاء الاصطناعي: كشف دقيق للقوة والضعف مع حلول ذكية قابلة للتطبيق. يتضمن قياسات كمية وتوصيات.",
-  [TaskType.CREATIVE]: "إبداع محاكاتي متطور: إنتاج محتوى يحمل البصمة الجينية للمؤلف بدقة متناهية.",
-  [TaskType.INTEGRATED]: "تكامل ذكي متقدم: دمج التحليل العميق مع الإبداع التوليدي لنتائج استثنائية.",
-  [TaskType.COMPLETION]: "استكمال ذكي تنبؤي: فهم عميق للنمط وإكمال متسق مع الرؤية الأصلية، مع تحديد نطاق الاستكمال. يمكن دمجه مع قدرات تحليلية وإبداعية أخرى.",
-  
-  // الوظائف التحليلية الموجودة
-  [TaskType.RHYTHM_MAPPING]: "رسم خرائط الإيقاع: تحليل بصري متقدم لديناميكيات السرد والتوتر الدرامي.",
-  [TaskType.CHARACTER_NETWORK]: "شبكات الشخصيات الذكية: تحليل العلاقات والصراعات بخوارزميات الشبكات المعقدة.",
-  [TaskType.DIALOGUE_FORENSICS]: "الطب الشرعي للحوار: تحليل عميق للأصوات والأنماط اللغوية الفريدة للشخصيات.",
-  [TaskType.THEMATIC_MINING]: "التنقيب الموضوعاتي: استخراج المعاني العميقة والرسائل الضمنية بالذكاء الاصطناعي.",
-  [TaskType.STYLE_FINGERPRINT]: "بصمة الأسلوب الرقمية: تحليل فريد للهوية الأدبية للمؤلف بدقة علمية.",
-  [TaskType.CONFLICT_DYNAMICS]: "ديناميكيات الصراع: نمذجة رياضية للتوترات وتطور الصراعات داخل النص.",
-  
-  // الوظائف الإبداعية المتطورة الموجودة
-  [TaskType.ADAPTIVE_REWRITING]: "إعادة الكتابة التكيفية: تحويل ذكي للنصوص حسب السياق، الهدف، أو الجمهور، مع الحفاظ على الجوهر.",
-  [TaskType.SCENE_GENERATOR]: "مولد المشاهد الذكي: إنشاء مشاهد متكاملة (حوار، وصف) تناسب السياق الدرامي المحدد.",
-  [TaskType.CHARACTER_VOICE]: "محاكي الصوت الشخصي: توليد حوارات أصيلة ومتسقة مع صوت كل شخصية.",
-  [TaskType.WORLD_BUILDER]: "باني العوالم: إنشاء وتوسيع عوالم درامية متكاملة (قوانين، تاريخ، ثقافة) ومتستقة داخلياً.",
-  
-  // الوظائف التنبؤية والتوليدية الموجودة
-  [TaskType.PLOT_PREDICTOR]: "التنبؤ بمسار الحبكة: استشراف ذكي للتطورات المحتملة للقصة ضمن نطاق الاستكمال المحدد.",
-  [TaskType.TENSION_OPTIMIZER]: "محسن التوتر الدرامي: ضبط ديناميكي لمنحنى التشويق والإثارة ضمن نطاق الاستكمال.",
-  [TaskType.AUDIENCE_RESONANCE]: "محلل صدى الجمهور: تنبؤ دقيق باستجابة الجمهور المحتملة للمحتوى المكتمل أو المعدل.",
-  [TaskType.PLATFORM_ADAPTER]: "محول المنصات الذكي: تكييف المحتوى المكتمل أو الموجود ليناسب متطلبات منصات عرض مختلفة.",
-
-  // --- الوحدات الجديدة (Units 3-11) ---
-  [TaskType.CHARACTER_DEEP_ANALYZER]: "الوحدة 3: مُحلل الشخصيات العميق - تحديد وتتبع وتحليل الشخصيات وعلاقاتها وعمقها النفسي وتفردها.",
-  [TaskType.DIALOGUE_ADVANCED_ANALYZER]: "الوحدة 4: محلل الحوار المتطور - تحليل تفرد الأصوات، النص الفرعي، طبيعية الحوار، الإيقاع اللغوي، والكليشيهات.",
-  [TaskType.VISUAL_CINEMATIC_ANALYZER]: "الوحدة 5: محلل السياق البصري والسينمائي - تفسير التعليمات الإخراجية، الأجواء، الرمزية البصرية، وقابلية التصوير.",
-  [TaskType.THEMES_MESSAGES_ANALYZER]: "الوحدة 6: محلل الموضوعات والرسائل - استخراج الموضوعات، العمق الفلسفي، الرسائل المخفية، والتماسك الموضوعي.",
-  [TaskType.CULTURAL_HISTORICAL_ANALYZER]: "الوحدة 7: محلل السياق الثقافي والتاريخي - تحديد الحقبة، الدقة الثقافية، التحيزات، والحساسية للقضايا.",
-  [TaskType.PRODUCIBILITY_ANALYZER]: "الوحدة 8: محلل القابلية للإنتاج - تقدير الميزانية، المتطلبات التقنية، صعوبة التصوير، والمواقع.",
-  [TaskType.TARGET_AUDIENCE_ANALYZER]: "الوحدة 9: محلل الجمهور المستهدف - تحديد الديموغرافيا، التوقعات، الجاذبية، والمحتوى الحساس.",
-  [TaskType.LITERARY_QUALITY_ANALYZER]: "الوحدة 10: محلل الجودة الأدبية - تقييم الأصالة، البلاغة، الكليشيهات، التماسك السردي، والتأثير العاطفي.",
-  [TaskType.RECOMMENDATIONS_GENERATOR]: "الوحدة 11: مولد التوصيات والتحسينات - اقتراحات مخصصة لتحسين البنية، الشخصيات، الحوار، وبدائل إبداعية.",
-};
 
 // Helper to identify tasks that require completion scope input
 export const TASKS_REQUIRING_COMPLETION_SCOPE: TaskType[] = [
@@ -69,6 +31,35 @@ export const COMPLETION_ENHANCEMENT_OPTIONS: CompletionEnhancementOption[] = [
   { id: TaskType.THEMES_MESSAGES_ANALYZER, label: "محلل الموضوعات والرسائل (جديد)" },
 ];
 
+export const TASK_LABELS: Record<TaskType, string> = {
+  [TaskType.ANALYSIS]: 'تحليل نقدي',
+  [TaskType.CREATIVE]: 'إبداع محاكاتي',
+  [TaskType.INTEGRATED]: 'سير عمل متكامل',
+  [TaskType.COMPLETION]: 'استكمال النص',
+  [TaskType.RHYTHM_MAPPING]: 'رسم خرائط الإيقاع',
+  [TaskType.CHARACTER_NETWORK]: 'تحليل شبكات الشخصيات',
+  [TaskType.DIALOGUE_FORENSICS]: 'تحليل الحوار',
+  [TaskType.THEMATIC_MINING]: 'التنقيب عن الموضوعات',
+  [TaskType.STYLE_FINGERPRINT]: 'بصمة الأسلوب',
+  [TaskType.CONFLICT_DYNAMICS]: 'ديناميكيات الصراع',
+  [TaskType.ADAPTIVE_REWRITING]: 'إعادة كتابة تكيفية',
+  [TaskType.SCENE_GENERATOR]: 'مولد المشاهد',
+  [TaskType.CHARACTER_VOICE]: 'محاكاة صوت الشخصيات',
+  [TaskType.WORLD_BUILDER]: 'بناء العوالم',
+  [TaskType.PLOT_PREDICTOR]: 'التنبؤ بالحبكة',
+  [TaskType.TENSION_OPTIMIZER]: 'تحسين التوتر',
+  [TaskType.AUDIENCE_RESONANCE]: 'تحليل صدى الجمهور',
+  [TaskType.PLATFORM_ADAPTER]: 'تحويل المنصات',
+  [TaskType.CHARACTER_DEEP_ANALYZER]: 'تحليل الشخصيات العميق',
+  [TaskType.DIALOGUE_ADVANCED_ANALYZER]: 'تحليل الحوار المتقدم',
+  [TaskType.VISUAL_CINEMATIC_ANALYZER]: 'تحليل السياق البصري',
+  [TaskType.THEMES_MESSAGES_ANALYZER]: 'تحليل الموضوعات والرسائل',
+  [TaskType.CULTURAL_HISTORICAL_ANALYZER]: 'تحليل السياق الثقافي',
+  [TaskType.PRODUCIBILITY_ANALYZER]: 'تحليل القابلية للإنتاج',
+  [TaskType.TARGET_AUDIENCE_ANALYZER]: 'تحليل الجمهور المستهدف',
+  [TaskType.LITERARY_QUALITY_ANALYZER]: 'تحليل الجودة الأدبية',
+  [TaskType.RECOMMENDATIONS_GENERATOR]: 'مولد التوصيات',
+};
 
 export const TASK_CATEGORY_MAP: Record<TaskType, TaskCategory> = {
   [TaskType.ANALYSIS]: TaskCategory.CORE,
@@ -178,13 +169,8 @@ export const SEVEN_STATIONS_OF_DRAMATIC_ANALYSIS = `
 export const CORE_CREATIVE_INSTRUCTIONS = `
 ### مهمة الإبداع المحاكي (TaskType.CREATIVE)
 **الهدف:** إنتاج محتوى إبداعي جديد يحاكي أسلوب المؤلف الأصلي.
-**المخرجات المطلوبة (JSON - واجهة \`CreativeResult\`):**
-\`\`\`json
-{
-  "title": "محتوى إبداعي محاكي لـ [اسم العمل الأصلي]",
-  "content": "[النص الإبداعي المنتج هنا... حوار، وصف، فصل جديد، إلخ]"
-}
-\`\`\`
+**المخرجات المطلوبة (نص عادي):**
+[النص الإبداعي المنتج هنا... حوار، وصف، فصل جديد، إلخ]
 **العملية:** طبق "المراحل الثلاث للإبداع المحاكي".
 `;
 
@@ -205,17 +191,15 @@ export const INTEGRATED_MODE_INSTRUCTIONS = `
 export const COMPLETION_MODE_INSTRUCTIONS = `
 ### مهمة وضع الاستكمال (TaskType.COMPLETION)
 **الهدف:** فهم عمل غير مكتمل (وقد يتضمن سياقًا من استكمالات سابقة) واقتراح تكملة نصية بناءً على **"نطاق الاستكمال المطلوب"**. إذا تم تحديد "تحسينات استكمال" إضافية، يجب دمج قدراتها في عملية الاستكمال.
-**المخرجات المطلوبة (JSON - واجهة \`CreativeResult\` أو \`EnhancedAnalysisResult\` مع التركيز على \`content\` للتكملة):**
-\`\`\`json
-{
-  "title": "استكمال لـ [اسم العمل]",
-  "content": "تحليل موجز للجزء الأصلي (والسياق السابق إذا وجد): [ملخص التحليل هنا...]\n\nالتكملة المقترحة (مع مراعاة التحسينات المطلوبة ونطاق الاستكمال):\n[نص التكملة هنا...]"
-}
-\`\`\`
+**المخرجات المطلوبة (نص عادي):**
+تحليل موجز للجزء الأصلي (والسياق السابق إذا وجد): [ملخص التحليل هنا...]
+
+التكملة المقترحة (مع مراعاة التحسينات المطلوبة ونطاق الاستكمال):
+[نص التكملة هنا...]
 **العملية:** 
 1.  حلل المواد المقدمة (النص الأصلي، السياق السابق إن وجد).
 2.  انتبه جيدًا لـ **"نطاق الاستكمال المطلوب"**.
-3.  إذا تم تحديد **"تحسينات استكمال"** (مثل التنقيب عن الموضوعات، بصمة الأسلوب، تحليل الشخصيات العميق، إلخ)، قم بدمج أهداف هذه التحسينات بفعالية في النص المستكمل. على سبيل المثال، إذا طُلب "التنقيب عن الموضوعات"، يجب أن يعكس الجزء المستكمل فهماً أعمق وتطويراً للموضوعات الرئيسية. إذا طُلب "بصمة الأسلوب"، يجب أن يكون الجزء المستكمل متسقاً للغاية مع أسلوب المؤلف الأصلي. إذا طُلب "تحليل الشخصيات العميق"، يجب أن يعكس الاستكمال فهمًا وتطويرًا للشخصيات بناءً على هذا التحليل.
+3.  انتبه جيدًا لـ **"تحسينات الاستكمال"** إذا تم تحديدها. يجب عليك دمج أهداف كل التحسينات المختارة في النص المستكمل. إذا اختار المستخدم خيارات متعددة (مثل "بصمة الأسلوب" و"تحليل الشخصيات العميق")، فيجب أن يجمع الاستكمال بين الدقة الأسلوبية والتطور العميق للشخصيات. يجب أن يعكس النص النهائي فهمًا وتطبيقًا متكاملًا لكل الأهداف المطلوبة.
 4.  قدم ملخصاً موجزاً لتحليلك (خاصة إذا كان هناك سياق سابق أو تحسينات معقدة) ثم قدم التكملة النصية.
 `;
 
@@ -329,33 +313,18 @@ export const CONFLICT_DYNAMICS_INSTRUCTIONS = `### مهمة ديناميكيات
 `;
 export const ADAPTIVE_REWRITING_INSTRUCTIONS = `### مهمة إعادة الكتابة التكيفية (TaskType.ADAPTIVE_REWRITING)
 **الهدف:** إعادة كتابة جزء من النص ليتناسب مع سياق أو هدف أو جمهور مختلف، ضمن "نطاق الاستكمال المطلوب".
-**المخرجات المطلوبة (JSON - واجهة \`CreativeResult\`):**
-\`\`\`json
-{
-  "title": "إعادة كتابة تكيفية لـ [جزء من العمل]",
-  "content": "[النص المعاد كتابته هنا، مع شرح موجز للتغييرات والغرض منها]"
-}
-\`\`\`
+**المخرجات المطلوبة (نص عادي):**
+[النص المعاد كتابته هنا، مع شرح موجز للتغييرات والغرض منها]
 `;
 export const SCENE_GENERATOR_INSTRUCTIONS = `### مهمة مولد المشاهد (TaskType.SCENE_GENERATOR)
 **الهدف:** إنشاء مشهد جديد (حوار ووصف) بناءً على سياق محدد و"نطاق الاستكمال المطلوب".
-**المخرجات المطلوبة (JSON - واجهة \`CreativeResult\`):**
-\`\`\`json
-{
-  "title": "مشهد مولد: [عنوان المشهد المقترح]",
-  "content": "[وصف المشهد والحوار هنا...]"
-}
-\`\`\`
+**المخرجات المطلوبة (نص عادي):**
+[وصف المشهد والحوار هنا...]
 `;
 export const CHARACTER_VOICE_INSTRUCTIONS = `### مهمة محاكي صوت الشخصيات (TaskType.CHARACTER_VOICE)
 **الهدف:** توليد حوار أو نص بصوت شخصية معينة من العمل.
-**المخرجات المطلوبة (JSON - واجهة \`CreativeResult\`):**
-\`\`\`json
-{
-  "title": "نص بصوت شخصية: [اسم الشخصية]",
-  "content": "[الحوار أو النص الذي أنشئ بصوت الشخصية]"
-}
-\`\`\`
+**المخرجات المطلوبة (نص عادي):**
+[الحوار أو النص الذي أنشئ بصوت الشخصية]
 **تعليمات إضافية:** يرجى تحديد الشخصية المطلوبة في "المتطلبات الخاصة".
 `;
 export const WORLD_BUILDER_INSTRUCTIONS = `### مهمة باني العوالم (TaskType.WORLD_BUILDER)
@@ -751,7 +720,7 @@ ${ADVANCED_MODULE_OUTPUT_STRUCTURE}
 
 const RECOMMENDATIONS_GENERATOR_INSTRUCTIONS = `
 ### الوحدة 11: مولد التوصيات والتحسينات (TaskType.RECOMMENDATIONS_GENERATOR)
-**الهدف:** تقديم اقتراحات تحسين مخصصة وبدائل إبداعية بناءً على تحليل النص (أو بناءً على نتائج وحدات تحليلية أخرى إذا تم دمجها).
+**الهدف:** تقديم اقتراحات تحسين مفصلة للنص الدرامي تغطي جوانب مثل البنية، تطوير الشخصيات، تحسين الحوار، وتقديم بدائل إبداعية. يتم ذلك بناءً على تحليل النص (أو نتائج وحدات تحليلية سابقة إذا تم توفيرها).
 ${ADVANCED_MODULE_OUTPUT_STRUCTURE}
 **تفاصيل حقل \`details\` المطلوبة لهذه الوحدة:**
 \`\`\`json
@@ -797,99 +766,14 @@ ${ADVANCED_MODULE_OUTPUT_STRUCTURE}
   ]
 }
 \`\`\`
+**تعليمات إضافية صارمة:** بناءً على التحليل، يجب عليك تقديم اقتراحات محددة وقابلة للتنفيذ لكل قسم من الأقسام التالية ضمن كائن \`details\`: \`structureOptimizerSuggestions\`، \`characterDeveloperSuggestions\`، \`dialogueEnhancerSuggestions\`، و \`creativeAlternativeGenerator\`. يجب أن تكون هذه الأقسام مليئة بالرؤى العملية.
 **ملاحظة هامة:** إذا كان هذا الطلب يهدف إلى تحسين نص بناءً على نتائج تحليل سابقة من وحدات أخرى، يرجى الإشارة إلى ذلك في "المتطلبات الخاصة" للمستخدم، ويفضل أن يتم تزويدك بملخص لتلك النتائج.
 `;
 
-
-export const SUPPORTED_MIME_TYPES = {
-  'text/plain': ['.txt'],
-  'text/markdown': ['.md'],
-  'application/pdf': ['.pdf'],
-  'application/msword': ['.doc'],
-  'application/vnd.openxmlformats-officedocument.wordprocessingml.document': ['.docx'],
-  'image/png': ['.png'],
-  'image/jpeg': ['.jpg', '.jpeg'],
-  'image/webp': ['.webp'],
-};
-
-// SVG Icons
-export const UploadIcon: React.FC<{ className?: string }> = ({ className }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className || "w-6 h-6"}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M12 16.5V9.75m0 0l-3.75 3.75M12 9.75l3.75 3.75M3 17.25V6.75A2.25 2.25 0 015.25 4.5h13.5A2.25 2.25 0 0121 6.75v10.5A2.25 2.25 0 0118.75 19.5H5.25A2.25 2.25 0 013 17.25z" />
-  </svg>
-);
-export const DocumentTextIcon: React.FC<{ className?: string }> = ({ className }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className || "w-6 h-6"}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
-  </svg>
-);
-export const LightBulbIcon: React.FC<{ className?: string }> = ({ className }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className || "w-6 h-6"}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.355a7.5 7.5 0 01-4.5 0m4.5 0v.75A2.25 2.25 0 0113.5 21h-3a2.25 2.25 0 01-2.25-2.25V18m7.5-12V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25V6M3 16.06V18c0 1.657 1.343 3 3 3h12c1.657 0 3-1.343 3-3v-1.94A5.985 5.985 0 0118 15c0-1.657-1.343-3-3-3s-3 1.343-3 3c0 .178.015.355.044.528M16.5 9.75A2.25 2.25 0 0014.25 7.5h-4.5A2.25 2.25 0 007.5 9.75V12a2.25 2.25 0 002.25 2.25h4.5A2.25 2.25 0 0016.5 12V9.75z" />
-  </svg>
-);
-export const SparklesIcon: React.FC<{ className?: string }> = ({ className }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className || "w-6 h-6"}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L1.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.25 12L17 14.25l-1.25-2.25L13.5 11l2.25-1.25L17 7.5l1.25 2.25L20.5 11l-2.25 1.25z" />
-  </svg>
-);
-export const PencilSquareIcon: React.FC<{ className?: string }> = ({ className }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className || "w-6 h-6"}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-  </svg>
-);
-export const ChartBarIcon: React.FC<{ className?: string }> = ({ className }) => ( 
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className || "w-6 h-6"}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
-  </svg>
-);
-export const UsersIcon: React.FC<{ className?: string }> = ({ className }) => ( 
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className || "w-6 h-6"}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
-  </svg>
-);
-export const CodeBracketIcon: React.FC<{ className?: string }> = ({ className }) => ( 
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className || "w-6 h-6"}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" />
-  </svg>
-);
-export const MagnifyingGlassIcon: React.FC<{ className?: string }> = ({ className }) => ( 
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className || "w-6 h-6"}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-  </svg>
-);
-export const GlobeAltIcon: React.FC<{ className?: string }> = ({ className }) => ( 
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className || "w-6 h-6"}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A11.978 11.978 0 0112 16.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-  </svg>
-);
-export const BeakerIcon: React.FC<{ className?: string }> = ({ className }) => ( 
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className || "w-6 h-6"}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M14.25 6.087c0-.355-.186-.676-.401-.959a1.968 1.968 0 00-3.139-.748L8.56 5.175a1.968 1.968 0 00-.902 1.429 1.968 1.968 0 00.133.729 1.808 1.808 0 013.37-1.025l.001-.001.001-.001a1.808 1.808 0 013.07 1.223L12 16.5l3-4.5V6.087zm0 0L12 2.25 9.75 6.087M8.25 9.75L6 16.5h12L15.75 9.75M8.25 9.75L12 14.25l3.75-4.5M8.25 9.75h7.5" />
-  </svg>
-);
-export const ArrowsRightLeftIcon: React.FC<{ className?: string }> = ({ className }) => ( 
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className || "w-6 h-6"}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h18M16.5 3L21 7.5m0 0L16.5 12M21 7.5H3" />
-  </svg>
-);
-export const FilmIcon: React.FC<{ className?: string }> = ({ className }) => ( 
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className || "w-6 h-6"}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M6 20.25h12m-7.5-3.75v3.75m3.75-3.75v3.75M6.75 20.25v-3.75m10.5 3.75v-3.75M6.225 20.25h11.55A2.25 2.25 0 0020.025 18V5.25A2.25 2.25 0 0017.775 3H6.225a2.25 2.25 0 00-2.25 2.25v12.75c0 1.242 1.008 2.25 2.25 2.25z" />
-  </svg>
-);
-export const ClipboardDocumentIcon: React.FC<{ className?: string }> = ({ className }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className || "w-6 h-6"}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.11-7.5-8.862C9.628 2.054 9.252 2 8.839 2H8.25C6.561 2 5.25 3.311 5.25 5.007v1.018M7.5 7.5h2.25m-2.25 3h2.25m-2.25 3h2.25m1.5-13.5H12v1.5M12 3.75h3.75m-3.75 0V2.25m0 1.5V6m2.25-2.25v1.5m0 0V2.25m0 1.5v1.5m0 0H12m6.75 6h2.25M15 13.5h2.25m-2.25 3h2.25M15 19.5h2.25M18.75 12h-2.25" />
-  </svg>
-);
-
-
-// Mapping task types to appropriate instruction constants
-export const TASK_SPECIFIC_INSTRUCTIONS: Record<string, string> = {
-  [TaskType.ANALYSIS]: CORE_ANALYSIS_INSTRUCTIONS + "\n" + SEVEN_STATIONS_OF_DRAMATIC_ANALYSIS,
-  [TaskType.CREATIVE]: CORE_CREATIVE_INSTRUCTIONS + "\n" + THREE_STAGES_OF_EMULATIVE_CREATIVITY,
-  [TaskType.INTEGRATED]: INTEGRATED_MODE_INSTRUCTIONS + "\n" + SEVEN_STATIONS_OF_DRAMATIC_ANALYSIS + "\n" + THREE_STAGES_OF_EMULATIVE_CREATIVITY,
+export const TASK_SPECIFIC_INSTRUCTIONS: Record<TaskType, string> = {
+  [TaskType.ANALYSIS]: CORE_ANALYSIS_INSTRUCTIONS,
+  [TaskType.CREATIVE]: CORE_CREATIVE_INSTRUCTIONS,
+  [TaskType.INTEGRATED]: INTEGRATED_MODE_INSTRUCTIONS,
   [TaskType.COMPLETION]: COMPLETION_MODE_INSTRUCTIONS,
   [TaskType.RHYTHM_MAPPING]: RHYTHM_MAPPING_INSTRUCTIONS,
   [TaskType.CHARACTER_NETWORK]: CHARACTER_NETWORK_INSTRUCTIONS,
@@ -905,7 +789,6 @@ export const TASK_SPECIFIC_INSTRUCTIONS: Record<string, string> = {
   [TaskType.TENSION_OPTIMIZER]: TENSION_OPTIMIZER_INSTRUCTIONS,
   [TaskType.AUDIENCE_RESONANCE]: AUDIENCE_RESONANCE_INSTRUCTIONS,
   [TaskType.PLATFORM_ADAPTER]: PLATFORM_ADAPTER_INSTRUCTIONS,
-  // New Modules
   [TaskType.CHARACTER_DEEP_ANALYZER]: CHARACTER_DEEP_ANALYZER_INSTRUCTIONS,
   [TaskType.DIALOGUE_ADVANCED_ANALYZER]: DIALOGUE_ADVANCED_ANALYZER_INSTRUCTIONS,
   [TaskType.VISUAL_CINEMATIC_ANALYZER]: VISUAL_CINEMATIC_ANALYZER_INSTRUCTIONS,
@@ -917,22 +800,20 @@ export const TASK_SPECIFIC_INSTRUCTIONS: Record<string, string> = {
   [TaskType.RECOMMENDATIONS_GENERATOR]: RECOMMENDATIONS_GENERATOR_INSTRUCTIONS,
 };
 
-// Tasks that are expected to return structured JSON
 export const TASKS_EXPECTING_JSON_RESPONSE: TaskType[] = [
-  TaskType.ANALYSIS, 
-  TaskType.RHYTHM_MAPPING, 
-  TaskType.CHARACTER_NETWORK, 
-  // TaskType.DIALOGUE_FORENSICS, // This often returns multiple CharacterAnalysis objects, handle as array or make specific
-  TaskType.STYLE_FINGERPRINT, 
-  TaskType.WORLD_BUILDER, 
-  TaskType.PLOT_PREDICTOR, 
-  TaskType.TENSION_OPTIMIZER, 
-  TaskType.AUDIENCE_RESONANCE, 
+  TaskType.ANALYSIS,
+  TaskType.INTEGRATED,
+  TaskType.RHYTHM_MAPPING,
+  TaskType.CHARACTER_NETWORK,
+  TaskType.DIALOGUE_FORENSICS,
+  TaskType.THEMATIC_MINING,
+  TaskType.STYLE_FINGERPRINT,
+  TaskType.CONFLICT_DYNAMICS,
+  TaskType.PLOT_PREDICTOR,
+  TaskType.TENSION_OPTIMIZER,
+  TaskType.AUDIENCE_RESONANCE,
   TaskType.PLATFORM_ADAPTER,
-  TaskType.INTEGRATED, // Usually EnhancedAnalysisResult
-  TaskType.CREATIVE, // Uses CreativeResult
-  TaskType.COMPLETION, // Uses CreativeResult or EnhancedAnalysisResult
-  // New Modules (all are expected to return AdvancedModuleResult)
+  TaskType.WORLD_BUILDER, // This one is creative but has a complex JSON structure
   TaskType.CHARACTER_DEEP_ANALYZER,
   TaskType.DIALOGUE_ADVANCED_ANALYZER,
   TaskType.VISUAL_CINEMATIC_ANALYZER,
@@ -943,76 +824,101 @@ export const TASKS_EXPECTING_JSON_RESPONSE: TaskType[] = [
   TaskType.LITERARY_QUALITY_ANALYZER,
   TaskType.RECOMMENDATIONS_GENERATOR,
 ];
-// Corrected BeakerIcon path data in the illustrative commented block below (though it's commented out).
-// export const UploadIcon: React.FC<{ className?: string }> = ({ className }) => (
-//   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className || "w-6 h-6"}>
-//     <path strokeLinecap="round" strokeLinejoin="round" d="M12 16.5V9.75m0 0l-3.75 3.75M12 9.75l3.75 3.75M3 17.25V6.75A2.25 2.25 0 015.25 4.5h13.5A2.25 2.25 0 0121 6.75v10.5A2.25 2.25 0 0118.75 19.5H5.25A2.25 2.25 0 013 17.25z" />
-//   </svg>
-// );
-// export const DocumentTextIcon: React.FC<{ className?: string }> = ({ className }) => (
-//   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className || "w-6 h-6"}>
-//     <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
-//   </svg>
-// );
-// export const LightBulbIcon: React.FC<{ className?: string }> = ({ className }) => (
-//   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className || "w-6 h-6"}>
-//     <path strokeLinecap="round" strokeLinejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.355a7.5 7.5 0 01-4.5 0m4.5 0v.75A2.25 2.25 0 0113.5 21h-3a2.25 2.25 0 01-2.25-2.25V18m7.5-12V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25V6M3 16.06V18c0 1.657 1.343 3 3 3h12c1.657 0 3-1.343 3-3v-1.94A5.985 5.985 0 0118 15c0-1.657-1.343-3-3-3s-3 1.343-3 3c0 .178.015.355.044.528M16.5 9.75A2.25 2.25 0 0014.25 7.5h-4.5A2.25 2.25 0 007.5 9.75V12a2.25 2.25 0 002.25 2.25h4.5A2.25 2.25 0 0016.5 12V9.75z" />
-//   </svg>
-// );
-// export const SparklesIcon: React.FC<{ className?: string }> = ({ className }) => (
-//   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className || "w-6 h-6"}>
-//     <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L1.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.25 12L17 14.25l-1.25-2.25L13.5 11l2.25-1.25L17 7.5l1.25 2.25L20.5 11l-2.25 1.25z" />
-//   </svg>
-// );
-// export const PencilSquareIcon: React.FC<{ className?: string }> = ({ className }) => (
-//   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className || "w-6 h-6"}>
-//     <path strokeLinecap="round" strokeLinejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-//   </svg>
-// );
-// export const ChartBarIcon: React.FC<{ className?: string }> = ({ className }) => ( 
-//   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className || "w-6 h-6"}>
-//     <path strokeLinecap="round" strokeLinejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
-//   </svg>
-// );
-// export const UsersIcon: React.FC<{ className?: string }> = ({ className }) => ( 
-//   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className || "w-6 h-6"}>
-//     <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
-//   </svg>
-// );
-// export const CodeBracketIcon: React.FC<{ className?: string }> = ({ className }) => ( 
-//   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className || "w-6 h-6"}>
-//     <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" />
-//   </svg>
-// );
-// export const MagnifyingGlassIcon: React.FC<{ className?: string }> = ({ className }) => ( 
-//   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className || "w-6 h-6"}>
-//     <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-//   </svg>
-// );
-// export const GlobeAltIcon: React.FC<{ className?: string }> = ({ className }) => ( 
-//   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className || "w-6 h-6"}>
-//     <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A11.978 11.978 0 0112 16.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-//   </svg>
-// );
-// export const BeakerIcon: React.FC<{ className?: string }> = ({ className }) => ( 
-//    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className || "w-6 h-6"}>
-//      <path strokeLinecap="round" strokeLinejoin="round" d="M14.25 6.087c0-.355-.186-.676-.401-.959a1.968 1.968 0 00-3.139-.748L8.56 5.175a1.968 1.968 0 00-.902 1.429 1.968 1.968 0 00.133.729 1.808 1.808 0 013.37-1.025l.001-.001.001-.001a1.808 1.808 0 013.07 1.223L12 16.5l3-4.5V6.087zm0 0L12 2.25 9.75 6.087M8.25 9.75L6 16.5h12L15.75 9.75M8.25 9.75L12 14.25l3.75-4.5M8.25 9.75h7.5" />
-//    </svg>
-// );
-// export const ArrowsRightLeftIcon: React.FC<{ className?: string }> = ({ className }) => ( 
-//   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className || "w-6 h-6"}>
-//     <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h18M16.5 3L21 7.5m0 0L16.5 12M21 7.5H3" />
-//   </svg>
-// );
-// export const FilmIcon: React.FC<{ className?: string }> = ({ className }) => ( 
-//   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className || "w-6 h-6"}>
-//     <path strokeLinecap="round" strokeLinejoin="round" d="M6 20.25h12m-7.5-3.75v3.75m3.75-3.75v3.75M6.75 20.25v-3.75m10.5 3.75v-3.75M6.225 20.25h11.55A2.25 2.25 0 0020.025 18V5.25A2.25 2.25 0 0017.775 3H6.225a2.25 2.25 0 00-2.25 2.25v12.75c0 1.242 1.008 2.25 2.25 2.25z" />
-//   </svg>
-// );
-// export const ClipboardDocumentIcon: React.FC<{ className?: string }> = ({ className }) => (
-//   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className || "w-6 h-6"}>
-//     <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.11-7.5-8.862C9.628 2.054 9.252 2 8.839 2H8.25C6.561 2 5.25 3.311 5.25 5.007v1.018M7.5 7.5h2.25m-2.25 3h2.25m-2.25 3h2.25m1.5-13.5H12v1.5M12 3.75h3.75m-3.75 0V2.25m0 1.5V6m2.25-2.25v1.5m0 0V2.25m0 1.5v1.5m0 0H12m6.75 6h2.25M15 13.5h2.25m-2.25 3h2.25M15 19.5h2.25M18.75 12h-2.25" />
-//   </svg>
-// );
-// The above comment block is to remind that the full SVG definitions should be there.
-; // Added semicolon for safety, though not strictly necessary for ES modules usually.
+
+export const SUPPORTED_MIME_TYPES = {
+  'text/plain': ['.txt'],
+  'text/markdown': ['.md'],
+  'application/pdf': ['.pdf'],
+  'application/msword': ['.doc'],
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document': ['.docx'],
+  'image/png': ['.png'],
+  'image/jpeg': ['.jpg', '.jpeg'],
+  'image/webp': ['.webp'],
+};
+
+// SVG Icons
+export const UploadIcon: React.FC<{ className?: string }> = ({ className }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className || "w-6 h-6"}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
+  </svg>
+);
+
+export const DocumentTextIcon: React.FC<{ className?: string }> = ({ className }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className || "w-6 h-6"}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+  </svg>
+);
+
+export const LightBulbIcon: React.FC<{ className?: string }> = ({ className }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className || "w-6 h-6"}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.311a14.994 14.994 0 01-3.75 0M9.75 10.5a3 3 0 116 0 3 3 0 01-6 0z" />
+  </svg>
+);
+
+export const SparklesIcon: React.FC<{ className?: string }> = ({ className }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className || "w-6 h-6"}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.898 20.567L16.5 21.75l-.398-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.398a2.25 2.25 0 001.423-1.423L16.5 15.75l.398 1.183a2.25 2.25 0 001.423 1.423L19.5 18.75l-1.183.398a2.25 2.25 0 00-1.423 1.423z" />
+  </svg>
+);
+
+export const PencilSquareIcon: React.FC<{ className?: string }> = ({ className }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className || "w-6 h-6"}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+  </svg>
+);
+
+export const ChartBarIcon: React.FC<{ className?: string }> = ({ className }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className || "w-6 h-6"}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
+    </svg>
+);
+
+export const UsersIcon: React.FC<{ className?: string }> = ({ className }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className || "w-6 h-6"}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m-7.5-2.962c.57-1.023-.59-2.096-1.745-2.096-1.498 0-2.585 1.549-1.758 3.097m11.268-3.097c-.57 1.023.59 2.096 1.745 2.096 1.498 0 2.585-1.549 1.758-3.097m-9.5 2.962c.57-1.023-.59-2.096-1.745-2.096-1.498 0-2.585 1.549-1.758 3.097M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+    </svg>
+);
+
+export const CodeBracketIcon: React.FC<{ className?: string }> = ({ className }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className || "w-6 h-6"}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" />
+    </svg>
+);
+
+export const MagnifyingGlassIcon: React.FC<{ className?: string }> = ({ className }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className || "w-6 h-6"}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+    </svg>
+);
+
+export const GlobeAltIcon: React.FC<{ className?: string }> = ({ className }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className || "w-6 h-6"}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
+    </svg>
+);
+
+export const BeakerIcon: React.FC<{ className?: string }> = ({ className }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className || "w-6 h-6"}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M14.25 6.087c0-.596.484-1.087 1.088-1.087h.624a1.088 1.088 0 011.088 1.087v11.826c0 .596-.484 1.087-1.088 1.087h-.624a1.088 1.088 0 01-1.088-1.087V6.087zM6.75 6.087c0-.596.484-1.087 1.088-1.087h.624a1.088 1.088 0 011.088 1.087v11.826c0 .596-.484 1.087-1.088 1.087h-.624a1.088 1.088 0 01-1.088-1.087V6.087z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 12h10.5" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 6.087c0-.596.484-1.087 1.088-1.087h12.824c.604 0 1.088.49 1.088 1.087v.624a1.088 1.088 0 01-1.088 1.087H5.588a1.088 1.088 0 01-1.088-1.087v-.624zM4.5 17.913c0 .596.484 1.087 1.088 1.087h12.824c.604 0 1.088-.49 1.088-1.087v-.624a1.088 1.088 0 00-1.088-1.087H5.588a1.088 1.088 0 00-1.088 1.087v.624z" />
+    </svg>
+);
+
+export const ArrowsRightLeftIcon: React.FC<{ className?: string }> = ({ className }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className || "w-6 h-6"}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h18m-7.5-12L21 9m0 0L16.5 12M21 9H3" />
+    </svg>
+);
+
+export const FilmIcon: React.FC<{ className?: string }> = ({ className }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className || "w-6 h-6"}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+    </svg>
+);
+
+export const ClipboardDocumentIcon: React.FC<{ className?: string }> = ({ className }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className || "w-6 h-6"}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75c0-.231-.035-.454-.1-.664M6.75 7.5H18a2.25 2.25 0 012.25 2.25v9a2.25 2.25 0 01-2.25 2.25H6.75a2.25 2.25 0 01-2.25-2.25v-9a2.25 2.25 0 012.25-2.25z" />
+    </svg>
+);

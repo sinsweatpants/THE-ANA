@@ -1,4 +1,5 @@
 
+
 // Fix: Removed ResponseMimeType from import as it's not exported by @google/genai
 import { GoogleGenAI, GenerateContentResponse, Part, Content, SafetySetting, HarmCategory, HarmBlockThreshold } from "@google/genai";
 // Fix: Import ENHANCED_TASK_DESCRIPTIONS from '../constants'
@@ -9,9 +10,10 @@ import {
   TASK_SPECIFIC_INSTRUCTIONS,
   TASKS_EXPECTING_JSON_RESPONSE,
   COMPLETION_ENHANCEMENT_OPTIONS, 
-  ENHANCED_TASK_DESCRIPTIONS as TASK_DESCRIPTIONS_FOR_PROMPT,
   TASK_CATEGORY_MAP
 } from '../constants';
+import { ENHANCED_TASK_DESCRIPTIONS as TASK_DESCRIPTIONS_FOR_PROMPT } from '../ai/orchestration';
+
 
 interface ProcessTextsParams {
   processedFiles: ProcessedFile[];
@@ -217,7 +219,7 @@ export const processTextsWithGemini = async (params: ProcessTextsParams, retries
 
     const contents: Content[] = [{ role: "user", parts: promptParts }];
 
-    const shouldRequestJson = TASKS_EXPECTING_JSON_RESPONSE.includes(params.taskType);
+    const shouldExpectJson = TASKS_EXPECTING_JSON_RESPONSE.includes(params.taskType);
 
     // Base model config
     const modelConfig: any = { 
@@ -232,16 +234,6 @@ export const processTextsWithGemini = async (params: ProcessTextsParams, retries
         { category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT, threshold: HarmBlockThreshold.BLOCK_NONE }
       ] as SafetySetting[]
     };
-
-    if (shouldRequestJson) {
-      modelConfig.responseMimeType = "application/json";
-    }
-    
-    // Add thinkingConfig only for the specific model that supports it
-    if (GEMINI_TEXT_MODEL === 'gemini-2.5-flash-preview-04-17') {
-        // For now, let's use default thinking (enabled). 
-        // To disable for low latency: modelConfig.thinkingConfig = { thinkingBudget: 0 };
-    }
     
     const response: GenerateContentResponse = await genAI.models.generateContent({
       model: GEMINI_TEXT_MODEL,
@@ -251,47 +243,51 @@ export const processTextsWithGemini = async (params: ProcessTextsParams, retries
     
     const rawTextOutput = response.text;
 
-    if (!rawTextOutput && !shouldRequestJson) { 
+    if (!rawTextOutput) { 
         if (response.candidates && response.candidates[0] && response.candidates[0].finishReason !== "STOP") {
              return { error: ` أنهى Gemini المعالجة بسبب: ${response.candidates[0].finishReason}. قد يكون المحتوى قد تم حظره أو انتهى بشكل غير متوقع.` };
         }
         return { error: "أرجع Gemini استجابة نصية فارغة." };
     }
 
+    let jsonStr = rawTextOutput.trim();
+    const fenceRegex = /^(?:\s*```(?:json)?\s*\n?)?([\s\S]*?)(?:\n?\s*```\s*)?$/s;
+    const match = jsonStr.match(fenceRegex);
+    if (match && match[1]) { 
+      jsonStr = match[1].trim();
+    }
 
-    if (shouldRequestJson) {
-      let jsonStr = rawTextOutput.trim();
-      // More robust regex to remove potential markdown fences, including optional 'json' language specifier
-      const fenceRegex = /^(?:\s*```(?:json)?\s*\n?)?([\s\S]*?)(?:\n?\s*```\s*)?$/s;
-      const match = jsonStr.match(fenceRegex);
-      if (match && match[1]) { 
-        jsonStr = match[1].trim();
-      }
-      
+    // Only attempt to parse if it looks like a JSON object or array
+    if (jsonStr.startsWith('{') || jsonStr.startsWith('[')) {
       try {
         const parsedData: GeminiTaskResultData = JSON.parse(jsonStr);
         return { data: parsedData, rawText: rawTextOutput };
       } catch (e) {
-        // Attempt to fix if the string is not perfectly clean (e.g. trailing commas, etc.)
-        // This is a very basic attempt; more sophisticated fixing might be needed for complex cases
+        // First parse failed, try to fix it.
         const fixedJsonStr = attemptToFixJson(jsonStr);
         try {
             const parsedData: GeminiTaskResultData = JSON.parse(fixedJsonStr);
-            // console.warn("JSON parsed successfully after basic fix attempt.");
             return { data: parsedData, rawText: rawTextOutput };
         } catch (e2) {
             console.error("فشل في تحليل JSON حتى بعد محاولة الإصلاح:", e2, "\nالنص الأصلي:", rawTextOutput, "\nالنص الذي تمت محاولة إصلاحه:", fixedJsonStr);
-            // If JSON parsing fails, but we have raw text, return it as string data.
-            // The ResultsDisplay component can then show this raw text.
-            if (rawTextOutput) { 
+            // If it was *supposed* to be JSON, show the user the specific error.
+            if (shouldExpectJson) {
                 return { data: rawTextOutput, rawText: rawTextOutput, error: "تم استلام نص غير متوقع بدلاً من JSON. يتم عرض النص الخام." };
             }
-            return { error: "فشل في تحليل استجابة JSON من Gemini ولم يتم إرجاع نص خام.", rawText: rawTextOutput };
+            // Otherwise, for creative tasks, just fall back to raw text without an error.
+            return { data: rawTextOutput, rawText: rawTextOutput };
         }
       }
-    } else {
-      return { data: rawTextOutput, rawText: rawTextOutput };
     }
+    
+    // If it doesn't look like JSON, treat it as raw text.
+    // If we were expecting JSON but got something else entirely, flag it.
+    if (shouldExpectJson) {
+        return { data: rawTextOutput, rawText: rawTextOutput, error: "تم استلام نص غير متوقع بدلاً من JSON. يتم عرض النص الخام." };
+    }
+
+    // Otherwise, it's a valid text response for a creative task.
+    return { data: rawTextOutput, rawText: rawTextOutput };
 
   } catch (e: any) {
     console.error(`خطأ في معالجة النصوص مع Gemini (محاولة ${retries}/${MAX_RETRIES}):`, e);

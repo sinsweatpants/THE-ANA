@@ -2,7 +2,8 @@
 
 import React, { useState, useCallback } from 'react';
 import { TaskType, GeminiTaskResultData } from '../types'; 
-import { ENHANCED_TASK_DESCRIPTIONS as TASK_DESCRIPTIONS, ClipboardDocumentIcon } from '../constants';
+import { ClipboardDocumentIcon } from '../constants';
+import { ENHANCED_TASK_DESCRIPTIONS as TASK_DESCRIPTIONS } from '../ai/orchestration';
 import { ActionButton } from './ActionButton';
 
 interface CopyButtonProps {

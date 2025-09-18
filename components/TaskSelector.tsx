@@ -1,12 +1,14 @@
 
+
 import React from 'react';
 import { TaskType, TaskCategory } from '../types';
 import { 
-  ENHANCED_TASK_DESCRIPTIONS, 
   TASK_CATEGORY_MAP,
   LightBulbIcon, SparklesIcon, DocumentTextIcon, PencilSquareIcon,
   ChartBarIcon, UsersIcon, CodeBracketIcon, MagnifyingGlassIcon, GlobeAltIcon, BeakerIcon, ArrowsRightLeftIcon, FilmIcon, ClipboardDocumentIcon
 } from '../constants'; // Added ClipboardDocumentIcon to imports
+import { ENHANCED_TASK_DESCRIPTIONS } from '../ai/orchestration';
+
 
 interface TaskSelectorProps {
   selectedTask: TaskType | null;
@@ -79,8 +81,17 @@ const categoryOrder: TaskCategory[] = [
   TaskCategory.ADVANCED_MODULES, 
 ];
 
+// Define icon for visual indicator
+const ChevronLeftIcon: React.FC<{ className?: string }> = ({ className }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className || "w-6 h-6"}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+    </svg>
+);
+
 
 export const TaskSelector: React.FC<TaskSelectorProps> = ({ selectedTask, onTaskSelect }) => {
+  const selectedCategory = selectedTask ? TASK_CATEGORY_MAP[selectedTask] : null;
+
   return (
     <div className="w-full p-6 bg-slate-800 rounded-xl shadow-xl border border-panel-border backdrop-blur-xs bg-panel">
       <h3 className="text-2xl font-semibold mb-6 text-primary-light flex items-center">
@@ -91,9 +102,16 @@ export const TaskSelector: React.FC<TaskSelectorProps> = ({ selectedTask, onTask
           const tasksInCategory = groupedTasks[category];
           if (!tasksInCategory || tasksInCategory.length === 0) return null;
 
+          const isSelectedCategory = selectedCategory === category;
+
           return (
-            <div key={category}>
-              <h4 className="text-lg font-semibold mb-3 text-primary-light border-b-2 border-primary-dark pb-1">
+            <div key={category} className={`p-3 rounded-lg transition-all duration-300 ${isSelectedCategory ? 'bg-slate-700/50 ring-2 ring-primary' : ''}`}>
+              <h4 className={`flex items-center text-lg font-semibold mb-3 border-b-2 pb-1 transition-colors duration-300 ${
+                  isSelectedCategory 
+                    ? 'text-secondary-light border-secondary' 
+                    : 'text-primary-light border-primary-dark'
+                }`}>
+                {isSelectedCategory && <ChevronLeftIcon className="w-5 h-5 me-2" />}
                 {category}
               </h4>
               <div className="space-y-2">

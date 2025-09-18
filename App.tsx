@@ -1,4 +1,5 @@
 
+
 import React, { useState, useEffect, useCallback } from 'react';
 import { TaskType, ProcessedFile, GeminiServiceResponse, PreviousCompletionContext, CompletionEnhancementOption, TaskCategory } from './types'; 
 import { FileUpload } from './components/FileUpload';
@@ -15,10 +16,10 @@ import { processTextsWithGemini } from './services/geminiService';
 import { 
   MIN_FILES_REQUIRED, 
   SparklesIcon, LightBulbIcon, PencilSquareIcon, DocumentTextIcon,
-  BeakerIcon, ChartBarIcon, UsersIcon, MagnifyingGlassIcon, FilmIcon, GlobeAltIcon, CodeBracketIcon, ClipboardDocumentIcon, // Added ClipboardDocumentIcon
+  BeakerIcon, ChartBarIcon, UsersIcon, MagnifyingGlassIcon, FilmIcon, GlobeAltIcon, CodeBracketIcon, ClipboardDocumentIcon,
   TASKS_REQUIRING_COMPLETION_SCOPE,
   COMPLETION_ENHANCEMENT_OPTIONS, 
-  ENHANCED_TASK_DESCRIPTIONS as TASK_DESCRIPTIONS,
+  TASK_LABELS, // Use short labels for UI
   TASK_CATEGORY_MAP
 } from './constants';
 
@@ -118,7 +119,7 @@ const App: React.FC = () => {
       return;
     }
     if (TASKS_REQUIRING_COMPLETION_SCOPE.includes(selectedTask) && !completionScope.trim()) {
-      setSubmissionError(`لهذه المهمة (${TASK_DESCRIPTIONS[selectedTask] || selectedTask}), يرجى تحديد "نطاق الاستكمال المطلوب".`);
+      setSubmissionError(`لهذه المهمة (${TASK_LABELS[selectedTask] || selectedTask}), يرجى تحديد "نطاق الاستكمال المطلوب".`);
       return;
     }
 
@@ -194,79 +195,72 @@ const App: React.FC = () => {
     ]);
 
   const isProcessingFiles = isLoading && uploadedFiles.length > 0 && processedFilesContent.length !== uploadedFiles.length;
-  
-  const canSubmit = selectedTask !== null && 
-                    uploadedFiles.length >= MIN_FILES_REQUIRED && 
-                    processedFilesContent.length === uploadedFiles.length &&
-                    !isProcessingFiles && 
-                    !isLoading; 
 
   const getButtonIconAndText = () => {
     if (!selectedTask) return { icon: <SparklesIcon className="w-5 h-5" />, text: 'ابدأ المعالجة' };
     
-    const taskDescriptionPart = TASK_DESCRIPTIONS[selectedTask] ? TASK_DESCRIPTIONS[selectedTask].split(':')[0] : 'معالجة';
-    const taskLabelPartOnly = TASK_DESCRIPTIONS[selectedTask] ? TASK_DESCRIPTIONS[selectedTask].substring(0, TASK_DESCRIPTIONS[selectedTask].indexOf('(') !== -1 ? TASK_DESCRIPTIONS[selectedTask].indexOf('(') : TASK_DESCRIPTIONS[selectedTask].length).trim() : 'معالجة';
+    const taskLabel = TASK_LABELS[selectedTask] || 'معالجة';
     const taskCategory = TASK_CATEGORY_MAP[selectedTask];
+
+    let icon = <SparklesIcon className="w-5 h-5" />;
 
     switch (taskCategory) {
         case TaskCategory.CORE:
-            if (selectedTask === TaskType.ANALYSIS) return { icon: <LightBulbIcon className="w-5 h-5" />, text: taskDescriptionPart };
-            if (selectedTask === TaskType.CREATIVE) return { icon: <SparklesIcon className="w-5 h-5" />, text: taskDescriptionPart };
-            if (selectedTask === TaskType.INTEGRATED) return { icon: <DocumentTextIcon className="w-5 h-5" />, text: taskDescriptionPart };
-            if (selectedTask === TaskType.COMPLETION) return { icon: <PencilSquareIcon className="w-5 h-5" />, text: taskDescriptionPart };
-            return { icon: <SparklesIcon className="w-5 h-5" />, text: taskDescriptionPart };
-
+            if (selectedTask === TaskType.ANALYSIS) icon = <LightBulbIcon className="w-5 h-5" />;
+            if (selectedTask === TaskType.CREATIVE) icon = <SparklesIcon className="w-5 h-5" />;
+            if (selectedTask === TaskType.INTEGRATED) icon = <DocumentTextIcon className="w-5 h-5" />;
+            if (selectedTask === TaskType.COMPLETION) icon = <PencilSquareIcon className="w-5 h-5" />;
+            break;
         case TaskCategory.ANALYSIS:
-            return { icon: <LightBulbIcon className="w-5 h-5" />, text: taskDescriptionPart || 'تحليل الآن' };
-        
+            icon = <LightBulbIcon className="w-5 h-5" />;
+            break;
         case TaskCategory.CREATIVE:
-            return { icon: <SparklesIcon className="w-5 h-5" />, text: taskDescriptionPart || 'إنشاء الآن' };
-
+            icon = <SparklesIcon className="w-5 h-5" />;
+            break;
         case TaskCategory.PREDICTIVE:
-            return { icon: <BeakerIcon className="w-5 h-5" />, text: taskDescriptionPart || 'تنبؤ/تحسين' };
-        
+            icon = <BeakerIcon className="w-5 h-5" />;
+            break;
         case TaskCategory.ADVANCED_MODULES:
-            let buttonTextForModule = taskLabelPartOnly || 'تشغيل الوحدة';
-             if (buttonTextForModule.startsWith("الوحدة")) { // Remove "الوحدة X:" prefix for cleaner button text
-                buttonTextForModule = buttonTextForModule.substring(buttonTextForModule.indexOf(':') + 1).trim();
-            }
-
             switch (selectedTask) {
-                case TaskType.CHARACTER_DEEP_ANALYZER: return { icon: <UsersIcon className="w-5 h-5" />, text: buttonTextForModule };
-                case TaskType.DIALOGUE_ADVANCED_ANALYZER: return { icon: <MagnifyingGlassIcon className="w-5 h-5" />, text: buttonTextForModule };
-                case TaskType.VISUAL_CINEMATIC_ANALYZER: return { icon: <FilmIcon className="w-5 h-5" />, text: buttonTextForModule };
-                case TaskType.THEMES_MESSAGES_ANALYZER: return { icon: <LightBulbIcon className="w-5 h-5" />, text: buttonTextForModule };
-                case TaskType.CULTURAL_HISTORICAL_ANALYZER: return { icon: <GlobeAltIcon className="w-5 h-5" />, text: buttonTextForModule };
-                case TaskType.PRODUCIBILITY_ANALYZER: return { icon: <ChartBarIcon className="w-5 h-5" />, text: buttonTextForModule };
-                case TaskType.TARGET_AUDIENCE_ANALYZER: return { icon: <UsersIcon className="w-5 h-5" />, text: buttonTextForModule };
-                case TaskType.LITERARY_QUALITY_ANALYZER: return { icon: <PencilSquareIcon className="w-5 h-5" />, text: buttonTextForModule };
-                case TaskType.RECOMMENDATIONS_GENERATOR: return { icon: <SparklesIcon className="w-5 h-5" />, text: buttonTextForModule };
-                default: return { icon: <ClipboardDocumentIcon className="w-5 h-5" />, text: buttonTextForModule }; 
+                case TaskType.CHARACTER_DEEP_ANALYZER: icon = <UsersIcon className="w-5 h-5" />; break;
+                case TaskType.DIALOGUE_ADVANCED_ANALYZER: icon = <MagnifyingGlassIcon className="w-5 h-5" />; break;
+                case TaskType.VISUAL_CINEMATIC_ANALYZER: icon = <FilmIcon className="w-5 h-5" />; break;
+                case TaskType.THEMES_MESSAGES_ANALYZER: icon = <LightBulbIcon className="w-5 h-5" />; break;
+                case TaskType.CULTURAL_HISTORICAL_ANALYZER: icon = <GlobeAltIcon className="w-5 h-5" />; break;
+                case TaskType.PRODUCIBILITY_ANALYZER: icon = <ChartBarIcon className="w-5 h-5" />; break;
+                case TaskType.TARGET_AUDIENCE_ANALYZER: icon = <UsersIcon className="w-5 h-5" />; break;
+                case TaskType.LITERARY_QUALITY_ANALYZER: icon = <PencilSquareIcon className="w-5 h-5" />; break;
+                case TaskType.RECOMMENDATIONS_GENERATOR: icon = <SparklesIcon className="w-5 h-5" />; break;
+                default: icon = <ClipboardDocumentIcon className="w-5 h-5" />; break;
             }
-            
+            break;
         default:
-            return { icon: <SparklesIcon className="w-5 h-5" />, text: taskDescriptionPart || 'ابدأ المعالجة' };
+            break;
     }
+    return { icon, text: taskLabel };
   };
 
   const { icon: buttonIcon, text: buttonText } = getButtonIconAndText();
   
+  const isTaskRequiringScope = selectedTask && TASKS_REQUIRING_COMPLETION_SCOPE.includes(selectedTask);
   let submitDisabledReason = "";
     if (uploadedFiles.length < MIN_FILES_REQUIRED) {
         submitDisabledReason += `يرجى تحميل ${MIN_FILES_REQUIRED} ملف على الأقل. `;
     }
-    if (selectedTask === null) {
+    if (!selectedTask) {
         submitDisabledReason += 'يرجى اختيار نوع الخدمة. ';
+    }
+    if (isTaskRequiringScope && !completionScope.trim()) {
+      submitDisabledReason += `لهذه المهمة، يرجى تحديد "نطاق الاستكمال المطلوب". `;
     }
     if (isProcessingFiles) {
         submitDisabledReason += 'جاري معالجة الملفات المرفوعة. يرجى الانتظار. ';
     }
-    if (selectedTask && TASKS_REQUIRING_COMPLETION_SCOPE.includes(selectedTask) && !completionScope.trim()) {
-      submitDisabledReason += `لهذه المهمة، يرجى تحديد "نطاق الاستكمال المطلوب". `;
-    }
     if (error) { 
-        submitDisabledReason += `خطأ في معالجة الملفات: ${error}. `;
+        submitDisabledReason += `يوجد خطأ في معالجة الملفات يمنع الإرسال. `;
     }
+
+  const isSubmitDisabled = !!submitDisabledReason.trim() || isLoading || !apiKeyPresent;
 
   const showIterativeCompletionOption = 
     previousCompletionContext &&
@@ -277,7 +271,7 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-900 via-slate-800 to-gray-900">
-      {isLoading && <Loader message={isProcessingFiles ? "جاري معالجة الملفات..." : (selectedTask && TASK_DESCRIPTIONS[selectedTask!] ? `جاري ${TASK_DESCRIPTIONS[selectedTask!].split(':')[0]}...` : "جاري معالجة طلبك...")} />}
+      {isLoading && <Loader message={isProcessingFiles ? "جاري معالجة الملفات..." : (selectedTask && TASK_LABELS[selectedTask] ? `جاري ${TASK_LABELS[selectedTask]}...` : "جاري معالجة طلبك...")} />}
       <Header />
       <main className="flex-grow container mx-auto px-4 py-8 md:py-12">
         <div className="max-w-4xl mx-auto space-y-8">
@@ -356,14 +350,14 @@ const App: React.FC = () => {
           <div className="text-center pt-4">
             <ActionButton
               onClick={handleSubmit}
-              disabled={!canSubmit || isLoading || !apiKeyPresent || !!error} 
+              disabled={isSubmitDisabled}
               icon={buttonIcon}
               aria-label={buttonText}
               title={submitDisabledReason.trim() || buttonText} 
             >
               {isLoading && !isProcessingFiles ? 'جاري الإرسال...' : buttonText}
             </ActionButton>
-            {(!canSubmit || !!error) && apiKeyPresent && ( 
+            {isSubmitDisabled && !isLoading && apiKeyPresent && (
                  <p className="text-sm text-yellow-400 mt-3" role="status">
                     {submitDisabledReason.trim()}
                 </p>
