@@ -45,8 +45,8 @@ export const FileUpload: React.FC<FileUploadProps> = ({ onFilesUploaded, uploade
     onDrop,
     accept: SUPPORTED_MIME_TYPES,
     minSize: 1, // 1 byte
-    maxSize: MAX_FILE_SIZE_BYTES, 
-  });
+    maxSize: MAX_FILE_SIZE_BYTES,
+  } as any);
 
   const removeFile = useCallback((fileName: string) => {
     const newFiles = uploadedFiles.filter(file => file.name !== fileName);
