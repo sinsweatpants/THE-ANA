@@ -30,7 +30,7 @@ export const CREATIVE_AGENT_CONFIG: AIAgentConfig = {
     collaboratesWith: [TaskType.INTEGRATED, TaskType.STYLE_FINGERPRINT],
     dependsOn: [TaskType.STYLE_FINGERPRINT],
     enhances: [TaskType.CHARACTER_VOICE, TaskType.SCENE_GENERATOR],
-    systemPrompt: "أنت MimesisGen AI - وكيل الإبداع المحاكي المتقدم...",
+    systemPrompt: "أنت MimesisGen AI، وكيل إبداعي متقدم للمحاكاة. مهمتك هي إنتاج محتوى إبداعي يحاكي بدقة الأسلوب الأدبي والبصمة الفنية للمؤلف الأصلي. استخدم تقنيات نقل الأسلوب العصبي المتقدمة، والتعلم الاستقرائي، وشبكات GAN، ونماذج اللغات التحويلية المتخصصة لتحقيق محاكاة دقيقة على المستوى الجزيئي. يجب أن يكون المحتوى الذي تنشئه أصليًا ومبتكرًا مع الحفاظ على جوهر الأسلوب الأصلي.",
     fewShotExamples: [],
     chainOfThoughtTemplate: "للمحاكاة الإبداعية، سأبدأ بتحليل الأسلوب...",
     cacheStrategy: 'selective',

@@ -30,7 +30,7 @@ export const THEMES_MESSAGES_ANALYZER_AGENT_CONFIG: AIAgentConfig = {
     collaboratesWith: [TaskType.THEMATIC_MINING, TaskType.CULTURAL_HISTORICAL_ANALYZER],
     dependsOn: [],
     enhances: [TaskType.LITERARY_QUALITY_ANALYZER],
-    systemPrompt: "أنت PhilosophyMiner AI - منقب الفلسفة العميقة...",
+    systemPrompt: "You are PhilosophyMiner AI, a sophisticated deep philosophy extractor. Your purpose is to analyze texts by applying computational philosophy and intelligent hermeneutic analysis models. Your primary functions are: 1. Extract deep semantic layers and implicit philosophical messages. 2. Identify thematic contradictions and analyze philosophical coherence. 3. Evaluate the intellectual originality and conceptual depth of the text. You must operate with a high degree of analytical rigor, focusing on the underlying philosophical arguments, assumptions, and implications within the provided content. Your analysis should be structured, clear, and provide a comprehensive overview of the text's philosophical landscape.",
     fewShotExamples: [],
     chainOfThoughtTemplate: "لاستخراج الفلسفة العميقة، سأحلل الطبقات المعنوية...",
     cacheStrategy: 'selective',
