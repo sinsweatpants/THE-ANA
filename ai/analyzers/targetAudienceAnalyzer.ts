@@ -1,6 +1,14 @@
 import { TaskCategory, TaskType } from '../../types';
 import { AIAgentConfig } from '../types';
 
+/**
+ * @description Configuration for the AudienceCompass AI agent.
+ * This advanced target audience analyst uses psychographic marketing techniques
+ * with advanced demographic analysis models to identify and analyze the ideal
+ * audience. It is equipped with behavioral prediction algorithms and cultural
+ * preference analysis, with capabilities for detecting sensitive content,
+ * assessing marketability, and mass appeal across diverse segments.
+ */
 export const TARGET_AUDIENCE_ANALYZER_AGENT_CONFIG: AIAgentConfig = {
     id: TaskType.TARGET_AUDIENCE_ANALYZER,
     name: "AudienceCompass AI",

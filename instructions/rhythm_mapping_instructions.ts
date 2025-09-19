@@ -1,3 +1,7 @@
+/**
+ * @description Instructions for the rhythm mapping task.
+ * These instructions guide the AI to analyze the dramatic rhythm of a text and provide a visual representation if possible.
+ */
 export const RHYTHM_MAPPING_INSTRUCTIONS = `### مهمة رسم خرائط الإيقاع (TaskType.RHYTHM_MAPPING)
 **الهدف:** تحليل الإيقاع الدرامي وتقديم تصور بياني له إن أمكن.
 **المخرجات المطلوبة (JSON - واجهة \`RhythmAnalysis\`):**

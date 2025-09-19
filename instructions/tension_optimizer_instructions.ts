@@ -1,3 +1,7 @@
+/**
+ * @description Instructions for the tension optimizer task.
+ * These instructions guide the AI to analyze and suggest modifications to enhance dramatic tension within a specified scope.
+ */
 export const TENSION_OPTIMIZER_INSTRUCTIONS = `### مهمة محسن التوتر الدرامي (TaskType.TENSION_OPTIMIZER)
 **الهدف:** تحليل واقتراح تعديلات لتعزيز التوتر الدرامي ضمن "نطاق الاستكمال المطلوب".
 **المخرجات المطلوبة (JSON - واجهة \`TensionOptimizerResult\`):**

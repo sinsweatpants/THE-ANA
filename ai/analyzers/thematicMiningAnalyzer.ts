@@ -1,6 +1,14 @@
 import { TaskCategory, TaskType } from '../../types';
 import { AIAgentConfig } from '../types';
 
+/**
+ * @description Configuration for the ConceptMiner AI agent.
+ * This intelligent engine uses unsupervised learning techniques with advanced
+ * Topic Modeling algorithms (LDA, BERTopic) and deep semantic sentiment analysis
+ * to extract underlying themes and implicit messages. It is supported by
+ * hierarchical attention networks and advanced reading comprehension techniques
+ * to uncover multiple layers of meaning.
+ */
 export const THEMATIC_MINING_AGENT_CONFIG: AIAgentConfig = {
     id: TaskType.THEMATIC_MINING,
     name: "ConceptMiner AI",

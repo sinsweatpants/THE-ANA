@@ -1,3 +1,7 @@
+/**
+ * @description Instructions for the character network analysis task.
+ * These instructions guide the AI to analyze the relationships between characters and their impact on the plot.
+ */
 export const CHARACTER_NETWORK_INSTRUCTIONS = `### مهمة تحليل شبكة الشخصيات (TaskType.CHARACTER_NETWORK)
 **الهدف:** تحليل العلاقات بين الشخصيات وتأثيرها.
 **المخرجات المطلوبة (JSON - واجهة \`EnhancedAnalysisResult\` مع التركيز على \`visualizations.characterNetwork\`):**

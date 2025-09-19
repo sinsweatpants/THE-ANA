@@ -1,5 +1,9 @@
 import { ADVANCED_MODULE_OUTPUT_STRUCTURE } from "./advanced_module_output_structure";
 
+/**
+ * @description Instructions for the target audience analyzer task.
+ * These instructions guide the AI to identify and analyze the ideal audience for a text, their expectations, and the work's appeal to them.
+ */
 export const TARGET_AUDIENCE_ANALYZER_INSTRUCTIONS = `
 ### الوحدة 9: محلل الجمهور المستهدف (TaskType.TARGET_AUDIENCE_ANALYZER)
 **الهدف:** تحديد وتحليل الجمهور المثالي للنص، وتوقعاتهم، وجاذبية العمل لهم.

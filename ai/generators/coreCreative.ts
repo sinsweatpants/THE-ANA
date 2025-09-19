@@ -1,6 +1,14 @@
 import { TaskCategory, TaskType } from '../../types';
 import { AIAgentConfig } from '../types';
 
+/**
+ * @description Configuration for the MimesisGen AI agent.
+ * This advanced intelligent system uses neural Style Transfer techniques with
+ * inductive learning to produce creative content that mimics the literary and
+ * stylistic fingerprint of the original author with molecular precision. It is
+ * supported by Generative Adversarial Networks (GANs) and specialized
+ * transformational language models.
+ */
 export const CREATIVE_AGENT_CONFIG: AIAgentConfig = {
     id: TaskType.CREATIVE,
     name: "MimesisGen AI",

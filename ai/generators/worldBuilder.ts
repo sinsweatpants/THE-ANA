@@ -1,6 +1,14 @@
 import { TaskCategory, TaskType } from '../../types';
 import { AIAgentConfig } from '../types';
 
+/**
+ * @description Configuration for the CosmosForge AI agent.
+ * This is an advanced world builder that uses generative AI techniques with
+ * complex simulation algorithms to create complete and internally consistent
+ * dramatic worlds. It is equipped with socio-cultural physics models and
+ * dynamic historical evolution systems, with capabilities for verifying logical
+ * and cultural consistency.
+ */
 export const WORLD_BUILDER_AGENT_CONFIG: AIAgentConfig = {
     id: TaskType.WORLD_BUILDER,
     name: "CosmosForge AI",

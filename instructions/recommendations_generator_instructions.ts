@@ -1,5 +1,10 @@
 import { ADVANCED_MODULE_OUTPUT_STRUCTURE } from "./advanced_module_output_structure";
 
+/**
+ * @description Instructions for the recommendations generator task.
+ * These instructions guide the AI to provide detailed improvement suggestions for a dramatic text,
+ * covering aspects like structure, character development, dialogue enhancement, and creative alternatives.
+ */
 export const RECOMMENDATIONS_GENERATOR_INSTRUCTIONS = `
 ### الوحدة 11: مولد التوصيات والتحسينات (TaskType.RECOMMENDATIONS_GENERATOR)
 **الهدف:** تقديم اقتراحات تحسين مفصلة للنص الدرامي تغطي جوانب مثل البنية، تطوير الشخصيات، تحسين الحوار، وتقديم بدائل إبداعية. يتم ذلك بناءً على تحليل النص (أو نتائج وحدات تحليلية سابقة إذا تم توفيرها).

@@ -1,6 +1,14 @@
 import { TaskCategory, TaskType } from '../../types';
 import { AIAgentConfig } from '../types';
 
+/**
+ * @description Configuration for the SceneArchitect AI agent.
+ * This advanced scene generator uses hierarchical planning techniques with
+ * specialized generative language models to create integrated dramatic scenes.
+ * It is equipped with narrative consistency algorithms and techniques for
+ * controlling rhythm and tension, with capabilities for integration with
+ * visual description and natural dialogue.
+ */
 export const SCENE_GENERATOR_AGENT_CONFIG: AIAgentConfig = {
     id: TaskType.SCENE_GENERATOR,
     name: "SceneArchitect AI",

@@ -1,3 +1,7 @@
+/**
+ * @enum {string}
+ * @description Defines the available task types for the AI.
+ */
 export enum TaskType {
   // الوظائف الأساسية المحدثة
   ANALYSIS = 'analysis',
@@ -46,19 +50,37 @@ export enum TaskType {
   RECOMMENDATIONS_GENERATOR = 'recommendations_generator',
 }
 
+/**
+ * @enum {string}
+ * @description Defines the categories for the available tasks.
+ */
 export enum TaskCategory {
   CORE = 'المهام الأساسية',
   ANALYSES = 'التحليلات',
   AGENTS = 'الوكلاء'
 }
 
-// Defined types based on user feedback
+/**
+ * @interface DataPoint
+ * @description Defines a single data point for a chart or graph.
+ * @property {number | string} x - The x-coordinate value (can be numerical or categorical).
+ * @property {number} y - The y-coordinate value.
+ * @property {string} [label] - An optional label for the data point.
+ */
 export interface DataPoint {
   x: number | string; // Can be a numerical value (e.g., time) or categorical (e.g., scene number)
   y: number;          // The value for the point (e.g., tension level)
   label?: string;     // Optional label for the data point
 }
 
+/**
+ * @interface NetworkGraphNode
+ * @description Defines a node in a network graph.
+ * @property {string} id - The unique identifier for the node.
+ * @property {string} label - The display label for the node.
+ * @property {string | number} [group] - An optional group for coloring or categorization.
+ * @property {number} [value] - An optional value associated with the node.
+ */
 export interface NetworkGraphNode {
   id: string;         // Unique identifier for the node (e.g., character name)
   label: string;      // Display label for the node
@@ -66,6 +88,15 @@ export interface NetworkGraphNode {
   value?: number;     // Optional value associated with the node (e.g., importance)
 }
 
+/**
+ * @interface NetworkGraphEdge
+ * @description Defines an edge in a network graph.
+ * @property {string} from - The ID of the source node.
+ * @property {string} to - The ID of the target node.
+ * @property {string} [label] - An optional label for the edge.
+ * @property {number} [value] - An optional weight or strength of the connection.
+ * @property {string} [arrows] - Defines the direction of the edge (e.g., 'to', 'from', 'middle').
+ */
 export interface NetworkGraphEdge {
   from: string;       // ID of the source node
   to: string;         // ID of the target node
@@ -74,6 +105,13 @@ export interface NetworkGraphEdge {
   arrows?: string;    // e.g., 'to', 'from', 'middle' to indicate direction
 }
 
+/**
+ * @interface NetworkGraph
+ * @description Defines the structure of a network graph.
+ * @property {NetworkGraphNode[]} nodes - An array of nodes in the graph.
+ * @property {NetworkGraphEdge[]} edges - An array of edges in the graph.
+ * @property {string} [description] - A textual summary or interpretation of the graph.
+ */
 export interface NetworkGraph {
   nodes: NetworkGraphNode[];
   edges: NetworkGraphEdge[];
@@ -196,7 +234,10 @@ export type PotentialReport = any;
 export type InnovativeIdea = any;
 
 
-// واجهة نتائج التحليل المتقدمة
+/**
+ * @interface EnhancedAnalysisResult
+ * @description Defines the structure for an enhanced analysis result.
+ */
 export interface EnhancedAnalysisResult {
   title: string;
   content: string; // Could be a summary or main textual output if JSON is rich
@@ -223,7 +264,10 @@ export interface EnhancedAnalysisResult {
   };
 }
 
-// واجهة للتوصيات الذكية
+/**
+ * @interface SmartRecommendation
+ * @description Defines the structure for a smart recommendation.
+ */
 export interface SmartRecommendation {
   id: string;
   priority: 'critical' | 'high' | 'medium' | 'low';
@@ -239,7 +283,10 @@ export interface SmartRecommendation {
   estimatedEffort?: 'minimal' | 'moderate' | 'significant';
 }
 
-// واجهة لتحليل الشخصيات المتقدم
+/**
+ * @interface CharacterAnalysis
+ * @description Defines the structure for an advanced character analysis.
+ */
 export interface CharacterAnalysis {
   id?: string; // Character ID or name
   name: string;
@@ -265,7 +312,10 @@ export interface CharacterAnalysis {
   };
 }
 
-// واجهة لتحليل الإيقاع الدرامي
+/**
+ * @interface RhythmAnalysis
+ * @description Defines the structure for a dramatic rhythm analysis.
+ */
 export interface RhythmAnalysis {
   overallPace?: 'slow' | 'moderate' | 'fast' | 'variable';
   content?: string; // Main textual output for rhythm analysis summary
@@ -296,6 +346,10 @@ export interface RhythmAnalysis {
   rhythmMap?: DataPoint[]; // A specific visualization for the overall rhythm
 }
 
+/**
+ * @interface StyleFingerprintAnalysis
+ * @description Defines the structure for a style fingerprint analysis.
+ */
 export interface StyleFingerprintAnalysis {
   content?: string; // Main textual output summary
   linguisticSignature?: {
@@ -325,6 +379,10 @@ export interface StyleFingerprintAnalysis {
   };
 }
 
+/**
+ * @interface AudienceResonanceAnalysis
+ * @description Defines the structure for an audience resonance analysis.
+ */
 export interface AudienceResonanceAnalysis {
   content?: string; // Main textual output summary
   predictedResponse?: {
@@ -352,6 +410,10 @@ export interface AudienceResonanceAnalysis {
   };
 }
 
+/**
+ * @interface WorldBuilderResult
+ * @description Defines the structure for a world builder result.
+ */
 export interface WorldBuilderResult {
   content?: string; // Main textual output for world building summary or narrative description
   physicalWorld?: {
@@ -380,6 +442,10 @@ export interface WorldBuilderResult {
   };
 }
 
+/**
+ * @interface TensionOptimizerResult
+ * @description Defines the structure for a tension optimizer result.
+ */
 export interface TensionOptimizerResult {
   content?: string; // Main textual output, e.g., summary of optimizations
   currentTensionMap?: TensionPoint[]; // Tension points in the original text
@@ -407,6 +473,10 @@ export interface TensionOptimizerResult {
   };
 }
 
+/**
+ * @interface PlatformAdapterResult
+ * @description Defines the structure for a platform adapter result.
+ */
 export interface PlatformAdapterResult {
   platform?: 'cinema' | 'tv_series' | 'streaming_film' | 'streaming_series' | 'theater' | 'web_short' | 'interactive_narrative';
   content?: string; // Main textual output, e.g., summary of adaptations
@@ -435,6 +505,10 @@ export interface PlatformAdapterResult {
   };
 }
 
+/**
+ * @interface PlotPredictorResult
+ * @description Defines the structure for a plot predictor result.
+ */
 export interface PlotPredictorResult {
   content?: string; // Main textual output (e.g., the predicted plot itself or a summary)
   currentTrajectory?: PlotPoint[]; // Key points in the current plot
@@ -465,7 +539,10 @@ export interface PlotPredictorResult {
   };
 }
 
-// New generic result type for advanced modules (Units 3-11)
+/**
+ * @interface AdvancedModuleResult
+ * @description Defines the structure for a generic advanced module result.
+ */
 export interface AdvancedModuleResult {
   title: string; // e.g., "تحليل الشخصيات العميق لـ [اسم العمل]"
   summary: string; // A general summary of the findings for this module
@@ -475,17 +552,28 @@ export interface AdvancedModuleResult {
   recommendations?: SmartRecommendation[]; // Common output for many advanced modules
 }
 
-
+/**
+ * @interface BasicAnalysisResult
+ * @description Defines the structure for a basic analysis result.
+ */
 export interface BasicAnalysisResult {
   title: string;
   content: string;
 }
 
+/**
+ * @interface CreativeResult
+ * @description Defines the structure for a creative result.
+ */
 export interface CreativeResult {
   title: string;
   content: string;
 }
 
+/**
+ * @interface GroundingSource
+ * @description Defines the structure for a grounding source.
+ */
 export interface GroundingSource {
   web: {
     uri: string;
@@ -493,6 +581,10 @@ export interface GroundingSource {
   }
 }
 
+/**
+ * @interface ProcessedFile
+ * @description Defines the structure for a file processed for Gemini.
+ */
 export interface ProcessedFile {
   name: string;
   mimeType: string;
@@ -517,12 +609,20 @@ export type GeminiTaskResultData =
   | BasicAnalysisResult // For basic analysis
   | AdvancedModuleResult; // Added for new advanced modules
 
+/**
+ * @interface GeminiServiceResponse
+ * @description Defines the structure for a response from the Gemini service.
+ */
 export interface GeminiServiceResponse {
   data?: GeminiTaskResultData;
   rawText?: string; // Always include the raw text for fallback or simplified display
   error?: string;
 }
 
+/**
+ * @interface PreviousCompletionContext
+ * @description Defines the structure for the context of a previous completion.
+ */
 export interface PreviousCompletionContext {
   filesHash: string; // Hash of original files (e.g., names + total size)
   originalTask: TaskType;
@@ -530,6 +630,10 @@ export interface PreviousCompletionContext {
   lastCompletionOutput: string; // The text output of the last completion
 }
 
+/**
+ * @interface CompletionEnhancementOption
+ * @description Defines the structure for a completion enhancement option.
+ */
 export interface CompletionEnhancementOption {
   id: TaskType;
   label: string;

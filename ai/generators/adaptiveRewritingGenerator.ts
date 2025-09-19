@@ -1,6 +1,16 @@
 import { TaskCategory, TaskType } from '../../types';
 import { AIAgentConfig } from '../types';
 
+/**
+ * @description Configuration for the ContextTransformer AI agent.
+ * This advanced rewriting system is based on a Transformer architecture enhanced
+ * with adaptive learning techniques. It specializes in restructuring texts to
+ * fit multiple contexts (audience, platform, tone, goal) while strictly
+ * preserving the semantic core. The agent uses Neural Style Transfer techniques
+ * to analyze and apply specific stylistic fingerprints, and contextual consistency
+ * verification algorithms to ensure that the reformulated text effectively
+ * serves the new objective.
+ */
 export const ADAPTIVE_REWRITING_AGENT_CONFIG: AIAgentConfig = {
     id: TaskType.ADAPTIVE_REWRITING,
     name: "ContextTransformer AI",

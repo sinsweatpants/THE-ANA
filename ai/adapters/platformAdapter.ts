@@ -1,6 +1,14 @@
 import { TaskCategory, TaskType } from '../../types';
 import { AIAgentConfig } from '../types';
 
+/**
+ * @description Configuration for the MediaTransmorph AI agent.
+ * This agent is a multi-platform media converter that uses comparative media analysis
+ * techniques with automatic adaptation models to reshape content to fit the requirements
+ * of different platforms. It is equipped with algorithms for understanding the constraints
+ * and features of each media outlet, with capabilities for controlling rhythm and structure
+ * according to the target medium.
+ */
 export const PLATFORM_ADAPTER_AGENT_CONFIG: AIAgentConfig = {
     id: TaskType.PLATFORM_ADAPTER,
     name: "MediaTransmorph AI",

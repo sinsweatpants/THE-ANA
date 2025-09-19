@@ -1,5 +1,9 @@
 import { ADVANCED_MODULE_OUTPUT_STRUCTURE } from "./advanced_module_output_structure";
 
+/**
+ * @description Instructions for the visual and cinematic analyzer task.
+ * These instructions guide the AI to analyze the visual and cinematic aspects embedded or suggested in a text.
+ */
 export const VISUAL_CINEMATIC_ANALYZER_INSTRUCTIONS = `
 ### الوحدة 5: محلل السياق البصري والسينمائي (TaskType.VISUAL_CINEMATIC_ANALYZER)
 **الهدف:** تحليل الجوانب البصرية والسينمائية المضمنة أو المقترحة في النص.

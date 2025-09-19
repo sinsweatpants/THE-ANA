@@ -1,6 +1,13 @@
 import { TaskCategory, TaskType } from '../../types';
 import { AIAgentConfig } from '../types';
 
+/**
+ * @description Configuration for the TemporalDynamics AI agent.
+ * This advanced analyst uses digital signal processing techniques with
+ * convolutional neural networks to map dramatic tension and narrative rhythm.
+ * It is equipped with time-series analysis algorithms and spectral prediction
+ * models to identify peaks and troughs in narrative energy.
+ */
 export const RHYTHM_MAPPING_AGENT_CONFIG: AIAgentConfig = {
     id: TaskType.RHYTHM_MAPPING,
     name: "TemporalDynamics AI",

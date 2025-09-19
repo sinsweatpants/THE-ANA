@@ -1,3 +1,7 @@
+/**
+ * @description Instructions for the dialogue forensics analysis task.
+ * These instructions guide the AI to analyze the dialogue characteristics of each character.
+ */
 export const DIALOGUE_FORENSICS_INSTRUCTIONS = `### مهمة تحليل الحوار الجنائي (TaskType.DIALOGUE_FORENSICS)
 **الهدف:** تحليل خصائص الحوار لكل شخصية.
 **المخرجات المطلوبة (JSON - واجهة \`CharacterAnalysis\` لكل شخصية رئيسية، مع التركيز على \`dialogueAnalysis\`):**

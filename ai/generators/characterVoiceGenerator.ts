@@ -1,6 +1,14 @@
 import { TaskCategory, TaskType } from '../../types';
 import { AIAgentConfig } from '../types';
 
+/**
+ * @description Configuration for the PersonaSynth AI agent.
+ * This is an advanced engine for simulating character voices that uses deep
+ * learning techniques with specialized GPT models for analyzing and imitating
+ * linguistic patterns. It is equipped with a long-term personal memory and
+ * voice consistency algorithms to ensure that each character maintains their
+ * unique linguistic fingerprint across different dialogues.
+ */
 export const CHARACTER_VOICE_AGENT_CONFIG: AIAgentConfig = {
     id: TaskType.CHARACTER_VOICE,
     name: "PersonaSynth AI",

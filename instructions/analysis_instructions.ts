@@ -1,3 +1,8 @@
+/**
+ * @description Instructions for the core analysis task.
+ * These instructions guide the AI to provide a deep critical analysis of a text,
+ * including metrics, visualizations, and recommendations.
+ */
 export const CORE_ANALYSIS_INSTRUCTIONS = `
 ### مهمة التحليل النقدي (TaskType.ANALYSIS)
 **الهدف:** تقديم تحليل نقدي معمق للنص.

@@ -1,6 +1,13 @@
 import { TaskCategory, TaskType } from '../../types';
 import { AIAgentConfig } from '../types';
 
+/**
+ * @description Configuration for the SynthesisOrchestrator AI agent.
+ * This advanced orchestral agent uses Swarm Intelligence techniques to coordinate
+ * and integrate analysis and creation processes into a unified workflow. It is
+ * equipped with multi-level reinforcement learning algorithms and adaptive
+ * control capabilities for adjusting complexity intensity according to the context.
+ */
 export const INTEGRATED_AGENT_CONFIG: AIAgentConfig = {
     id: TaskType.INTEGRATED,
     name: "SynthesisOrchestrator AI", 

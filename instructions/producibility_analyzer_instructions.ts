@@ -1,5 +1,10 @@
 import { ADVANCED_MODULE_OUTPUT_STRUCTURE } from "./advanced_module_output_structure";
 
+/**
+ * @description Instructions for the producibility analyzer task.
+ * These instructions guide the AI to evaluate the practical aspects of producing a text,
+ * such as estimated budget, technical requirements, and challenges.
+ */
 export const PRODUCIBILITY_ANALYZER_INSTRUCTIONS = `
 ### الوحدة 8: محلل القابلية للإنتاج (TaskType.PRODUCIBILITY_ANALYZER)
 **الهدف:** تقييم الجوانب العملية لإنتاج النص (ميزانية تقديرية، متطلبات فنية، تحديات).

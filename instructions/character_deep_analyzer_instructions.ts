@@ -1,5 +1,9 @@
 import { ADVANCED_MODULE_OUTPUT_STRUCTURE } from "./advanced_module_output_structure";
 
+/**
+ * @description Instructions for the character deep analyzer task.
+ * These instructions guide the AI to perform a comprehensive and in-depth analysis of the characters in a dramatic text.
+ */
 export const CHARACTER_DEEP_ANALYZER_INSTRUCTIONS = `
 ### الوحدة 3: مُحلل الشخصيات العميق (TaskType.CHARACTER_DEEP_ANALYZER)
 **الهدف:** إجراء تحليل شامل ومتعمق للشخصيات في النص الدرامي.

@@ -1,5 +1,9 @@
 import { ADVANCED_MODULE_OUTPUT_STRUCTURE } from "./advanced_module_output_structure";
 
+/**
+ * @description Instructions for the cultural and historical context analyzer task.
+ * These instructions guide the AI to analyze the cultural and historical accuracy of a text and handle sensitive issues.
+ */
 export const CULTURAL_HISTORICAL_ANALYZER_INSTRUCTIONS = `
 ### الوحدة 7: محلل السياق الثقافي والتاريخي (TaskType.CULTURAL_HISTORICAL_ANALYZER)
 **الهدف:** تحليل الدقة الثقافية والتاريخية للنص، والتعامل مع القضايا الحساسة.

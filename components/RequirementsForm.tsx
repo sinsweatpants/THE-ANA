@@ -1,5 +1,13 @@
 import React from 'react';
 
+/**
+ * @interface RequirementsFormProps
+ * @description Defines the props for the RequirementsForm component.
+ * @property {string} specialRequirements - The current value of the special requirements textarea.
+ * @property {string} additionalInfo - The current value of the additional info textarea.
+ * @property {(value: string) => void} onSpecialRequirementsChange - The function to call when the special requirements change.
+ * @property {(value: string) => void} onAdditionalInfoChange - The function to call when the additional info changes.
+ */
 interface RequirementsFormProps {
   specialRequirements: string;
   additionalInfo: string;
@@ -7,6 +15,11 @@ interface RequirementsFormProps {
   onAdditionalInfoChange: (value: string) => void;
 }
 
+/**
+ * @description A form for entering special requirements and additional information.
+ * @param {RequirementsFormProps} props - The props for the component.
+ * @returns {React.ReactElement} The rendered form element.
+ */
 export const RequirementsForm: React.FC<RequirementsFormProps> = ({
   specialRequirements,
   additionalInfo,

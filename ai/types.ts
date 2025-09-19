@@ -1,58 +1,94 @@
 import { TaskCategory, TaskType } from '../types';
 
+/**
+ * @interface AIAgentCapabilities
+ * @description Defines the capabilities of an AI agent.
+ */
 export interface AIAgentCapabilities {
-  // Core AI Techniques
-  multiModal: boolean;              // معالجة متعددة الوسائط
-  reasoningChains: boolean;         // سلاسل التفكير
-  toolUse: boolean;                 // استخدام الأدوات
-  memorySystem: boolean;            // نظام الذاكرة
-  selfReflection: boolean;          // التفكير الذاتي
+  /** @description Whether the agent can process multiple modalities (e.g., text, images). */
+  multiModal: boolean;
+  /** @description Whether the agent can perform multi-step reasoning. */
+  reasoningChains: boolean;
+  /** @description Whether the agent can use external tools. */
+  toolUse: boolean;
+  /** @description Whether the agent has a memory system. */
+  memorySystem: boolean;
+  /** @description Whether the agent can perform self-reflection to improve its performance. */
+  selfReflection: boolean;
 
-  // Advanced Features
-  ragEnabled: boolean;              // تعزيز البحث والإنتاج
-  vectorSearch: boolean;            // البحث الشعاعي
-  agentOrchestration: boolean;      // تنسيق الوكلاء
-  metacognitive: boolean;           // ما وراء المعرفة
-  adaptiveLearning: boolean;        // التعلم التكيفي
+  /** @description Whether the agent uses Retrieval-Augmented Generation. */
+  ragEnabled: boolean;
+  /** @description Whether the agent can perform vector searches. */
+  vectorSearch: boolean;
+  /** @description Whether the agent can orchestrate other agents. */
+  agentOrchestration: boolean;
+  /** @description Whether the agent has metacognitive abilities. */
+  metacognitive: boolean;
+  /** @description Whether the agent can learn and adapt over time. */
+  adaptiveLearning: boolean;
 
-  // Performance Metrics
-  complexityScore: number;          // درجة التعقيد (0-1)
-  accuracyLevel: number;            // مستوى الدقة (0-1)
+  /** @description The complexity score of the agent (0-1). */
+  complexityScore: number;
+  /** @description The accuracy level of the agent (0-1). */
+  accuracyLevel: number;
+  /** @description The processing speed of the agent. */
   processingSpeed: 'fast' | 'medium' | 'slow' | 'adaptive';
+  /** @description The resource intensity of the agent. */
   resourceIntensity: 'low' | 'medium' | 'high' | 'variable';
 
-  // Specialized Capabilities
-  languageModeling: boolean;        // نمذجة اللغة
-  patternRecognition: boolean;      // تمييز الأنماط
-  creativeGeneration: boolean;      // التوليد الإبداعي
-  analyticalReasoning: boolean;     // التفكير التحليلي
-  emotionalIntelligence: boolean;   // الذكاء العاطفي
+  /** @description Whether the agent has language modeling capabilities. */
+  languageModeling: boolean;
+  /** @description Whether the agent can recognize patterns. */
+  patternRecognition: boolean;
+  /** @description Whether the agent can generate creative content. */
+  creativeGeneration: boolean;
+  /** @description Whether the agent can perform analytical reasoning. */
+  analyticalReasoning: boolean;
+  /** @description Whether the agent has emotional intelligence capabilities. */
+  emotionalIntelligence: boolean;
 }
 
+/**
+ * @interface AIAgentConfig
+ * @description Defines the configuration for an AI agent.
+ */
 export interface AIAgentConfig {
+  /** @description The unique identifier for the agent's task type. */
   id: TaskType;
+  /** @description The name of the agent. */
   name: string;
+  /** @description A brief description of the agent's purpose. */
   description: string;
+  /** @description The category of the task the agent performs. */
   category: TaskCategory;
+  /** @description The capabilities of the agent. */
   capabilities: AIAgentCapabilities;
 
-  // Agent Collaboration
-  collaboratesWith: TaskType[];     // الوكلاء المتعاونون
-  dependsOn: TaskType[];           // التبعيات
-  enhances: TaskType[];            // يعزز وكلاء آخرين
+  /** @description A list of task types this agent collaborates with. */
+  collaboratesWith: TaskType[];
+  /** @description A list of task types this agent depends on. */
+  dependsOn: TaskType[];
+  /** @description A list of task types this agent enhances. */
+  enhances: TaskType[];
 
-  // Prompt Engineering
+  /** @description The system prompt that defines the agent's behavior. */
   systemPrompt: string;
+  /** @description A list of few-shot examples for the agent. */
   fewShotExamples: string[];
+  /** @description The template for the agent's chain of thought. */
   chainOfThoughtTemplate: string;
 
-  // Performance Optimization
+  /** @description The caching strategy for the agent. */
   cacheStrategy: 'none' | 'aggressive' | 'selective' | 'adaptive';
+  /** @description Whether the agent's tasks can be parallelized. */
   parallelizable: boolean;
+  /** @description Whether the agent can process tasks in batches. */
   batchProcessing: boolean;
 
-  // Quality Assurance
+  /** @description A list of validation rules for the agent's output. */
   validationRules: string[];
+  /** @description The expected schema of the agent's output. */
   outputSchema: object;
+  /** @description The confidence threshold for the agent's output. */
   confidenceThreshold: number;
 }

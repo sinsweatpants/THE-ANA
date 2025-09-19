@@ -1,3 +1,8 @@
+/**
+ * @description Instructions for the completion mode task.
+ * These instructions guide the AI to understand an incomplete work and suggest a textual continuation
+ * based on the "required completion scope" and any additional "completion enhancements".
+ */
 export const COMPLETION_MODE_INSTRUCTIONS = `
 ### مهمة وضع الاستكمال (TaskType.COMPLETION)
 **الهدف:** فهم عمل غير مكتمل (وقد يتضمن سياقًا من استكمالات سابقة) واقتراح تكملة نصية بناءً على **"نطاق الاستكمال المطلوب"**. إذا تم تحديد "تحسينات استكمال" إضافية، يجب دمج قدراتها في عملية الاستكمال.

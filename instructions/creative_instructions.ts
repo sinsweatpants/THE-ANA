@@ -1,3 +1,7 @@
+/**
+ * @description Instructions for the core creative task.
+ * These instructions guide the AI to produce new creative content that mimics the style of the original author.
+ */
 export const CORE_CREATIVE_INSTRUCTIONS = `
 ### مهمة الإبداع المحاكي (TaskType.CREATIVE)
 **الهدف:** إنتاج محتوى إبداعي جديد يحاكي أسلوب المؤلف الأصلي.

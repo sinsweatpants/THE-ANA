@@ -1,6 +1,14 @@
 import { TaskCategory, TaskType } from '../../types';
 import { AIAgentConfig } from '../types';
 
+/**
+ * @description Configuration for the CinemaVision AI agent.
+ * This advanced visual cinematic analyst uses computer vision techniques with
+ * visual narrative understanding models to analyze and interpret cinematic
+ * elements embedded in the text. It is equipped with output analysis algorithms
+ * and filmability assessment, with capabilities for detecting visual symbolism
+ * and analyzing directorial moods.
+ */
 export const VISUAL_CINEMATIC_ANALYZER_AGENT_CONFIG: AIAgentConfig = {
     id: TaskType.VISUAL_CINEMATIC_ANALYZER,
     name: "CinemaVision AI",

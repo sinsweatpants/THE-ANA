@@ -1,5 +1,10 @@
 import { ADVANCED_MODULE_OUTPUT_STRUCTURE } from "./advanced_module_output_structure";
 
+/**
+ * @description Instructions for the literary quality analyzer task.
+ * These instructions guide the AI to evaluate the literary and artistic quality of a text,
+ * including originality, rhetoric, and narrative cohesion.
+ */
 export const LITERARY_QUALITY_ANALYZER_INSTRUCTIONS = `
 ### الوحدة 10: محلل الجودة الأدبية (TaskType.LITERARY_QUALITY_ANALYZER)
 **الهدف:** تقييم الجودة الأدبية والفنية للنص، بما في ذلك الأصالة، البلاغة، والتماسك السردي.

@@ -1,5 +1,9 @@
 import React from 'react';
 
+/**
+ * @description A simple footer component for the application.
+ * @returns {React.ReactElement} The rendered footer element.
+ */
 export const Footer: React.FC = () => {
   return (
     <footer className="w-full py-6 px-4 text-center bg-slate-900 border-t border-slate-800 mt-12">

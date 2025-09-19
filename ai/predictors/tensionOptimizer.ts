@@ -1,6 +1,14 @@
 import { TaskCategory, TaskType } from '../../types';
 import { AIAgentConfig } from '../types';
 
+/**
+ * @description Configuration for the DramaEngine AI agent.
+ * This advanced tension optimizer uses evolutionary optimization algorithms
+ * with dramatic psychology models to adjust tension and excitement curves. It
+ * is equipped with emotional simulation techniques and predictive audience
+ * response models, with capabilities for dynamic control of the intensity and
+ * timing of dramatic peaks.
+ */
 export const TENSION_OPTIMIZER_AGENT_CONFIG: AIAgentConfig = {
     id: TaskType.TENSION_OPTIMIZER,
     name: "DramaEngine AI",

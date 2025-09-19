@@ -1,3 +1,7 @@
+/**
+ * @description Defines the expected JSON output structure for advanced AI modules.
+ * This structure includes a title, summary, detailed findings, and optional recommendations.
+ */
 export const ADVANCED_MODULE_OUTPUT_STRUCTURE = `
 **المخرجات المطلوبة (JSON - واجهة \`AdvancedModuleResult\`):**
 يجب أن يكون الناتج كائن JSON بالبنية التالية:
