@@ -1,7 +1,7 @@
 
 
-import React, { useState, useEffect, useCallback } from 'react';
-import { TaskType, ProcessedFile, GeminiServiceResponse, PreviousCompletionContext, CompletionEnhancementOption, TaskCategory } from './types'; 
+import React, { useEffect, useCallback } from 'react';
+import { TaskType, ProcessedFile, TaskCategory } from './types';
 import { FileUpload } from './components/FileUpload';
 import { TaskSelector } from './components/TaskSelector';
 import { RequirementsForm } from './components/RequirementsForm';
@@ -11,6 +11,7 @@ import { ActionButton } from './components/ActionButton';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { CompletionEnhancements } from './components/CompletionEnhancements'; // New component
+import { ErrorMessage } from './components/ErrorMessage';
 import { processFilesForGemini } from './services/fileReaderService';
 import { processTextsWithGemini } from './services/geminiService';
 import { 
@@ -22,25 +23,89 @@ import {
   TASK_LABELS, // Use short labels for UI
   TASK_CATEGORY_MAP
 } from './constants';
+import { useAppStore } from './store/appStore';
+import { shallow } from 'zustand/shallow';
 
 
+/**
+ * Central orchestrator for the application workflow, wiring together file ingestion,
+ * task selection, Gemini interactions, and result presentation via the shared state store.
+ */
 const App: React.FC = () => {
-  const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
-  const [processedFilesContent, setProcessedFilesContent] = useState<ProcessedFile[]>([]);
-  const [selectedTask, setSelectedTask] = useState<TaskType | null>(null);
-  const [specialRequirements, setSpecialRequirements] = useState<string>('');
-  const [additionalInfo, setAdditionalInfo] = useState<string>('');
-  const [completionScope, setCompletionScope] = useState<string>(''); 
-  
-  const [selectedCompletionEnhancements, setSelectedCompletionEnhancements] = useState<TaskType[]>([]);
-  const [previousCompletionContext, setPreviousCompletionContext] = useState<PreviousCompletionContext | null>(null);
-  const [usePreviousContextForCompletion, setUsePreviousContextForCompletion] = useState<boolean>(false);
+  const {
+    uploadedFiles,
+    processedFilesContent,
+    selectedTask,
+    specialRequirements,
+    additionalInfo,
+    completionScope,
+    selectedCompletionEnhancements,
+    previousCompletionContext,
+    usePreviousContextForCompletion,
+    geminiResult,
+    error,
+    submissionError,
+    isLoading,
+    apiKeyPresent,
+    setSpecialRequirements,
+    setAdditionalInfo,
+    setCompletionScope,
+    setProcessedFilesContent,
+    setGeminiResult,
+    setError,
+    setSubmissionError,
+    setIsLoading,
+    setPreviousCompletionContext,
+    setUsePreviousContextForCompletion,
+    setApiKeyPresent,
+    handleFilesUploaded: storeHandleFilesUploaded,
+    handleTaskSelect: storeHandleTaskSelect,
+    toggleCompletionEnhancement,
+  } = useAppStore(
+    (state) => ({
+      uploadedFiles: state.uploadedFiles,
+      processedFilesContent: state.processedFilesContent,
+      selectedTask: state.selectedTask,
+      specialRequirements: state.specialRequirements,
+      additionalInfo: state.additionalInfo,
+      completionScope: state.completionScope,
+      selectedCompletionEnhancements: state.selectedCompletionEnhancements,
+      previousCompletionContext: state.previousCompletionContext,
+      usePreviousContextForCompletion: state.usePreviousContextForCompletion,
+      geminiResult: state.geminiResult,
+      error: state.error,
+      submissionError: state.submissionError,
+      isLoading: state.isLoading,
+      apiKeyPresent: state.apiKeyPresent,
+      setSpecialRequirements: state.setSpecialRequirements,
+      setAdditionalInfo: state.setAdditionalInfo,
+      setCompletionScope: state.setCompletionScope,
+      setProcessedFilesContent: state.setProcessedFilesContent,
+      setGeminiResult: state.setGeminiResult,
+      setError: state.setError,
+      setSubmissionError: state.setSubmissionError,
+      setIsLoading: state.setIsLoading,
+      setPreviousCompletionContext: state.setPreviousCompletionContext,
+      setUsePreviousContextForCompletion: state.setUsePreviousContextForCompletion,
+      setApiKeyPresent: state.setApiKeyPresent,
+      handleFilesUploaded: state.handleFilesUploaded,
+      handleTaskSelect: state.handleTaskSelect,
+      toggleCompletionEnhancement: state.toggleCompletionEnhancement,
+    }),
+    shallow
+  );
 
-  const [geminiResult, setGeminiResult] = useState<GeminiServiceResponse | null>(null);
-  const [error, setError] = useState<string | null>(null); 
-  const [submissionError, setSubmissionError] = useState<string | null>(null); 
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [apiKeyPresent, setApiKeyPresent] = useState<boolean>(true); 
+  const handleFilesUploaded = useCallback((files: File[]) => {
+    storeHandleFilesUploaded(files);
+  }, [storeHandleFilesUploaded]);
+
+  const handleTaskSelect = useCallback((task: TaskType) => {
+    storeHandleTaskSelect(task);
+  }, [storeHandleTaskSelect]);
+
+  const handleToggleEnhancement = useCallback((enhancementId: TaskType) => {
+    toggleCompletionEnhancement(enhancementId);
+  }, [toggleCompletionEnhancement]);
 
   const generateFileHash = useCallback((files: ProcessedFile[]): string => {
     if (!files || files.length === 0) return "";
@@ -78,40 +143,16 @@ const App: React.FC = () => {
       }
     };
     processAndSetFiles();
-  }, [uploadedFiles]);
+  }, [
+    uploadedFiles,
+    setIsLoading,
+    setError,
+    setSubmissionError,
+    setPreviousCompletionContext,
+    setUsePreviousContextForCompletion,
+    setProcessedFilesContent,
+  ]);
 
-
-  const handleFilesUploaded = useCallback((files: File[]) => {
-    setUploadedFiles(files); 
-    setSubmissionError(null); 
-    setGeminiResult(null);
-    setPreviousCompletionContext(null);
-    setUsePreviousContextForCompletion(false);
-    setSelectedCompletionEnhancements([]);
-  }, []); 
-
-  const handleTaskSelect = useCallback((task: TaskType) => {
-    setSelectedTask(task);
-    setSubmissionError(null); 
-    setGeminiResult(null);
-    if (!TASKS_REQUIRING_COMPLETION_SCOPE.includes(task)) {
-      setCompletionScope(''); 
-    }
-    if (task !== TaskType.COMPLETION) {
-      setSelectedCompletionEnhancements([]);
-    }
-    if (!TASKS_REQUIRING_COMPLETION_SCOPE.includes(task)) {
-        setUsePreviousContextForCompletion(false);
-    }
-  }, []); 
-
-  const handleToggleEnhancement = useCallback((enhancementId: TaskType) => {
-    setSelectedCompletionEnhancements(prev => 
-      prev.includes(enhancementId) 
-        ? prev.filter(id => id !== enhancementId)
-        : [...prev, enhancementId]
-    );
-  }, []);
 
   const handleSubmit = useCallback(async () => {
     if (!selectedTask || processedFilesContent.length < MIN_FILES_REQUIRED) {
@@ -183,16 +224,22 @@ const App: React.FC = () => {
       setIsLoading(false);
     }
   }, [
-        processedFilesContent, 
-        selectedTask, 
-        specialRequirements, 
-        additionalInfo, 
-        completionScope, 
-        selectedCompletionEnhancements, 
-        usePreviousContextForCompletion, 
-        previousCompletionContext,
-        generateFileHash
-    ]);
+    processedFilesContent,
+    selectedTask,
+    specialRequirements,
+    additionalInfo,
+    completionScope,
+    selectedCompletionEnhancements,
+    usePreviousContextForCompletion,
+    previousCompletionContext,
+    generateFileHash,
+    setSubmissionError,
+    setGeminiResult,
+    setIsLoading,
+    setPreviousCompletionContext,
+    setUsePreviousContextForCompletion,
+    setApiKeyPresent,
+  ]);
 
   const isProcessingFiles = isLoading && uploadedFiles.length > 0 && processedFilesContent.length !== uploadedFiles.length;
 
@@ -281,11 +328,8 @@ const App: React.FC = () => {
               <p>مفتاح Gemini API مفقود أو غير صالح. يرجى التأكد من أن متغير البيئة <code>API_KEY</code> قد تم تكوينه بشكل صحيح لبيئة التطبيق. هذا التطبيق لا يمكنه العمل بدون مفتاح API صالح.</p>
             </div>
           )}
-          {error && ( 
-            <div className="p-4 mb-6 bg-yellow-700 border border-yellow-500 text-yellow-100 rounded-lg shadow-lg" role="alert">
-              <h3 className="font-bold text-lg">خطأ في معالجة الملفات</h3>
-              <p>{error}</p>
-            </div>
+          {error && (
+            <ErrorMessage title="خطأ في معالجة الملفات" description={error} tone="warning" className="mb-6" />
           )}
 
           <FileUpload uploadedFiles={uploadedFiles} onFilesUploaded={handleFilesUploaded} />
@@ -369,11 +413,8 @@ const App: React.FC = () => {
              )}
           </div>
           
-          {submissionError && ( 
-             <div className="p-4 mt-6 bg-red-800 border border-red-600 text-red-100 rounded-lg shadow-lg" role="alert">
-                <h3 className="font-bold text-lg">خطأ في الإرسال</h3>
-                <p>{submissionError}</p>
-            </div>
+          {submissionError && (
+            <ErrorMessage title="خطأ في الإرسال" description={submissionError} className="mt-6" />
           )}
 
           {geminiResult && !geminiResult.error && (geminiResult.data || geminiResult.rawText) && (

@@ -26,7 +26,17 @@ export interface ProcessTextsParams {
 
 // The responsibility of this function is to construct the detailed, task-specific prompt
 // before passing it to the generic Gemini client.
-const constructPromptParts = (params: ProcessTextsParams): Part[] => {
+/**
+ * Builds the ordered Gemini prompt parts for a given task configuration.
+ *
+ * The builder stitches together the persona, task-specific instructions, processed
+ * file contents (including base64 blobs when necessary) and any optional user
+ * requirements such as completion scope, iterative context, or enhancement modules.
+ *
+ * @param params - Aggregated request data describing the task, uploaded artefacts and user preferences.
+ * @returns A fully composed array of Gemini `Part` entries ready for submission.
+ */
+export const constructPromptParts = (params: ProcessTextsParams): Part[] => {
   const {
     processedFiles,
     taskType,
@@ -173,6 +183,15 @@ const constructPromptParts = (params: ProcessTextsParams): Part[] => {
   return parts;
 };
 
+/**
+ * Sends the constructed prompt to Gemini using the shared client and returns the raw service response.
+ *
+ * The helper automatically flags tasks that expect JSON payloads so the underlying
+ * client can tighten validation and retries when necessary.
+ *
+ * @param params - The same task configuration used for prompt construction.
+ * @returns A promise that resolves to the Gemini service response structure.
+ */
 export const processTextsWithGemini = async (params: ProcessTextsParams): Promise<GeminiServiceResponse> => {
   const promptParts = constructPromptParts(params);
   const shouldExpectJson = TASKS_EXPECTING_JSON_RESPONSE.includes(params.taskType);

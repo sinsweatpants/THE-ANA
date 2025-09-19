@@ -33,6 +33,17 @@ const readFileAsArrayBuffer = (file: File): Promise<ArrayBuffer> => {
   });
 };
 
+/**
+ * Converts uploaded browser files into normalized payloads that Gemini can consume.
+ *
+ * Text-based inputs are read directly, DOCX files are parsed through Mammoth, and
+ * binary sources such as PDF and images are converted to base64 strings. Any failure
+ * is transformed into a localized diagnostic message so later stages can surface
+ * the issue without crashing.
+ *
+ * @param files - The raw `File` objects provided by the user.
+ * @returns A promise that resolves to processed representations ready for prompting Gemini.
+ */
 export const processFilesForGemini = async (files: File[]): Promise<ProcessedFile[]> => {
   return Promise.all(
     files.map(async (file): Promise<ProcessedFile> => {

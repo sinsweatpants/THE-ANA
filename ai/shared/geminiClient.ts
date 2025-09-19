@@ -140,7 +140,16 @@ export const generateContent = async (params: GenerateContentParams, retries: nu
   } catch (e: any) {
     console.error(`خطأ في معالجة النصوص مع Gemini (محاولة ${retries}/${MAX_RETRIES}):`, e);
 
-    if (retries < MAX_RETRIES && (e.status >= 500 || (e.message && e.message.toLowerCase().includes("network error")))) {
+    const statusCode: number | undefined = typeof e?.status === 'number'
+      ? e.status
+      : typeof e?.response?.status === 'number'
+        ? e.response.status
+        : undefined;
+
+    if (
+      retries < MAX_RETRIES &&
+      ((statusCode !== undefined && statusCode >= 500) || (e.message && e.message.toLowerCase().includes("network error")))
+    ) {
       console.log(`إعادة المحاولة (${retries + 1}/${MAX_RETRIES})...`);
       await new Promise(resolve => setTimeout(resolve, 1000 * Math.pow(2, retries)));
       return generateContent(params, retries + 1);
@@ -153,19 +162,25 @@ export const generateContent = async (params: GenerateContentParams, retries: nu
       errorMessage = "حجم الملفات المرسلة أو حجم السياق الكلي يتجاوز الحد المسموح به من Gemini API. يرجى محاولة تقليل حجم الملفات أو عددها، أو تقصير نطاق الاستكمال إذا كنت تستخدم الاستكمال التكراري.";
     } else if (e.message && (e.message.toLowerCase().includes("unsupported mime type") || e.message.toLowerCase().includes("invalid_argument"))) {
       errorMessage = "واجهت Gemini API مشكلة في معالجة أحد أنواع الملفات المرفوعة أو محتواها. يرجى التحقق من أن الملفات هي من الأنواع المدعومة (نصوص، صور، PDF، DOCX بعد المعالجة) وأنها غير تالفة.";
-    } else if (e.status && (e.status === 400 || e.status === 'INVALID_ARGUMENT')) {
-        errorMessage = `خطأ في الطلب إلى Gemini API (قد يكون بسبب محتوى غير متوقع أو تنسيق خاطئ): ${e.message || 'وسيطات غير صالحة.'}`;
-    } else if (e.status >= 500) {
-        errorMessage = `واجه خادم Gemini API مشكلة (خطأ ${e.status}). يرجى المحاولة مرة أخرى لاحقًا. ${e.message || ''}`;
+    } else if (statusCode === 400 || e.status === 'INVALID_ARGUMENT') {
+      errorMessage = `طلب غير صالح إلى Gemini API. تحقق من تنسيق البيانات المرسلة وتأكد من أن جميع الحقول مطابقة للتعليمات المتوقعة.${e.message ? ` التفاصيل: ${e.message}` : ''}`;
+    } else if (statusCode === 401 || statusCode === 403) {
+      errorMessage = "تم رفض الطلب من قبل Gemini API. يرجى التأكد من صلاحية الأذونات ومفتاح API المستخدم.";
+    } else if (statusCode === 429) {
+      errorMessage = "تم تجاوز الحد المسموح به من طلبات Gemini API. يرجى الانتظار قليلاً قبل إعادة المحاولة أو تقليل معدل الإرسال.";
+    } else if (statusCode !== undefined && statusCode >= 500) {
+      errorMessage = `واجه خادم Gemini API مشكلة داخلية (خطأ ${statusCode}). يرجى المحاولة مرة أخرى لاحقًا.${e.message ? ` التفاصيل: ${e.message}` : ''}`;
     }
 
-    // More detailed error from Gemini response if available
-    if (e.response && e.response.error && e.response.error.message) {
-        errorMessage = `خطأ من Gemini API: ${e.response.error.message}`;
-    } else if (e.message && e.message.includes("content") && e.message.includes("blocked")) { // Check for content blocking
+    const detailedMessage = e.response && e.response.error && e.response.error.message
+      ? ` التفاصيل من الخادم: ${e.response.error.message}`
+      : '';
+
+    if (detailedMessage) {
+      errorMessage += detailedMessage;
+    } else if (e.message && e.message.includes("content") && e.message.includes("blocked")) {
         errorMessage = `تم حظر المحتوى بواسطة Gemini API بسبب سياسات الأمان. ${e.message}`;
     }
-
 
     return { error: errorMessage };
   }
