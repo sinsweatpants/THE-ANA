@@ -4,7 +4,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import App from '../App';
 import { processFilesForGemini } from '../services/fileReaderService';
-import { processTextsWithGemini } from '../services/geminiService';
+import { executeCoreAnalysis } from '../ai/tasks';
 import { useAppStore } from '../store/appStore';
 import { ProcessedFile, TaskType, GeminiServiceResponse } from '../types';
 
@@ -25,12 +25,38 @@ vi.mock('../services/fileReaderService', () => ({
   processFilesForGemini: vi.fn(),
 }));
 
-vi.mock('../services/geminiService', () => ({
-  processTextsWithGemini: vi.fn(),
+vi.mock('../ai/tasks', () => ({
+  executeAdaptiveRewriting: vi.fn(),
+  executeAudienceResonanceAnalysis: vi.fn(),
+  executeCharacterDeepAnalysis: vi.fn(),
+  executeCharacterNetworkAnalysis: vi.fn(),
+  executeCharacterVoiceGeneration: vi.fn(),
+  executeCompletionTask: vi.fn(),
+  executeConflictDynamicsAnalysis: vi.fn(),
+  executeCoreAnalysis: vi.fn(),
+  executeCoreCreative: vi.fn(),
+  executeCulturalHistoricalAnalysis: vi.fn(),
+  executeDialogueAdvancedAnalysis: vi.fn(),
+  executeDialogueForensicsAnalysis: vi.fn(),
+  executeIntegratedAnalysis: vi.fn(),
+  executeLiteraryQualityAnalysis: vi.fn(),
+  executePlotPrediction: vi.fn(),
+  executePlatformAdaptation: vi.fn(),
+  executeProducibilityAnalysis: vi.fn(),
+  executeRecommendationsGeneration: vi.fn(),
+  executeRhythmMappingAnalysis: vi.fn(),
+  executeSceneGeneration: vi.fn(),
+  executeStyleFingerprintAnalysis: vi.fn(),
+  executeTargetAudienceAnalysis: vi.fn(),
+  executeThematicMiningAnalysis: vi.fn(),
+  executeThemesMessagesAnalysis: vi.fn(),
+  executeTensionOptimization: vi.fn(),
+  executeVisualCinematicAnalysis: vi.fn(),
+  executeWorldBuilding: vi.fn(),
 }));
 
 const mockedProcessFilesForGemini = vi.mocked(processFilesForGemini);
-const mockedProcessTextsWithGemini = vi.mocked(processTextsWithGemini);
+const mockedExecuteCoreAnalysis = vi.mocked(executeCoreAnalysis);
 
 const resetStoreState = () => {
   useAppStore.setState({
@@ -59,7 +85,7 @@ describe('App integration workflow', () => {
     resetStoreState();
     mockUseDropzone.mockReset();
     mockedProcessFilesForGemini.mockReset();
-    mockedProcessTextsWithGemini.mockReset();
+    mockedExecuteCoreAnalysis.mockReset();
 
     mockUseDropzone.mockImplementation((options: DropzoneOptions) => {
       latestOptions = options;
@@ -88,7 +114,7 @@ describe('App integration workflow', () => {
     const submissionPromise = new Promise<GeminiServiceResponse>((resolve) => {
       resolveSubmission = resolve;
     });
-    mockedProcessTextsWithGemini.mockReturnValue(submissionPromise);
+    mockedExecuteCoreAnalysis.mockReturnValue(submissionPromise);
 
     render(<App />);
 
@@ -128,9 +154,8 @@ describe('App integration workflow', () => {
       expect(screen.queryByText('جاري تحليل نقدي...')).not.toBeInTheDocument();
     });
 
-    expect(mockedProcessTextsWithGemini).toHaveBeenCalledWith(
+    expect(mockedExecuteCoreAnalysis).toHaveBeenCalledWith(
       expect.objectContaining({
-        taskType: TaskType.ANALYSIS,
         processedFiles,
       }),
     );

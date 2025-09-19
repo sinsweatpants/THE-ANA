@@ -1,7 +1,7 @@
 
 
 import React, { useEffect, useCallback } from 'react';
-import { TaskType, ProcessedFile, TaskCategory } from './types';
+import { TaskType, ProcessedFile, TaskCategory, GeminiServiceResponse } from './types';
 import { FileUpload } from './components/FileUpload';
 import { TaskSelector } from './components/TaskSelector';
 import { RequirementsForm } from './components/RequirementsForm';
@@ -13,7 +13,36 @@ import { Footer } from './components/Footer';
 import { CompletionEnhancements } from './components/CompletionEnhancements'; // New component
 import { ErrorMessage } from './components/ErrorMessage';
 import { processFilesForGemini } from './services/fileReaderService';
-import { processTextsWithGemini } from './services/geminiService';
+import {
+  executeAdaptiveRewriting,
+  executeAudienceResonanceAnalysis,
+  executeCharacterDeepAnalysis,
+  executeCharacterNetworkAnalysis,
+  executeCharacterVoiceGeneration,
+  executeCompletionTask,
+  executeConflictDynamicsAnalysis,
+  executeCoreAnalysis,
+  executeCoreCreative,
+  executeCulturalHistoricalAnalysis,
+  executeDialogueAdvancedAnalysis,
+  executeDialogueForensicsAnalysis,
+  executeIntegratedAnalysis,
+  executeLiteraryQualityAnalysis,
+  executePlotPrediction,
+  executePlatformAdaptation,
+  executeProducibilityAnalysis,
+  executeRecommendationsGeneration,
+  executeRhythmMappingAnalysis,
+  executeSceneGeneration,
+  executeStyleFingerprintAnalysis,
+  executeTargetAudienceAnalysis,
+  executeThematicMiningAnalysis,
+  executeThemesMessagesAnalysis,
+  executeTensionOptimization,
+  executeVisualCinematicAnalysis,
+  executeWorldBuilding,
+} from './ai/tasks';
+import { TaskRuntimeParams } from './ai/tasks/taskTypes';
 import { 
   MIN_FILES_REQUIRED, 
   SparklesIcon, LightBulbIcon, PencilSquareIcon, DocumentTextIcon,
@@ -173,17 +202,104 @@ const App: React.FC = () => {
     }
 
     try {
-      const result = await processTextsWithGemini({
+      const baseParams: TaskRuntimeParams = {
         processedFiles: processedFilesContent,
-        taskType: selectedTask,
         specialRequirements,
         additionalInfo,
         completionScope: TASKS_REQUIRING_COMPLETION_SCOPE.includes(selectedTask) ? completionScope : undefined,
         selectedCompletionEnhancements: selectedTask === TaskType.COMPLETION ? selectedCompletionEnhancements : undefined,
-        previousContextText: previousContextText,
-      });
+        previousContextText,
+      };
 
-      setGeminiResult(result); 
+      let result: GeminiServiceResponse;
+
+      switch (selectedTask) {
+        case TaskType.ANALYSIS:
+          result = await executeCoreAnalysis(baseParams);
+          break;
+        case TaskType.CREATIVE:
+          result = await executeCoreCreative(baseParams);
+          break;
+        case TaskType.INTEGRATED:
+          result = await executeIntegratedAnalysis(baseParams);
+          break;
+        case TaskType.COMPLETION:
+          result = await executeCompletionTask(baseParams);
+          break;
+        case TaskType.RHYTHM_MAPPING:
+          result = await executeRhythmMappingAnalysis(baseParams);
+          break;
+        case TaskType.CHARACTER_NETWORK:
+          result = await executeCharacterNetworkAnalysis(baseParams);
+          break;
+        case TaskType.DIALOGUE_FORENSICS:
+          result = await executeDialogueForensicsAnalysis(baseParams);
+          break;
+        case TaskType.THEMATIC_MINING:
+          result = await executeThematicMiningAnalysis(baseParams);
+          break;
+        case TaskType.STYLE_FINGERPRINT:
+          result = await executeStyleFingerprintAnalysis(baseParams);
+          break;
+        case TaskType.CONFLICT_DYNAMICS:
+          result = await executeConflictDynamicsAnalysis(baseParams);
+          break;
+        case TaskType.ADAPTIVE_REWRITING:
+          result = await executeAdaptiveRewriting(baseParams);
+          break;
+        case TaskType.SCENE_GENERATOR:
+          result = await executeSceneGeneration(baseParams);
+          break;
+        case TaskType.CHARACTER_VOICE:
+          result = await executeCharacterVoiceGeneration(baseParams);
+          break;
+        case TaskType.WORLD_BUILDER:
+          result = await executeWorldBuilding(baseParams);
+          break;
+        case TaskType.PLOT_PREDICTOR:
+          result = await executePlotPrediction(baseParams);
+          break;
+        case TaskType.TENSION_OPTIMIZER:
+          result = await executeTensionOptimization(baseParams);
+          break;
+        case TaskType.AUDIENCE_RESONANCE:
+          result = await executeAudienceResonanceAnalysis(baseParams);
+          break;
+        case TaskType.PLATFORM_ADAPTER:
+          result = await executePlatformAdaptation(baseParams);
+          break;
+        case TaskType.CHARACTER_DEEP_ANALYZER:
+          result = await executeCharacterDeepAnalysis(baseParams);
+          break;
+        case TaskType.DIALOGUE_ADVANCED_ANALYZER:
+          result = await executeDialogueAdvancedAnalysis(baseParams);
+          break;
+        case TaskType.VISUAL_CINEMATIC_ANALYZER:
+          result = await executeVisualCinematicAnalysis(baseParams);
+          break;
+        case TaskType.THEMES_MESSAGES_ANALYZER:
+          result = await executeThemesMessagesAnalysis(baseParams);
+          break;
+        case TaskType.CULTURAL_HISTORICAL_ANALYZER:
+          result = await executeCulturalHistoricalAnalysis(baseParams);
+          break;
+        case TaskType.PRODUCIBILITY_ANALYZER:
+          result = await executeProducibilityAnalysis(baseParams);
+          break;
+        case TaskType.TARGET_AUDIENCE_ANALYZER:
+          result = await executeTargetAudienceAnalysis(baseParams);
+          break;
+        case TaskType.LITERARY_QUALITY_ANALYZER:
+          result = await executeLiteraryQualityAnalysis(baseParams);
+          break;
+        case TaskType.RECOMMENDATIONS_GENERATOR:
+          result = await executeRecommendationsGeneration(baseParams);
+          break;
+        default:
+          throw new Error(`Unsupported task: ${selectedTask}`);
+      }
+
+      setGeminiResult(result);
 
       if (result.error) {
         setSubmissionError(result.error); 
