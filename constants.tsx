@@ -30,13 +30,20 @@ import { TARGET_AUDIENCE_ANALYZER_INSTRUCTIONS } from './instructions/target_aud
 import { LITERARY_QUALITY_ANALYZER_INSTRUCTIONS } from './instructions/literary_quality_analyzer_instructions';
 import { RECOMMENDATIONS_GENERATOR_INSTRUCTIONS } from './instructions/recommendations_generator_instructions';
 
+/** @description The title of the application. */
 export const APP_TITLE = "المحلل الدرامي والمبدع المحاكي";
+/** @description The Gemini model used for text generation. */
 export const GEMINI_TEXT_MODEL = 'gemini-2.5-pro';
+/** @description The minimum number of files required for processing. */
 export const MIN_FILES_REQUIRED = 1; 
+/** @description The maximum file size in megabytes. */
 export const MAX_FILE_SIZE_MB = 20;
+/** @description The maximum file size in bytes. */
 export const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
 
-// Helper to identify tasks that require completion scope input
+/**
+ * @description A list of tasks that require a completion scope to be defined.
+ */
 export const TASKS_REQUIRING_COMPLETION_SCOPE: TaskType[] = [
   TaskType.COMPLETION,
   TaskType.PLOT_PREDICTOR,
@@ -46,7 +53,9 @@ export const TASKS_REQUIRING_COMPLETION_SCOPE: TaskType[] = [
   TaskType.WORLD_BUILDER, 
 ];
 
-// Tasks that can be used to enhance TaskType.COMPLETION
+/**
+ * @description A list of enhancement options available for the completion task.
+ */
 export const COMPLETION_ENHANCEMENT_OPTIONS: CompletionEnhancementOption[] = [
   { id: TaskType.THEMATIC_MINING, label: "التنقيب عن الموضوعات (موجود)" },
   { id: TaskType.STYLE_FINGERPRINT, label: "بصمة الأسلوب (موجود)" },
@@ -58,6 +67,9 @@ export const COMPLETION_ENHANCEMENT_OPTIONS: CompletionEnhancementOption[] = [
   { id: TaskType.THEMES_MESSAGES_ANALYZER, label: "محلل الموضوعات والرسائل (جديد)" },
 ];
 
+/**
+ * @description A record mapping task types to their display labels.
+ */
 export const TASK_LABELS: Record<TaskType, string> = {
   [TaskType.ANALYSIS]: 'تحليل نقدي',
   [TaskType.CREATIVE]: 'إبداع محاكاتي',
@@ -88,6 +100,9 @@ export const TASK_LABELS: Record<TaskType, string> = {
   [TaskType.RECOMMENDATIONS_GENERATOR]: 'مولد التوصيات',
 };
 
+/**
+ * @description A record mapping task types to their categories.
+ */
 export const TASK_CATEGORY_MAP: Record<TaskType, TaskCategory> = {
   [TaskType.ANALYSIS]: TaskCategory.CORE,
   [TaskType.CREATIVE]: TaskCategory.CORE,
@@ -122,6 +137,9 @@ export const TASK_CATEGORY_MAP: Record<TaskType, TaskCategory> = {
 
 // --- PROMPT ENGINEERING SECTION ---
 
+/**
+ * @description The base persona for the AI prompt, defining its role and capabilities.
+ */
 export const PROMPT_PERSONA_BASE = `أنت "الكاتب الناقد الخارق بالذكاء الاصطناعي" (CritiqueConstruct AI). دورك يتغير بناءً على المهمة:
 - للمهام التحليلية (مثل ${TaskType.ANALYSIS}, ${TaskType.RHYTHM_MAPPING}): أنت محلل درامي وخبير في بنية النصوص.
 - للمهام الإبداعية (مثل ${TaskType.CREATIVE}, ${TaskType.SCENE_GENERATOR}): أنت كاتب سيناريو ومؤلف مبدع يحاكي الأساليب.
@@ -144,6 +162,9 @@ export const PROMPT_PERSONA_BASE = `أنت "الكاتب الناقد الخار
 3.  **الأمانة للمصدر:** حافظ على روح وأسلوب النص الأصلي عند الإبداع أو الاستكمال.
 `;
 
+/**
+ * @description The seven stations of dramatic analysis for analysis and integrated tasks.
+ */
 export const SEVEN_STATIONS_OF_DRAMATIC_ANALYSIS = `
 **المحطات السبع للتحليل الدرامي (لـ TaskType.ANALYSIS و TaskType.INTEGRATED):**
 1.  **التشخيص البنيوي للشخصيات وشبكة الصراعات.**
@@ -155,6 +176,9 @@ export const SEVEN_STATIONS_OF_DRAMATIC_ANALYSIS = `
 7.  **التقرير الشامل والتكيف مع المنصات (إذا طُلب).**
 `;
 
+/**
+ * @description The three stages of emulative creativity for creative and integrated tasks.
+ */
 export const THREE_STAGES_OF_EMULATIVE_CREATIVITY = `
 **المراحل الثلاث للإبداع المحاكي (لـ TaskType.CREATIVE و TaskType.INTEGRATED):**
 1.  **التحليل الأسلوبي المعمق:** اللغة، البنية، الشخصيات، العالم.
@@ -162,6 +186,9 @@ export const THREE_STAGES_OF_EMULATIVE_CREATIVITY = `
 3.  **المحاكاة والإبداع:** إنتاج محتوى متسق.
 `;
 
+/**
+ * @description A record mapping task types to their specific instructions.
+ */
 export const TASK_SPECIFIC_INSTRUCTIONS: Record<TaskType, string> = {
   [TaskType.ANALYSIS]: CORE_ANALYSIS_INSTRUCTIONS,
   [TaskType.CREATIVE]: CORE_CREATIVE_INSTRUCTIONS,
@@ -192,6 +219,9 @@ export const TASK_SPECIFIC_INSTRUCTIONS: Record<TaskType, string> = {
   [TaskType.RECOMMENDATIONS_GENERATOR]: RECOMMENDATIONS_GENERATOR_INSTRUCTIONS,
 };
 
+/**
+ * @description A list of tasks that are expected to return a JSON response.
+ */
 export const TASKS_EXPECTING_JSON_RESPONSE: TaskType[] = [
   TaskType.ANALYSIS,
   TaskType.INTEGRATED,
@@ -217,6 +247,9 @@ export const TASKS_EXPECTING_JSON_RESPONSE: TaskType[] = [
   TaskType.RECOMMENDATIONS_GENERATOR,
 ];
 
+/**
+ * @description A record of supported MIME types and their corresponding file extensions.
+ */
 export const SUPPORTED_MIME_TYPES = {
   'text/plain': ['.txt'],
   'text/markdown': ['.md'],

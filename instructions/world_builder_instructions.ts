@@ -1,3 +1,8 @@
+/**
+ * @description Instructions for the world builder task.
+ * These instructions guide the AI to create or expand the details of a dramatic world
+ * (laws, history, culture) based on the current text and a specified scope.
+ */
 export const WORLD_BUILDER_INSTRUCTIONS = `### مهمة باني العوالم (TaskType.WORLD_BUILDER)
 **الهدف:** إنشاء أو توسيع تفاصيل عالم درامي (قوانين، تاريخ، ثقافة) بناءً على النص الحالي و"نطاق الاستكمال المطلوب".
 **المخرجات المطلوبة (JSON - واجهة \`WorldBuilderResult\`):**

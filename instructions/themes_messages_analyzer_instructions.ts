@@ -1,5 +1,9 @@
 import { ADVANCED_MODULE_OUTPUT_STRUCTURE } from "./advanced_module_output_structure";
 
+/**
+ * @description Instructions for the themes and messages analyzer task.
+ * These instructions guide the AI to extract and analyze main and sub-themes, as well as implicit and philosophical messages.
+ */
 export const THEMES_MESSAGES_ANALYZER_INSTRUCTIONS = `
 ### الوحدة 6: محلل الموضوعات والرسائل (TaskType.THEMES_MESSAGES_ANALYZER)
 **الهدف:** استخراج وتحليل الموضوعات الرئيسية والفرعية والرسائل الضمنية والفلسفية.

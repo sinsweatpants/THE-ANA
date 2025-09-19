@@ -2,7 +2,10 @@ import { AIAgentConfig, AIAgentCapabilities } from './types';
 import { TaskType } from '../types';
 
 /**
- * Centralized capability definitions for creative tasks.
+ * @description Centralized capability definitions for creative tasks.
+ * These capabilities are used to configure AI agents for creative purposes.
+ * @property {string} label - The display name of the capability.
+ * @property {string} description - A brief explanation of the capability.
  */
 export const CREATIVE_CAPABILITIES = [
   {
@@ -24,7 +27,10 @@ export const CREATIVE_CAPABILITIES = [
 ];
 
 /**
- * Centralized capability definitions for analytical tasks.
+ * @description Centralized capability definitions for analytical tasks.
+ * These capabilities are used to configure AI agents for analytical purposes.
+ * @property {string} label - The display name of the capability.
+ * @property {string} description - A brief explanation of the capability.
  */
 export const ANALYTICAL_CAPABILITIES = [
   {
@@ -52,6 +58,11 @@ export const ANALYTICAL_CAPABILITIES = [
 export class AgentConfigBuilder {
   private config: Partial<AIAgentConfig> = {};
 
+  /**
+   * @param {TaskType} id - The unique identifier for the agent.
+   * @param {string} systemMessage - The core instruction or persona for the AI.
+   * @returns {AgentConfigBuilder} - The builder instance for chaining.
+   */
   constructor(id: TaskType, systemMessage: string) {
     this.config.id = id;
     this.config.systemPrompt = systemMessage;

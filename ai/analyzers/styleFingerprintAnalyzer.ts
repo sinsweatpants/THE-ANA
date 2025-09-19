@@ -1,6 +1,14 @@
 import { TaskCategory, TaskType } from '../../types';
 import { AIAgentConfig } from '../types';
 
+/**
+ * @description Configuration for the AuthorDNA AI agent.
+ * This advanced stylistic analysis system uses advanced computational stylometry
+ * techniques with deep learning to extract the unique literary fingerprint of the
+ * author. It is equipped with algorithms for analyzing linguistic frequency and
+ * specialized AI models for identifying fine stylistic features and distinctive
+ * rhetorical traits.
+ */
 export const STYLE_FINGERPRINT_AGENT_CONFIG: AIAgentConfig = {
     id: TaskType.STYLE_FINGERPRINT,
     name: "AuthorDNA AI",

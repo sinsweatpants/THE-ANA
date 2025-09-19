@@ -1,12 +1,25 @@
 
 import React from 'react';
 
+/**
+ * @interface ActionButtonProps
+ * @description Defines the props for the ActionButton component.
+ * @extends React.ButtonHTMLAttributes<HTMLButtonElement>
+ * @property {React.ReactNode} children - The content of the button.
+ * @property {'primary' | 'secondary' | 'danger'} [variant='primary'] - The color variant of the button.
+ * @property {React.ReactNode} [icon] - An optional icon to display before the button text.
+ */
 interface ActionButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   variant?: 'primary' | 'secondary' | 'danger';
   icon?: React.ReactNode;
 }
 
+/**
+ * @description A customizable action button component with different variants and an optional icon.
+ * @param {ActionButtonProps} props - The props for the component.
+ * @returns {React.ReactElement} The rendered button element.
+ */
 export const ActionButton: React.FC<ActionButtonProps> = ({ children, variant = 'primary', icon, className, ...props }) => {
   const baseClasses = "px-6 py-3 rounded-lg font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-opacity-75 transition-all duration-150 ease-in-out flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed";
   

@@ -15,6 +15,11 @@ interface FileUploadProps {
   uploadedFiles: File[];
 }
 
+/**
+ * @description A drag-and-drop file upload component with validation and a list of uploaded files.
+ * @param {FileUploadProps} props - The props for the component.
+ * @returns {React.ReactElement} The rendered file upload element.
+ */
 export const FileUpload: React.FC<FileUploadProps> = ({ onFilesUploaded, uploadedFiles }) => {
   const [error, setError] = useState<string | null>(null);
 

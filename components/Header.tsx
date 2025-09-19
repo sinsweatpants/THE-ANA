@@ -1,6 +1,10 @@
 import React from 'react';
 import { APP_TITLE } from '../constants';
 
+/**
+ * @description The main header component for the application.
+ * @returns {React.ReactElement} The rendered header element.
+ */
 export const Header: React.FC = () => {
   return (
     <header className="w-full py-6 px-4 md:px-8 bg-slate-900 shadow-lg">

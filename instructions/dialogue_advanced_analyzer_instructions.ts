@@ -1,5 +1,9 @@
 import { ADVANCED_MODULE_OUTPUT_STRUCTURE } from "./advanced_module_output_structure";
 
+/**
+ * @description Instructions for the advanced dialogue analyzer task.
+ * These instructions guide the AI to perform a comprehensive analysis of the quality and effectiveness of the dialogue in a text.
+ */
 export const DIALOGUE_ADVANCED_ANALYZER_INSTRUCTIONS = `
 ### الوحدة 4: محلل الحوار المتطور (TaskType.DIALOGUE_ADVANCED_ANALYZER)
 **الهدف:** تحليل شامل لجودة وفعالية الحوار في النص.

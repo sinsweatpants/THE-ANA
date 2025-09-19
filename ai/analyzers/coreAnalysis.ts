@@ -1,6 +1,12 @@
 import { TaskCategory, TaskType } from '../../types';
 import { AIAgentConfig } from '../types';
 
+/**
+ * @description Configuration for the CritiqueArchitect AI agent.
+ * This is a hybrid multi-agent system that integrates dialectical thinking with
+ * deep vector analysis. It is equipped with long-term memory and self-thinking
+ * capabilities to uncover hidden structures and complex patterns in dramatic texts.
+ */
 export const ANALYSIS_AGENT_CONFIG: AIAgentConfig = {
     id: TaskType.ANALYSIS,
     name: "CritiqueArchitect AI",

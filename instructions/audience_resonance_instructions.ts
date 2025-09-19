@@ -1,3 +1,7 @@
+/**
+ * @description Instructions for the audience resonance analysis task.
+ * These instructions guide the AI to analyze how an audience might react to a text.
+ */
 export const AUDIENCE_RESONANCE_INSTRUCTIONS = `### مهمة محلل صدى الجمهور (TaskType.AUDIENCE_RESONANCE)
 **الهدف:** تحليل كيف يمكن أن يتفاعل الجمهور مع النص أو الجزء المكتمل.
 **المخرجات المطلوبة (JSON - واجهة \`AudienceResonanceAnalysis\`):**

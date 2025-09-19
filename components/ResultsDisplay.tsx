@@ -6,11 +6,22 @@ import { ClipboardDocumentIcon } from '../constants';
 import { ENHANCED_TASK_DESCRIPTIONS as TASK_DESCRIPTIONS } from '../ai/orchestration';
 import { ActionButton } from './ActionButton';
 
+/**
+ * @interface CopyButtonProps
+ * @description Defines the props for the CopyButton component.
+ * @property {string} textToCopy - The text to be copied to the clipboard.
+ * @property {string} [className] - Optional additional CSS classes.
+ */
 interface CopyButtonProps {
   textToCopy: string;
   className?: string;
 }
 
+/**
+ * @description A button that copies a given text to the clipboard.
+ * @param {CopyButtonProps} props - The props for the component.
+ * @returns {React.ReactElement} The rendered copy button element.
+ */
 const CopyButton: React.FC<CopyButtonProps> = ({ textToCopy, className }) => {
   const [copied, setCopied] = useState(false);
 
@@ -44,7 +55,14 @@ const CopyButton: React.FC<CopyButtonProps> = ({ textToCopy, className }) => {
   );
 };
 
-
+/**
+ * @interface ResultSectionProps
+ * @description Defines the props for the ResultSection component.
+ * @property {string} title - The title of the result section.
+ * @property {string} [content] - The content to be displayed in the section.
+ * @property {boolean} [isError] - Whether the section should be styled as an error.
+ * @property {React.ReactNode} [children] - Optional children to render within the section.
+ */
 interface ResultSectionProps {
   title: string;
   content?: string;
@@ -52,6 +70,11 @@ interface ResultSectionProps {
   children?: React.ReactNode;
 }
 
+/**
+ * @description A component to display a section of the results with a title and content.
+ * @param {ResultSectionProps} props - The props for the component.
+ * @returns {React.ReactElement} The rendered result section element.
+ */
 const ResultSection: React.FC<ResultSectionProps> = ({ title, content, isError, children }) => {
   const cleanedContent = typeof content === 'string' ? content.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "") : undefined;
 
@@ -87,6 +110,11 @@ interface ResultsDisplayProps {
   selectedTaskType: TaskType | null;
 }
 
+/**
+ * @description A component to display the results from the Gemini API, including structured data and raw text.
+ * @param {ResultsDisplayProps} props - The props for the component.
+ * @returns {React.ReactElement | null} The rendered results display element or null if there is no data.
+ */
 export const ResultsDisplay: React.FC<ResultsDisplayProps> = ({ resultData, rawText, error, selectedTaskType }) => {
   if (error) {
     return <ResultSection title="خطأ في المعالجة" content={error} isError />;

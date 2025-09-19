@@ -1,3 +1,7 @@
+/**
+ * @description Instructions for the conflict dynamics analysis task.
+ * These instructions guide the AI to analyze the evolution and types of conflicts in a text.
+ */
 export const CONFLICT_DYNAMICS_INSTRUCTIONS = `### مهمة ديناميكيات الصراع (TaskType.CONFLICT_DYNAMICS)
 **الهدف:** تحليل تطور الصراعات وأنواعها.
 **المخرجات المطلوبة (JSON - واجهة \`EnhancedAnalysisResult\` مع التركيز على \`metrics\` و \`visualizations.conflictMatrix\` إذا أمكن):**

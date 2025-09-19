@@ -6,6 +6,17 @@ import { GEMINI_TEXT_MODEL } from "../../constants";
 // Note: The prompt construction logic is kept separate to allow for more flexible use of this client.
 // The caller is responsible for constructing the prompt parts.
 
+/**
+ * @interface GenerateContentParams
+ * @description Defines the parameters for the generateContent function.
+ * @property {Part[]} promptParts - The parts of the prompt to send to the Gemini API.
+ * @property {string} [model] - The model to use for content generation.
+ * @property {number} [maxOutputTokens] - The maximum number of tokens to generate.
+ * @property {number} [temperature] - The temperature for sampling.
+ * @property {number} [topK] - The top-K sampling parameter.
+ * @property {number} [topP] - The top-P sampling parameter.
+ * @property {boolean} [shouldExpectJson] - Whether the response is expected to be in JSON format.
+ */
 interface GenerateContentParams {
   promptParts: Part[];
   model?: string;
@@ -18,6 +29,11 @@ interface GenerateContentParams {
 
 let ai: GoogleGenAI | null = null;
 
+/**
+ * @description Gets the singleton instance of the GoogleGenAI client.
+ * @returns {GoogleGenAI} The GoogleGenAI instance.
+ * @throws {Error} If the API_KEY environment variable is not set.
+ */
 const getAiInstance = (): GoogleGenAI => {
   if (!ai) {
     if (!process.env.API_KEY) {
@@ -28,6 +44,11 @@ const getAiInstance = (): GoogleGenAI => {
   return ai;
 };
 
+/**
+ * @description Attempts to fix a string that is not valid JSON by extracting the JSON object or array.
+ * @param {string} jsonString - The string to fix.
+ * @returns {string} The fixed JSON string or the original string if it cannot be fixed.
+ */
 const attemptToFixJson = (jsonString: string): string => {
     // Try to extract content between the first '{' and last '}' or first '[' and last ']'
     const objectMatch = jsonString.match(/\{(?:.|\n)*\}/s);
@@ -55,6 +76,12 @@ const attemptToFixJson = (jsonString: string): string => {
 
 const MAX_RETRIES = 1;
 
+/**
+ * @description Generates content using the Gemini API with retry logic.
+ * @param {GenerateContentParams} params - The parameters for content generation.
+ * @param {number} [retries=0] - The number of retries attempted.
+ * @returns {Promise<GeminiServiceResponse>} The response from the Gemini API.
+ */
 export const generateContent = async (params: GenerateContentParams, retries: number = 0): Promise<GeminiServiceResponse> => {
   const {
     promptParts,

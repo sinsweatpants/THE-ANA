@@ -40,6 +40,12 @@ import { PLATFORM_ADAPTER_AGENT_CONFIG } from '../adapters/platformAdapter';
 // Recommendations
 import { RECOMMENDATIONS_GENERATOR_AGENT_CONFIG } from '../recommendations/recommendationsGenerator';
 
+/**
+ * @description A frozen array of all AI agent configurations.
+ * This aggregates configurations from various modules, including core agents,
+ * analyzers, generators, predictors, adapters, and recommendation systems.
+ * Freezing the array prevents any modifications to the configurations at runtime.
+ */
 export const AGENT_CONFIGS = Object.freeze<AIAgentConfig[]>([
   // === CORE FOUNDATIONAL AGENTS ===
   ANALYSIS_AGENT_CONFIG,

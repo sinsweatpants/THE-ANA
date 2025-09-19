@@ -1,3 +1,7 @@
+/**
+ * @description Instructions for the plot predictor task.
+ * These instructions guide the AI to predict potential plot developments within a specified scope.
+ */
 export const PLOT_PREDICTOR_INSTRUCTIONS = `### مهمة متنبئ مسار الحبكة (TaskType.PLOT_PREDICTOR)
 **الهدف:** التنبؤ بالتطورات المحتملة للحبكة ضمن "نطاق الاستكمال المطلوب".
 **المخرجات المطلوبة (JSON - واجهة \`PlotPredictorResult\`):**

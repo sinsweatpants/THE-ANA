@@ -1,3 +1,7 @@
+/**
+ * @description Instructions for the platform adapter task.
+ * These instructions guide the AI to suggest modifications to adapt a text for a different platform.
+ */
 export const PLATFORM_ADAPTER_INSTRUCTIONS = `### مهمة محول المنصات (TaskType.PLATFORM_ADAPTER)
 **الهدف:** اقتراح تعديلات لتكييف النص أو الجزء المكتمل مع منصة عرض مختلفة (سينما، تلفزيون، إلخ).
 **المخرجات المطلوبة (JSON - واجهة \`PlatformAdapterResult\`):**

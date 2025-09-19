@@ -1,6 +1,13 @@
 import { TaskCategory, TaskType } from '../../types';
 import { AIAgentConfig } from '../types';
 
+/**
+ * @description Configuration for the SocialGraph AI agent.
+ * This advanced analyst applies graph theory and complex network algorithms
+ * (PageRank, Community Detection, Centrality Measures) to uncover power
+ * and influence structures among characters. It is supported by dynamic
+ * network analysis techniques and algorithms for detecting hidden social patterns.
+ */
 export const CHARACTER_NETWORK_AGENT_CONFIG: AIAgentConfig = {
     id: TaskType.CHARACTER_NETWORK,
     name: "SocialGraph AI",

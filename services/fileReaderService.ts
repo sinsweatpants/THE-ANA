@@ -2,6 +2,11 @@
 import { ProcessedFile } from '../types';
 import mammoth from 'mammoth';
 
+/**
+ * @description Reads a file as a text string.
+ * @param {File} file - The file to read.
+ * @returns {Promise<string>} A promise that resolves to the file content as a string.
+ */
 const readFileAsText = (file: File): Promise<string> => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -11,6 +16,11 @@ const readFileAsText = (file: File): Promise<string> => {
   });
 };
 
+/**
+ * @description Reads a file as a base64 encoded string.
+ * @param {File} file - The file to read.
+ * @returns {Promise<string>} A promise that resolves to the file content as a base64 string.
+ */
 const readFileAsBase64 = (file: File): Promise<string> => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -24,6 +34,11 @@ const readFileAsBase64 = (file: File): Promise<string> => {
   });
 };
 
+/**
+ * @description Reads a file as an ArrayBuffer.
+ * @param {File} file - The file to read.
+ * @returns {Promise<ArrayBuffer>} A promise that resolves to the file content as an ArrayBuffer.
+ */
 const readFileAsArrayBuffer = (file: File): Promise<ArrayBuffer> => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();

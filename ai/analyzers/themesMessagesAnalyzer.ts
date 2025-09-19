@@ -1,6 +1,15 @@
 import { TaskCategory, TaskType } from '../../types';
 import { AIAgentConfig } from '../types';
 
+/**
+ * @description Configuration for the PhilosophyMiner AI agent.
+ * This advanced themes and messages analyst uses computational philosophy
+ * techniques with intelligent hermeneutic analysis models to extract deep
+ * semantic layers and implicit philosophical messages. It is equipped with
+ * algorithms for detecting thematic contradictions and analyzing philosophical
+ * coherence, with capabilities for assessing intellectual originality and
+ * conceptual depth.
+ */
 export const THEMES_MESSAGES_ANALYZER_AGENT_CONFIG: AIAgentConfig = {
     id: TaskType.THEMES_MESSAGES_ANALYZER,
     name: "PhilosophyMiner AI",

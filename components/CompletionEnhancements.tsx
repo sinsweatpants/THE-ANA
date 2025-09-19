@@ -2,12 +2,24 @@ import React from 'react';
 import { TaskType, CompletionEnhancementOption } from '../types';
 import { LightBulbIcon, SparklesIcon } from '../constants'; // Assuming these icons can be used or provide more specific ones
 
+/**
+ * @interface CompletionEnhancementsProps
+ * @description Defines the props for the CompletionEnhancements component.
+ * @property {CompletionEnhancementOption[]} availableEnhancements - The list of available enhancements.
+ * @property {TaskType[]} selectedEnhancements - The list of selected enhancement IDs.
+ * @property {(enhancementId: TaskType) => void} onToggleEnhancement - The function to call when an enhancement is toggled.
+ */
 interface CompletionEnhancementsProps {
   availableEnhancements: CompletionEnhancementOption[];
   selectedEnhancements: TaskType[];
   onToggleEnhancement: (enhancementId: TaskType) => void;
 }
 
+/**
+ * @description A component that allows the user to select optional enhancements for the completion task.
+ * @param {CompletionEnhancementsProps} props - The props for the component.
+ * @returns {React.ReactElement | null} The rendered component or null if no enhancements are available.
+ */
 export const CompletionEnhancements: React.FC<CompletionEnhancementsProps> = ({
   availableEnhancements,
   selectedEnhancements,

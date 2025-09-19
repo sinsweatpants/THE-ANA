@@ -1,6 +1,14 @@
 import { TaskCategory, TaskType } from '../../types';
 import { AIAgentConfig } from '../types';
 
+/**
+ * @description Configuration for the ConversationLens AI agent.
+ * This advanced dialogue analyzer uses computational linguistics techniques with
+ * advanced pragmatic analysis models to examine the layers of meaning in dialogue.
+ * It is equipped with algorithms for detecting subtext and rhythmic analysis of
+ * speech, with capabilities for assessing naturalness, vocal uniqueness, and
+ * detecting linguistic clichés.
+ */
 export const DIALOGUE_ADVANCED_ANALYZER_AGENT_CONFIG: AIAgentConfig = {
     id: TaskType.DIALOGUE_ADVANCED_ANALYZER,
     name: "ConversationLens AI",

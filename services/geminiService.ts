@@ -13,7 +13,17 @@ import {
 } from '../constants';
 import { generateContent } from '../ai/shared/geminiClient';
 
-// This interface remains here as it's specific to this service's public-facing function.
+/**
+ * @interface ProcessTextsParams
+ * @description Defines the parameters for the processTextsWithGemini function.
+ * @property {ProcessedFile[]} processedFiles - The files processed for Gemini.
+ * @property {TaskType} taskType - The type of task to be performed.
+ * @property {string} specialRequirements - Any special requirements from the user.
+ * @property {string} additionalInfo - Any additional information from the user.
+ * @property {string} [completionScope] - The scope of the completion task.
+ * @property {TaskType[]} [selectedCompletionEnhancements] - The selected enhancements for the completion task.
+ * @property {string} [previousContextText] - The context from a previous iteration of the completion task.
+ */
 export interface ProcessTextsParams {
   processedFiles: ProcessedFile[];
   taskType: TaskType;

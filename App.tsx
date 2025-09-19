@@ -242,6 +242,10 @@ const App: React.FC = () => {
 
   const isProcessingFiles = isLoading && uploadedFiles.length > 0 && processedFilesContent.length !== uploadedFiles.length;
 
+  /**
+   * @description Gets the appropriate icon and text for the submit button based on the selected task.
+   * @returns {{icon: React.ReactNode, text: string}} The icon and text for the button.
+   */
   const getButtonIconAndText = () => {
     if (!selectedTask) return { icon: <SparklesIcon className="w-5 h-5" />, text: 'ابدأ المعالجة' };
     

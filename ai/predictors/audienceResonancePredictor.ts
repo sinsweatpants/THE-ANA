@@ -1,6 +1,14 @@
 import { TaskCategory, TaskType } from '../../types';
 import { AIAgentConfig } from '../types';
 
+/**
+ * @description Configuration for the EmpathyMatrix AI agent.
+ * This advanced resonance analyst uses collective psychology models with
+ * advanced emotion processing techniques to analyze and predict the emotional
+ * and intellectual response of the audience. It is equipped with extensive
+* demographic databases and social learning algorithms to understand complex
+ * mass interaction.
+ */
 export const AUDIENCE_RESONANCE_AGENT_CONFIG: AIAgentConfig = {
     id: TaskType.AUDIENCE_RESONANCE,
     name: "EmpathyMatrix AI",

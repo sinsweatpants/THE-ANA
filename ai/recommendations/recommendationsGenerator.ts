@@ -1,6 +1,15 @@
 import { TaskCategory, TaskType } from '../../types';
 import { AIAgentConfig } from '../types';
 
+/**
+ * @description Configuration for the WisdomSynthesizer AI agent.
+ * This advanced recommendations and improvements generator uses synthetic
+ * intelligence models with multi-objective optimization algorithms to provide
+ * customized suggestions and innovative creative solutions. It is equipped with
+ * feedback learning capabilities and design thinking models, with capabilities
+ * for producing diverse alternatives and evaluating the impact of proposed
+ * improvements on overall quality.
+ */
 export const RECOMMENDATIONS_GENERATOR_AGENT_CONFIG: AIAgentConfig = {
     id: TaskType.RECOMMENDATIONS_GENERATOR,
     name: "WisdomSynthesizer AI",

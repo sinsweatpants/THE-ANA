@@ -21,6 +21,15 @@ interface TaskSelectorProps {
   onTaskSelect: (taskType: TaskType) => void;
 }
 
+/**
+ * @interface TaskOption
+ * @description Defines the properties for a single task option in the selector.
+ * @property {TaskType} id - The unique identifier for the task.
+ * @property {string} label - The display label for the task.
+ * @property {React.ReactNode} icon - The icon to display for the task.
+ * @property {TaskCategory} category - The category the task belongs to.
+ * @property {string} description - A brief description of the task.
+ */
 interface TaskOption {
   id: TaskType;
   label: string;
@@ -29,6 +38,9 @@ interface TaskOption {
   description: string;
 }
 
+/**
+ * @description A list of all available task options.
+ */
 const taskOptionsList: TaskOption[] = [
   // Core tasks
   { id: TaskType.ANALYSIS, label: "تحليل نقدي", icon: <LightBulbIcon className="w-5 h-5" />, category: TASK_CATEGORY_MAP[TaskType.ANALYSIS], description: ENHANCED_TASK_DESCRIPTIONS[TaskType.ANALYSIS] },
@@ -68,7 +80,9 @@ const taskOptionsList: TaskOption[] = [
   { id: TaskType.RECOMMENDATIONS_GENERATOR, label: "مولد التوصيات (و11)", icon: <SparklesIcon className="w-5 h-5" />, category: TASK_CATEGORY_MAP[TaskType.RECOMMENDATIONS_GENERATOR], description: ENHANCED_TASK_DESCRIPTIONS[TaskType.RECOMMENDATIONS_GENERATOR] },
 ];
 
-// Group tasks by category
+/**
+ * @description A record of task options grouped by category.
+ */
 const groupedTasks = taskOptionsList.reduce((acc, task) => {
   const category = task.category || TaskCategory.CORE; // Fallback category
   if (!acc[category]) {
@@ -78,21 +92,32 @@ const groupedTasks = taskOptionsList.reduce((acc, task) => {
   return acc;
 }, {} as Record<TaskCategory, TaskOption[]>);
 
-// Define explicit order for categories
+/**
+ * @description The explicit order of task categories for display.
+ */
 const categoryOrder: TaskCategory[] = [
   TaskCategory.CORE,
   TaskCategory.ANALYSES,
   TaskCategory.AGENTS,
 ];
 
-// Define icon for visual indicator
+/**
+ * @description A chevron icon component for visual indication.
+ * @param {object} props - The props for the component.
+ * @param {string} [props.className] - Optional additional CSS classes.
+ * @returns {React.ReactElement} The rendered SVG icon.
+ */
 const ChevronLeftIcon: React.FC<{ className?: string }> = ({ className }) => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className || "w-6 h-6"}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
     </svg>
 );
 
-
+/**
+ * @description A component for selecting a task from a grouped list of options.
+ * @param {TaskSelectorProps} props - The props for the component.
+ * @returns {React.ReactElement} The rendered task selector element.
+ */
 export const TaskSelector: React.FC<TaskSelectorProps> = ({ selectedTask, onTaskSelect }) => {
   const selectedCategory = selectedTask ? TASK_CATEGORY_MAP[selectedTask] : null;
 

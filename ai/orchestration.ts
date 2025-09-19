@@ -8,8 +8,15 @@ import { AIAgentCapabilities, AIAgentConfig } from './types';
 // =====================================
 
 /**
- * Advanced AI Agent Orchestra Manager
- * مدير أوركسترا وكلاء الذكاء الاصطناعي المتقدم
+ * @class AIAgentOrchestraManager
+ * @description Advanced AI Agent Orchestra Manager that handles the lifecycle, collaboration, and performance of AI agents.
+ * It uses a singleton pattern to ensure a single instance manages all agents.
+ * @property {Map<TaskType, AIAgentConfig>} agents - A map of registered AI agents.
+ * @property {Map<TaskType, Set<TaskType>>} collaborationGraph - A graph representing collaborations between agents.
+ * @property {Map<TaskType, any>} performanceMetrics - A map to store performance metrics for each agent.
+ * @property {Map<string, any[]>} episodicMemory - Stores recent interactions for episodic learning.
+ * @property {Map<string, number[]>} semanticMemory - Stores vector embeddings for semantic understanding.
+ * @property {Map<string, Function>} proceduralMemory - Stores functions or procedures that agents can execute.
  */
 class AIAgentOrchestraManager {
   private static instance: AIAgentOrchestraManager;
@@ -28,6 +35,10 @@ class AIAgentOrchestraManager {
     this.initializeMetaLearning();
   }
 
+  /**
+   * @description Gets the singleton instance of the AIAgentOrchestraManager.
+   * @returns {AIAgentOrchestraManager} The singleton instance.
+   */
   public static getInstance(): AIAgentOrchestraManager {
     if (!AIAgentOrchestraManager.instance) {
       AIAgentOrchestraManager.instance = new AIAgentOrchestraManager();
@@ -36,7 +47,8 @@ class AIAgentOrchestraManager {
   }
 
   /**
-   * Initialize the complete AI Agent Orchestra with cutting-edge capabilities
+   * @description Initializes the AI Agent Orchestra by registering all agent configurations.
+   * @private
    */
   private initializeAgentOrchestra(): void {
     AGENT_CONFIGS.forEach(config => {
@@ -45,7 +57,8 @@ class AIAgentOrchestraManager {
   }
 
   /**
-   * Build collaboration graph for efficient agent orchestration
+   * @description Builds the collaboration graph to define relationships between agents for efficient orchestration.
+   * @private
    */
   private buildCollaborationGraph(): void {
     this.agents.forEach((agent, agentId) => {
@@ -71,7 +84,8 @@ class AIAgentOrchestraManager {
   }
 
   /**
-   * Initialize Meta-Learning capabilities
+   * @description Initializes meta-learning capabilities by setting up initial performance metrics for each agent.
+   * @private
    */
   private initializeMetaLearning(): void {
     // Initialize learning algorithms and performance tracking
@@ -87,7 +101,9 @@ class AIAgentOrchestraManager {
   }
 
   /**
-   * Get enhanced task description with AI capabilities
+   * @description Gets the enhanced task description for a given task type, including AI capabilities.
+   * @param {TaskType} taskType - The type of the task.
+   * @returns {string} The enhanced description.
    */
   public getEnhancedDescription(taskType: TaskType): string {
     const agent = this.agents.get(taskType);
@@ -95,7 +111,9 @@ class AIAgentOrchestraManager {
   }
 
   /**
-   * Get agent capabilities for a task
+   * @description Gets the capabilities of the agent assigned to a specific task.
+   * @param {TaskType} taskType - The type of the task.
+   * @returns {AIAgentCapabilities | null} The agent's capabilities or null if not found.
    */
   public getAgentCapabilities(taskType: TaskType): AIAgentCapabilities | null {
     const agent = this.agents.get(taskType);
@@ -103,7 +121,9 @@ class AIAgentOrchestraManager {
   }
 
   /**
-   * Get collaboration suggestions for a task
+   * @description Gets collaboration suggestions for a given task type.
+   * @param {TaskType} taskType - The type of the task.
+   * @returns {TaskType[]} An array of suggested collaborator task types.
    */
   public getCollaborationSuggestions(taskType: TaskType): TaskType[] {
     const collaborators = this.collaborationGraph.get(taskType);
@@ -111,7 +131,9 @@ class AIAgentOrchestraManager {
   }
 
   /**
-   * Optimize agent execution order based on dependencies
+   * @description Optimizes the execution order of tasks based on their dependencies.
+   * @param {TaskType[]} taskTypes - An array of task types to be executed.
+   * @returns {TaskType[]} The optimized order of task types.
    */
   public optimizeExecutionOrder(taskTypes: TaskType[]): TaskType[] {
     const visited = new Set<TaskType>();
@@ -134,14 +156,20 @@ class AIAgentOrchestraManager {
   }
 
   /**
-   * Get performance metrics for monitoring
+   * @description Gets the performance metrics for a specific agent.
+   * @param {TaskType} taskType - The type of the task.
+   * @returns {any} The performance metrics.
    */
   public getPerformanceMetrics(taskType: TaskType): any {
     return this.performanceMetrics.get(taskType);
   }
 
   /**
-   * Update performance based on execution results
+   * @description Updates the performance metrics of an agent based on execution results.
+   * @param {TaskType} taskType - The type of the task.
+   * @param {number} executionTime - The time taken to execute the task.
+   * @param {boolean} success - Whether the task execution was successful.
+   * @param {number} [userRating] - An optional user rating for the task outcome.
    */
   public updatePerformance(
     taskType: TaskType, 
@@ -164,14 +192,17 @@ class AIAgentOrchestraManager {
   }
 
   /**
-   * Get all agent configurations
+   * @description Gets a read-only map of all registered agent configurations.
+   * @returns {ReadonlyMap<TaskType, AIAgentConfig>} A map of all agents.
    */
   public getAllAgents(): ReadonlyMap<TaskType, AIAgentConfig> {
     return new Map(this.agents);
   }
 
   /**
-   * Memory management for episodic learning
+   * @description Stores an episode in the episodic memory for a specific task type, facilitating learning.
+   * @param {TaskType} taskType - The type of the task.
+   * @param {any} episode - The episode data to store.
    */
   public storeEpisode(taskType: TaskType, episode: any): void {
     const episodes = this.episodicMemory.get(taskType) || [];
@@ -186,7 +217,10 @@ class AIAgentOrchestraManager {
   }
 
   /**
-   * Retrieve relevant episodes for learning
+   * @description Retrieves relevant episodes from memory for learning purposes.
+   * @param {TaskType} taskType - The type of the task.
+   * @param {number} [limit=10] - The maximum number of episodes to retrieve.
+   * @returns {any[]} An array of relevant episodes.
    */
   public getRelevantEpisodes(taskType: TaskType, limit: number = 10): any[] {
     const episodes = this.episodicMemory.get(taskType) || [];
@@ -195,13 +229,12 @@ class AIAgentOrchestraManager {
 }
 
 /**
- * Singleton instance of the AI Agent Orchestra Manager
+ * @description Singleton instance of the AI Agent Orchestra Manager.
  */
 export const aiAgentOrchestra = AIAgentOrchestraManager.getInstance();
 
 /**
- * Enhanced task descriptions with AI Agent capabilities
- * الأوصاف المحسّنة للمهام مع قدرات وكلاء الذكاء الاصطناعي
+ * @description A frozen object containing enhanced task descriptions with AI Agent capabilities.
  */
 export const ENHANCED_TASK_DESCRIPTIONS = Object.freeze(
   Object.fromEntries(
@@ -217,7 +250,10 @@ export const ENHANCED_TASK_DESCRIPTIONS = Object.freeze(
 // =====================================
 
 /**
- * Real-time performance monitoring for AI agents
+ * @class AIAgentMonitor
+ * @description Provides real-time performance monitoring for AI agents.
+ * It uses a singleton pattern to ensure a single instance monitors all agents.
+ * @property {Map<string, any[]>} performanceLog - A map to store performance logs for each agent.
  */
 export class AIAgentMonitor {
   private static instance: AIAgentMonitor;
@@ -225,6 +261,10 @@ export class AIAgentMonitor {
   
   private constructor() {}
   
+  /**
+   * @description Gets the singleton instance of the AIAgentMonitor.
+   * @returns {AIAgentMonitor} The singleton instance.
+   */
   public static getInstance(): AIAgentMonitor {
     if (!AIAgentMonitor.instance) {
       AIAgentMonitor.instance = new AIAgentMonitor();
@@ -233,7 +273,14 @@ export class AIAgentMonitor {
   }
   
   /**
-   * Log agent performance with advanced metrics
+   * @description Logs the performance of an agent with advanced metrics.
+   * @param {TaskType} taskType - The type of the task.
+   * @param {object} metrics - The performance metrics to log.
+   * @param {number} metrics.executionTime - The time taken to execute the task.
+   * @param {number} metrics.accuracy - The accuracy of the task outcome.
+   * @param {number} metrics.resourceUsage - The resources used during execution.
+   * @param {number} [metrics.memoryUsage] - Optional memory usage metric.
+   * @param {number} [metrics.cacheHitRate] - Optional cache hit rate metric.
    */
   public logPerformance(
     taskType: TaskType, 
@@ -262,7 +309,9 @@ export class AIAgentMonitor {
   }
   
   /**
-   * Get performance analytics
+   * @description Gets performance analytics for a specific task type.
+   * @param {TaskType} taskType - The type of the task.
+   * @returns {any | null} An object with performance analytics or null if no logs are available.
    */
   public getAnalytics(taskType: TaskType): any {
     const logs = this.performanceLog.get(taskType) || [];
@@ -279,6 +328,12 @@ export class AIAgentMonitor {
     return metrics;
   }
   
+  /**
+   * @description Calculates the performance trend based on a series of values.
+   * @param {number[]} values - An array of performance values.
+   * @returns {'improving' | 'stable' | 'declining'} The calculated trend.
+   * @private
+   */
   private calculateTrend(values: number[]): 'improving' | 'stable' | 'declining' {
     if (values.length < 3) return 'stable';
     
@@ -294,7 +349,7 @@ export class AIAgentMonitor {
 }
 
 /**
- * AI Agent performance monitor singleton
+ * @description AI Agent performance monitor singleton.
  */
 export const aiAgentMonitor = AIAgentMonitor.getInstance();
 
@@ -303,7 +358,9 @@ export const aiAgentMonitor = AIAgentMonitor.getInstance();
 // =====================================
 
 /**
- * Get agent capability summary for UI display
+ * @description Gets a summary of an agent's capabilities for UI display.
+ * @param {TaskType} taskType - The type of the task.
+ * @returns {string} A summary of the agent's capabilities.
  */
 export const getAgentCapabilitySummary = (taskType: TaskType): string => {
   const capabilities = aiAgentOrchestra.getAgentCapabilities(taskType);
@@ -320,7 +377,9 @@ export const getAgentCapabilitySummary = (taskType: TaskType): string => {
 };
 
 /**
- * Check if task requires collaboration
+ * @description Checks if a task requires collaboration with other agents.
+ * @param {TaskType} taskType - The type of the task.
+ * @returns {boolean} True if collaboration is required, false otherwise.
  */
 export const requiresCollaboration = (taskType: TaskType): boolean => {
   const suggestions = aiAgentOrchestra.getCollaborationSuggestions(taskType);
@@ -328,7 +387,9 @@ export const requiresCollaboration = (taskType: TaskType): boolean => {
 };
 
 /**
- * Get optimization suggestions for task execution
+ * @description Gets optimization suggestions for task execution, including order and parallelization.
+ * @param {TaskType[]} taskTypes - An array of task types to be executed.
+ * @returns {{order: TaskType[], parallelizable: TaskType[], sequential: TaskType[]}} An object with optimization suggestions.
  */
 export const getOptimizationSuggestions = (taskTypes: TaskType[]): {
   order: TaskType[];
@@ -355,7 +416,9 @@ export const getOptimizationSuggestions = (taskTypes: TaskType[]): {
 };
 
 /**
- * Advanced caching strategy selector
+ * @description Gets the caching strategy for a specific task type.
+ * @param {TaskType} taskType - The type of the task.
+ * @returns {string} The caching strategy.
  */
 export const getCacheStrategy = (taskType: TaskType): string => {
   const agent = aiAgentOrchestra.getAllAgents().get(taskType);
@@ -363,7 +426,9 @@ export const getCacheStrategy = (taskType: TaskType): string => {
 };
 
 /**
- * Confidence threshold for quality assurance
+ * @description Gets the confidence threshold for quality assurance of a task.
+ * @param {TaskType} taskType - The type of the task.
+ * @returns {number} The confidence threshold.
  */
 export const getConfidenceThreshold = (taskType: TaskType): number => {
   const agent = aiAgentOrchestra.getAllAgents().get(taskType);
@@ -371,11 +436,12 @@ export const getConfidenceThreshold = (taskType: TaskType): number => {
 };
 
 /**
- * Development utilities for AI Agent Orchestra
+ * @description Development utilities for the AI Agent Orchestra, available only in development mode.
  */
 export const AI_AGENT_DEV_UTILS = process.env.NODE_ENV === 'development' ? {
   /**
-   * Validate agent configuration completeness
+   * @description Validates the completeness of the agent configurations.
+   * @returns {boolean} True if the configuration is valid, false otherwise.
    */
   validateAgentConfiguration: (): boolean => {
     console.group('🤖 AI Agent Orchestra Validation');
@@ -418,7 +484,7 @@ export const AI_AGENT_DEV_UTILS = process.env.NODE_ENV === 'development' ? {
   },
   
   /**
-   * Performance benchmark simulation
+   * @description Runs a performance benchmark simulation for all agents.
    */
   runPerformanceBenchmark: (): void => {
     console.group('⚡ AI Agent Performance Benchmark');

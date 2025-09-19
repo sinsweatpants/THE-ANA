@@ -1,6 +1,14 @@
 import { TaskCategory, TaskType } from '../../types';
 import { AIAgentConfig } from '../types';
 
+/**
+ * @description Configuration for the AestheticsJudge AI agent.
+ * This sophisticated literary quality analyzer uses computational literary criticism
+ * models with algorithms for evaluating linguistic and rhetorical beauty. It is
+ * equipped with criteria for literary originality and stylistic innovation, with
+ * capabilities for detecting clichés, analyzing narrative coherence, assessing
+ * emotional and artistic impact, and comparing with global literary standards.
+ */
 export const LITERARY_QUALITY_ANALYZER_AGENT_CONFIG: AIAgentConfig = {
     id: TaskType.LITERARY_QUALITY_ANALYZER,
     name: "AestheticsJudge AI",

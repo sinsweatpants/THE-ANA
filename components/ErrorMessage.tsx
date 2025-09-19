@@ -30,6 +30,11 @@ const toneStyles: Record<ErrorTone, { container: string; heading: string; body: 
   },
 };
 
+/**
+ * @description A component to display a standardized error or warning message.
+ * @param {ErrorMessageProps} props - The props for the component.
+ * @returns {React.ReactElement} The rendered error message element.
+ */
 export const ErrorMessage: React.FC<ErrorMessageProps> = ({ title, description, tone = 'error', className }) => {
   const palette = toneStyles[tone];
 

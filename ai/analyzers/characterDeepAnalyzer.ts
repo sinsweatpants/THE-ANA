@@ -1,6 +1,14 @@
 import { TaskCategory, TaskType } from '../../types';
 import { AIAgentConfig } from '../types';
 
+/**
+ * @description Configuration for the PsycheScope AI agent.
+ * This is an advanced character analyzer that uses computational psychology models
+ * with intelligent psychoanalytic techniques to delve into the depths of characters
+ * and analyze their unconscious motivations. It is equipped with algorithms for
+ * detecting complex psychological patterns and dynamic personal development models,
+ * with capabilities for assessing psychological depth and personal coherence.
+ */
 export const CHARACTER_DEEP_ANALYZER_AGENT_CONFIG: AIAgentConfig = {
     id: TaskType.CHARACTER_DEEP_ANALYZER,
     name: "PsycheScope AI",

@@ -1,6 +1,14 @@
 import { TaskCategory, TaskType } from '../../types';
 import { AIAgentConfig } from '../types';
 
+/**
+ * @description Configuration for the NarrativeContinuum AI agent.
+ * This advanced predictive system uses Multi-Head Attention models with
+ * long-term memory to understand the narrative context and produce consistent
+ * continuations. It is supported by Monte Carlo Tree Search techniques for
+ * creative exploration and Few-Shot Learning algorithms for rapid adaptation
+ * to different author styles.
+ */
 export const COMPLETION_AGENT_CONFIG: AIAgentConfig = {
     id: TaskType.COMPLETION,
     name: "NarrativeContinuum AI",
