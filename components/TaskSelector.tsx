@@ -9,7 +9,13 @@ import {
 } from '../constants'; // Added ClipboardDocumentIcon to imports
 import { ENHANCED_TASK_DESCRIPTIONS } from '../ai/orchestration';
 
-
+/**
+ * Props controlling the task selector menu that allows the user to pick one
+ * analytical or creative workflow at a time.
+ *
+ * @property selectedTask - Currently highlighted task, or `null` when nothing is chosen.
+ * @property onTaskSelect - Callback fired when the user activates a different task option.
+ */
 interface TaskSelectorProps {
   selectedTask: TaskType | null;
   onTaskSelect: (taskType: TaskType) => void;

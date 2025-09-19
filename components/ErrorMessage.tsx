@@ -2,6 +2,14 @@ import React from 'react';
 
 type ErrorTone = 'error' | 'warning';
 
+/**
+ * Props for the standardised error banner used across the application.
+ *
+ * @property title - Short headline describing the failure category.
+ * @property description - Detailed explanation surfaced to the user.
+ * @property tone - Optional styling hint (error vs warning palette).
+ * @property className - Additional utility classes forwarded to the container.
+ */
 interface ErrorMessageProps {
   title: string;
   description: string;

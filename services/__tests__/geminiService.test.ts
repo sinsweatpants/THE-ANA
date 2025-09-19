@@ -79,6 +79,27 @@ describe('constructPromptParts', () => {
     const fileSection = parts.find((part) => 'text' in part && part.text?.includes('--- الملف المقدم 1')) as Part | undefined;
     expect(fileSection?.text).toContain(baseFile.name);
   });
+
+  it('gracefully handles missing optional user configuration', () => {
+    const parts = constructPromptParts({
+      processedFiles: [baseFile],
+      taskType: TaskType.ANALYSIS,
+      specialRequirements: '',
+      additionalInfo: '',
+    });
+
+    const requirementsSection = parts.find(
+      (part) => 'text' in part && part.text?.includes('## مواصفات المستخدم الإضافية'),
+    ) as Part | undefined;
+
+    expect(requirementsSection).toBeDefined();
+    expect(requirementsSection?.text).toContain('لم يتم تقديم متطلبات محددة');
+
+    const previousContextSection = parts.find(
+      (part) => 'text' in part && part.text?.includes('## سياق الاستكمال السابق'),
+    );
+    expect(previousContextSection).toBeUndefined();
+  });
 });
 
 describe('processTextsWithGemini', () => {
