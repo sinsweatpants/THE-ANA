@@ -1,6 +1,5 @@
 import { GoogleGenAI, GenerateContentResponse, Part, Content, SafetySetting, HarmCategory, HarmBlockThreshold } from "@google/genai";
 import { GeminiServiceResponse, GeminiTaskResultData } from '../../types';
-import { GEMINI_TEXT_MODEL } from "../../constants";
 
 // Centralized Gemini API call
 // Note: The prompt construction logic is kept separate to allow for more flexible use of this client.
@@ -27,7 +26,31 @@ interface GenerateContentParams {
   shouldExpectJson?: boolean;
 }
 
+const DEFAULT_MODEL = 'models/gemini-2.5-pro';
+
 let ai: GoogleGenAI | null = null;
+
+const resolveApiKey = (): string | undefined => {
+  let browserKey: string | undefined;
+  try {
+    browserKey = (import.meta as ImportMeta).env?.GEMINI_API_KEY;
+  } catch (error) {
+    browserKey = undefined;
+  }
+
+  if (browserKey && browserKey.length > 0) {
+    return browserKey;
+  }
+
+  if (typeof process !== 'undefined') {
+    const nodeKey = process.env?.GEMINI_API_KEY || process.env?.API_KEY;
+    if (nodeKey && nodeKey.length > 0) {
+      return nodeKey;
+    }
+  }
+
+  return undefined;
+};
 
 /**
  * @description Gets the singleton instance of the GoogleGenAI client.
@@ -36,10 +59,11 @@ let ai: GoogleGenAI | null = null;
  */
 const getAiInstance = (): GoogleGenAI => {
   if (!ai) {
-    if (!process.env.API_KEY) {
-      throw new Error("لم يتم تعيين متغير البيئة API_KEY.");
+    const apiKey = resolveApiKey();
+    if (!apiKey) {
+      throw new Error("لم يتم تعيين متغير البيئة GEMINI_API_KEY أو أنه فارغ.");
     }
-    ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+    ai = new GoogleGenAI({ apiKey });
   }
   return ai;
 };
@@ -85,7 +109,7 @@ const MAX_RETRIES = 1;
 export const generateContent = async (params: GenerateContentParams, retries: number = 0): Promise<GeminiServiceResponse> => {
   const {
     promptParts,
-    model = GEMINI_TEXT_MODEL, // Default model
+    model = DEFAULT_MODEL, // Default model
     maxOutputTokens = 65000, // Default token limit
     temperature = 0.7,
     topK = 40,
