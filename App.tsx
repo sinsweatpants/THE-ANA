@@ -24,7 +24,7 @@ import {
   TASK_CATEGORY_MAP
 } from './constants';
 import { useAppStore } from './store/appStore';
-import { shallow } from 'zustand/shallow';
+import { useShallow } from 'zustand/react/shallow';
 
 
 /**
@@ -62,7 +62,7 @@ const App: React.FC = () => {
     handleTaskSelect: storeHandleTaskSelect,
     toggleCompletionEnhancement,
   } = useAppStore(
-    (state) => ({
+    useShallow((state) => ({
       uploadedFiles: state.uploadedFiles,
       processedFilesContent: state.processedFilesContent,
       selectedTask: state.selectedTask,
@@ -91,8 +91,7 @@ const App: React.FC = () => {
       handleFilesUploaded: state.handleFilesUploaded,
       handleTaskSelect: state.handleTaskSelect,
       toggleCompletionEnhancement: state.toggleCompletionEnhancement,
-    }),
-    shallow
+    })),
   );
 
   const handleFilesUploaded = useCallback((files: File[]) => {
