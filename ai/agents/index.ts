@@ -1,32 +1,44 @@
-// مجموعة إعدادات الوكلاء حسب كل مهمة
+// Aggregates all agent configurations from the new modular structure.
 import { AIAgentConfig } from '../types';
-import { ANALYSIS_AGENT_CONFIG } from './analysisAgent';
-import { CREATIVE_AGENT_CONFIG } from './creativeAgent';
-import { INTEGRATED_AGENT_CONFIG } from './integratedAgent';
-import { COMPLETION_AGENT_CONFIG } from './completionAgent';
-import { RHYTHM_MAPPING_AGENT_CONFIG } from './rhythmMappingAgent';
-import { CHARACTER_NETWORK_AGENT_CONFIG } from './characterNetworkAgent';
-import { DIALOGUE_FORENSICS_AGENT_CONFIG } from './dialogueForensicsAgent';
-import { THEMATIC_MINING_AGENT_CONFIG } from './thematicMiningAgent';
-import { STYLE_FINGERPRINT_AGENT_CONFIG } from './styleFingerprintAgent';
-import { CONFLICT_DYNAMICS_AGENT_CONFIG } from './conflictDynamicsAgent';
-import { SCENE_GENERATOR_AGENT_CONFIG } from './sceneGeneratorAgent';
-import { CHARACTER_VOICE_AGENT_CONFIG } from './characterVoiceAgent';
-import { WORLD_BUILDER_AGENT_CONFIG } from './worldBuilderAgent';
-import { PLOT_PREDICTOR_AGENT_CONFIG } from './plotPredictorAgent';
-import { TENSION_OPTIMIZER_AGENT_CONFIG } from './tensionOptimizerAgent';
-import { AUDIENCE_RESONANCE_AGENT_CONFIG } from './audienceResonanceAgent';
-import { PLATFORM_ADAPTER_AGENT_CONFIG } from './platformAdapterAgent';
-import { CHARACTER_DEEP_ANALYZER_AGENT_CONFIG } from './characterDeepAnalyzerAgent';
-import { DIALOGUE_ADVANCED_ANALYZER_AGENT_CONFIG } from './dialogueAdvancedAnalyzerAgent';
-import { VISUAL_CINEMATIC_ANALYZER_AGENT_CONFIG } from './visualCinematicAnalyzerAgent';
-import { THEMES_MESSAGES_ANALYZER_AGENT_CONFIG } from './themesMessagesAnalyzerAgent';
-import { CULTURAL_HISTORICAL_ANALYZER_AGENT_CONFIG } from './culturalHistoricalAnalyzerAgent';
-import { PRODUCIBILITY_ANALYZER_AGENT_CONFIG } from './producibilityAnalyzerAgent';
-import { TARGET_AUDIENCE_ANALYZER_AGENT_CONFIG } from './targetAudienceAnalyzerAgent';
-import { LITERARY_QUALITY_ANALYZER_AGENT_CONFIG } from './literaryQualityAnalyzerAgent';
-import { RECOMMENDATIONS_GENERATOR_AGENT_CONFIG } from './recommendationsGeneratorAgent';
-import { ADAPTIVE_REWRITING_AGENT_CONFIG } from './adaptiveRewritingAgent';
+
+// Core Agents
+import { ANALYSIS_AGENT_CONFIG } from '../analyzers/coreAnalysis';
+import { CREATIVE_AGENT_CONFIG } from '../generators/coreCreative';
+import { INTEGRATED_AGENT_CONFIG } from '../analyzers/integratedAnalysis';
+import { COMPLETION_AGENT_CONFIG } from '../generators/completion';
+
+// Analyzers
+import { RHYTHM_MAPPING_AGENT_CONFIG } from '../analyzers/rhythmMappingAnalyzer';
+import { CHARACTER_NETWORK_AGENT_CONFIG } from '../analyzers/characterNetworkAnalyzer';
+import { DIALOGUE_FORENSICS_AGENT_CONFIG } from '../analyzers/dialogueForensicsAnalyzer';
+import { THEMATIC_MINING_AGENT_CONFIG } from '../analyzers/thematicMiningAnalyzer';
+import { STYLE_FINGERPRINT_AGENT_CONFIG } from '../analyzers/styleFingerprintAnalyzer';
+import { CONFLICT_DYNAMICS_AGENT_CONFIG } from '../analyzers/conflictDynamicsAnalyzer';
+import { CHARACTER_DEEP_ANALYZER_AGENT_CONFIG } from '../analyzers/characterDeepAnalyzer';
+import { DIALOGUE_ADVANCED_ANALYZER_AGENT_CONFIG } from '../analyzers/dialogueAdvancedAnalyzer';
+import { VISUAL_CINEMATIC_ANALYZER_AGENT_CONFIG } from '../analyzers/visualCinematicAnalyzer';
+import { THEMES_MESSAGES_ANALYZER_AGENT_CONFIG } from '../analyzers/themesMessagesAnalyzer';
+import { CULTURAL_HISTORICAL_ANALYZER_AGENT_CONFIG } from '../analyzers/culturalHistoricalAnalyzer';
+import { PRODUCIBILITY_ANALYZER_AGENT_CONFIG } from '../analyzers/producibilityAnalyzer';
+import { TARGET_AUDIENCE_ANALYZER_AGENT_CONFIG } from '../analyzers/targetAudienceAnalyzer';
+import { LITERARY_QUALITY_ANALYZER_AGENT_CONFIG } from '../analyzers/literaryQualityAnalyzer';
+
+// Generators
+import { ADAPTIVE_REWRITING_AGENT_CONFIG } from '../generators/adaptiveRewritingGenerator';
+import { SCENE_GENERATOR_AGENT_CONFIG } from '../generators/sceneGenerator';
+import { CHARACTER_VOICE_AGENT_CONFIG } from '../generators/characterVoiceGenerator';
+import { WORLD_BUILDER_AGENT_CONFIG } from '../generators/worldBuilder';
+
+// Predictors
+import { PLOT_PREDICTOR_AGENT_CONFIG } from '../predictors/plotPredictor';
+import { TENSION_OPTIMIZER_AGENT_CONFIG } from '../predictors/tensionOptimizer';
+import { AUDIENCE_RESONANCE_AGENT_CONFIG } from '../predictors/audienceResonancePredictor';
+
+// Adapters
+import { PLATFORM_ADAPTER_AGENT_CONFIG } from '../adapters/platformAdapter';
+
+// Recommendations
+import { RECOMMENDATIONS_GENERATOR_AGENT_CONFIG } from '../recommendations/recommendationsGenerator';
 
 export const AGENT_CONFIGS = Object.freeze<AIAgentConfig[]>([
   // === CORE FOUNDATIONAL AGENTS ===
