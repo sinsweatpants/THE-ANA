@@ -10,7 +10,6 @@ import { DIALOGUE_FORENSICS_AGENT_CONFIG } from './dialogueForensicsAgent';
 import { THEMATIC_MINING_AGENT_CONFIG } from './thematicMiningAgent';
 import { STYLE_FINGERPRINT_AGENT_CONFIG } from './styleFingerprintAgent';
 import { CONFLICT_DYNAMICS_AGENT_CONFIG } from './conflictDynamicsAgent';
-import { ADAPTIVE_REWRITING_AGENT_CONFIG } from './adaptiveRewritingAgent';
 import { SCENE_GENERATOR_AGENT_CONFIG } from './sceneGeneratorAgent';
 import { CHARACTER_VOICE_AGENT_CONFIG } from './characterVoiceAgent';
 import { WORLD_BUILDER_AGENT_CONFIG } from './worldBuilderAgent';
@@ -27,6 +26,7 @@ import { PRODUCIBILITY_ANALYZER_AGENT_CONFIG } from './producibilityAnalyzerAgen
 import { TARGET_AUDIENCE_ANALYZER_AGENT_CONFIG } from './targetAudienceAnalyzerAgent';
 import { LITERARY_QUALITY_ANALYZER_AGENT_CONFIG } from './literaryQualityAnalyzerAgent';
 import { RECOMMENDATIONS_GENERATOR_AGENT_CONFIG } from './recommendationsGeneratorAgent';
+import { ADAPTIVE_REWRITING_AGENT_CONFIG } from './adaptiveRewritingAgent';
 
 export const AGENT_CONFIGS = Object.freeze<AIAgentConfig[]>([
   // === CORE FOUNDATIONAL AGENTS ===

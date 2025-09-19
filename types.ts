@@ -47,11 +47,9 @@ export enum TaskType {
 }
 
 export enum TaskCategory {
-  ANALYSIS = 'التحليل المتقدم',
-  CREATIVE = 'الإبداع المتطور',
-  PREDICTIVE = 'التنبؤ والتحسين',
   CORE = 'المهام الأساسية',
-  ADVANCED_MODULES = 'وحدات التحليل المتخصصة' 
+  ANALYSES = 'التحليلات',
+  AGENTS = 'الوكلاء'
 }
 
 // Defined types based on user feedback

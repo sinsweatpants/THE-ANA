@@ -75,10 +75,8 @@ const groupedTasks = taskOptionsList.reduce((acc, task) => {
 // Define explicit order for categories
 const categoryOrder: TaskCategory[] = [
   TaskCategory.CORE,
-  TaskCategory.ANALYSIS,
-  TaskCategory.CREATIVE,
-  TaskCategory.PREDICTIVE,
-  TaskCategory.ADVANCED_MODULES, 
+  TaskCategory.ANALYSES,
+  TaskCategory.AGENTS,
 ];
 
 // Define icon for visual indicator
