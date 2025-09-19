@@ -4,6 +4,12 @@ import { useDropzone } from 'react-dropzone';
 import { UploadIcon, DocumentTextIcon } from '../constants';
 import { MIN_FILES_REQUIRED, MAX_FILE_SIZE_BYTES, MAX_FILE_SIZE_MB, SUPPORTED_MIME_TYPES } from '../constants';
 
+/**
+ * Props for the drag-and-drop upload surface that feeds files into the processing pipeline.
+ *
+ * @property onFilesUploaded - Callback invoked with the latest list of accepted files.
+ * @property uploadedFiles - The currently staged files, displayed within the component.
+ */
 interface FileUploadProps {
   onFilesUploaded: (files: File[]) => void;
   uploadedFiles: File[];

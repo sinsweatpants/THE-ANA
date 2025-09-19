@@ -72,6 +72,14 @@ const ResultSection: React.FC<ResultSectionProps> = ({ title, content, isError, 
 };
 
 // Fix: Define the ResultsDisplayProps interface
+/**
+ * Props for the results container that renders Gemini outputs and structured payloads.
+ *
+ * @property resultData - Parsed JSON-like response returned by Gemini for data-rich tasks.
+ * @property rawText - Plain text fallback when the service only returns unstructured content.
+ * @property error - Optional error message to display instead of results.
+ * @property selectedTaskType - Current task identifier used for titling and file naming.
+ */
 interface ResultsDisplayProps {
   resultData?: GeminiTaskResultData | null;
   rawText?: string | null;
