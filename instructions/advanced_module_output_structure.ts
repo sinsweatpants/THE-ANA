@@ -107,7 +107,49 @@ export const ADVANCED_MODULE_OUTPUT_STRUCTURE = `**المخرجات المطلو
           "weight": 0.3,
           "justification": "يظهر الدافع في منتصف الفصل الأول وليس في افتتاحيته."
         }
-      ]
+      ],
+      "character_deep_analyzer": {
+        "arcs": [
+          {
+            "character": "سامر",
+            "trajectory": "من مثالي صارم إلى شخص قادر على المساومة لتحقيق العدالة.",
+            "status": "growing"
+          }
+        ],
+        "wounds": [
+          {
+            "character": "سامر",
+            "wound": "فقدان الأخ الأكبر",
+            "manifestation": "نزعة للانتقام تمنع التعاطف المبكر"
+          }
+        ],
+        "lies": [
+          {
+            "character": "سامر",
+            "lie": "القانون وحده يكفي لحماية المظلوم",
+            "truth": "التعاطف والمرونة يفتحان مسارات العدالة"
+          }
+        ],
+        "transformations": [
+          {
+            "character": "سامر",
+            "from": "محقق مثالي",
+            "to": "قائد يتقبل الحلول الرمادية",
+            "catalyst": "اكتشاف فساد رؤسائه"
+          }
+        ],
+        "screen_time_map": {
+          "سامر": 42,
+          "ليلى": 26
+        },
+        "consistency_flags": [
+          {
+            "character": "سامر",
+            "description": "يكسر القواعد فجأة في المشهد 52 دون تمهيد كافٍ",
+            "severity": "medium"
+          }
+        ]
+      }
     }
   ],
   "recommendations": [

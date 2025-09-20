@@ -269,6 +269,54 @@ const createCharacterDetail = (): ModuleDetailSection => ({
       justification: "الدافع يظهر في الفصل الثاني فقط.",
     },
   ],
+  character_deep_analyzer: {
+    arcs: [
+      {
+        character: "سامر",
+        trajectory: "من مثالي صارم إلى شخص يسمح بالحلول الوسط.",
+        status: "growing",
+      },
+      {
+        character: "ليلى",
+        trajectory: "من حليف متردد إلى شريك كامل في التحقيق.",
+        status: "growing",
+      },
+    ],
+    wounds: [
+      {
+        character: "سامر",
+        wound: "فقدان الأخ في حادث ملفق.",
+        manifestation: "حاجة قسرية للعدالة المطلقة.",
+      },
+    ],
+    lies: [
+      {
+        character: "سامر",
+        lie: "العدالة لا تتحقق إلا بإتباع القواعد دائماً.",
+        truth: "الحقيقة أحياناً تتطلب تجاوز الإجرائية المعتادة.",
+      },
+    ],
+    transformations: [
+      {
+        character: "سامر",
+        from: "محقق مثالي",
+        to: "محقق واقعي قادر على عقد تحالفات رمادية",
+        catalyst: "اكتشاف تورط رئيسه المباشر في التغطية.",
+      },
+    ],
+    screen_time_map: {
+      سامر: 42,
+      ليلى: 26,
+      "الضابط الفاسد": 18,
+    },
+    consistency_flags: [
+      {
+        character: "سامر",
+        description: "يتجاهل القواعد فجأة في المشهد 52 دون تمهيد كافٍ.",
+        severity: "medium",
+      },
+    ],
+  },
 });
 
 const createDialogueDetail = (): ModuleDetailSection => ({
@@ -305,6 +353,30 @@ const createDialogueDetail = (): ModuleDetailSection => ({
       justification: "توجد مقاطع تتجاوز ثلاث صفحات من دون تبديل في المكان.",
     },
   ],
+  dialogue_advanced_analyzer: {
+    naturalness: 0.78,
+    distinctiveness: 0.74,
+    subtext: 0.81,
+    power_dynamics: {
+      segments: [
+        {
+          scene: "28",
+          dominant_character: "رفيق سامر",
+          shift: "يتراجع نفوذ سامر بعد تهديد المذكرة.",
+          notes: "يستعيد سامر السيطرة بذكره للأدلة في الصفحة 60.",
+        },
+      ],
+    },
+    interruptions: {
+      counts_by_char: {
+        سامر: 6,
+        "رفيق سامر": 9,
+        ليلى: 2,
+      },
+      total: 17,
+    },
+    exposition_balance: 0.62,
+  },
 });
 
 const createVisualDetail = (): ModuleDetailSection => ({
@@ -340,6 +412,35 @@ const createVisualDetail = (): ModuleDetailSection => ({
       intensity: 82,
     },
   ],
+  visual_cinematic_analyzer: {
+    shot_suggestions: [
+      {
+        scene: "45",
+        suggestion: "استخدام عدسة 35مم بفتحة واسعة لعزل سامر عن الخلفية.",
+        lens: "35mm",
+      },
+    ],
+    camera_moves: [
+      {
+        scene: "60",
+        move: "تراكينغ خلفي",
+        purpose: "إبراز تضييق الخناق المؤسسي على سامر.",
+      },
+    ],
+    lighting_notes: [
+      {
+        scene: "80",
+        note: "إضافة إضاءة عملية دافئة لتأكيد المصالحة العائلية.",
+      },
+    ],
+    action_sequence_quality: [
+      {
+        sequence: "مطاردة النفق",
+        score: 88,
+        notes: "التقطيع سريع لكن يحتاج إلى لقطة علوية لإيضاح الجغرافيا.",
+      },
+    ],
+  },
 });
 
 const createThemeDetail = (): ModuleDetailSection => ({
@@ -370,6 +471,19 @@ const createThemeDetail = (): ModuleDetailSection => ({
       ],
     },
   ],
+  themes_messages_analyzer: {
+    explicit_messages: [
+      "العدالة تتطلب مواجهة الفساد مهما كان الثمن.",
+    ],
+    implicit_messages: [
+      "الولاء المؤسسي قد يحجب رؤية الحقيقة.",
+      "العدالة الشخصية تهدد الاستقرار العائلي إذا غابت المصارحة.",
+    ],
+    alignment_with_themes:
+      "المشاهد التي تتضمن المرآة والألوان الحمراء تدعم الرسالة حول كشف الحقيقة.",
+    risk_of_misreading:
+      "قد يفسر بعض الجمهور قبول سامر للصفقة النهائية كتطبيع مع الفساد إن لم يتم إبراز دوافعه الأخلاقية.",
+  },
 });
 
 const createCulturalDetail = (): ModuleDetailSection => ({
@@ -398,6 +512,30 @@ const createCulturalDetail = (): ModuleDetailSection => ({
       recommendedActions: ["استشارة مدقق لغوي مصري قبل القفل النهائي."],
     },
   ],
+  cultural_historical_analyzer: {
+    authenticity_score: 0.74,
+    missteps: [
+      {
+        id: "dialect_shift",
+        description: "دخول عبارة شامية في حوار يدور بالقاهرة.",
+        severity: "medium",
+        recommended_fix: "مراجعة الحوار مع مدقق لهجة مصري واستبدال العبارة بمكافئ محلي.",
+      },
+    ],
+    sources: [
+      {
+        type: "مقابلة ميدانية",
+        reference: "تقرير استشاري ثقافي - يناير 2025",
+        notes: "شمل مقابلات مع سكان محليين من حي الدقي.",
+      },
+    ],
+    localization_guidelines: [
+      {
+        region: "MENA",
+        notes: "تضمين تحذير محتوى بشأن الفساد المؤسسي لتجنب الرقابة في بعض الدول.",
+      },
+    ],
+  },
 });
 
 const createProductionDetail = (): ModuleDetailSection => ({
@@ -429,6 +567,35 @@ const createProductionDetail = (): ModuleDetailSection => ({
       ],
     },
   ],
+  producibility_analyzer: {
+    budget_tier: "medium",
+    schedule_buckets: {
+      by_location: [
+        {
+          label: "القاهرة - وسط المدينة",
+          items: ["مبنى النيابة", "السوق الشعبي"],
+        },
+      ],
+      by_cast: [
+        {
+          label: "الأبطال الرئيسيون",
+          items: ["سامر", "ليلى"],
+        },
+      ],
+    },
+    risk_register: [
+      {
+        id: "weather_delay",
+        prob: 0.35,
+        impact: "قد يؤخر التصوير الخارجي يومين",
+        mitigation: "توفير موقع داخلي بديل والتنسيق مع فريق الطقس.",
+      },
+    ],
+    logistics_notes: [
+      "يتطلب مشهد المطاردة إغلاق شارع لمدة 6 ساعات.",
+      "يوصى بحجز وسائل نقل إضافية للفريق الليلي.",
+    ],
+  },
 });
 
 const createAudienceDetail = (): ModuleDetailSection => ({
@@ -459,6 +626,29 @@ const createAudienceDetail = (): ModuleDetailSection => ({
       ],
     },
   ],
+  target_audience_analyzer: {
+    rating_guidance: "يناسب +16 مع تحذير عنف سياسي.",
+    triggers_flags: [
+      {
+        trigger: "مشاهد عنف مؤسسي",
+        severity: "medium",
+        scenes: ["المشهد 55", "المشهد 87"],
+      },
+    ],
+    suitability_score: 0.72,
+    demographic_fit: [
+      {
+        segment: "شباب حضريون 18-29",
+        alignment: 0.81,
+        notes: "يستجيبون إيجابياً للمحور السياسي والتصوير الحديث.",
+      },
+      {
+        segment: "عائلات 35-45",
+        alignment: 0.58,
+        notes: "تحتاج الخاتمة إلى تخفيف لغوي لدعمهم.",
+      },
+    ],
+  },
 });
 
 const createLiteraryDetail = (): ModuleDetailSection => ({
@@ -486,6 +676,29 @@ const createLiteraryDetail = (): ModuleDetailSection => ({
       ],
     },
   ],
+  literary_quality_analyzer: {
+    imagery_density: 0.64,
+    metaphor_map: [
+      {
+        motif: "المرآة",
+        occurrences: 6,
+        tone: "يعكس التشظي والبحث عن الحقيقة.",
+      },
+    ],
+    rhythm_profile: {
+      cadence: "جمل متوسطة مع انعطافات تأملية",
+      sentence_variance: 0.42,
+      dominant_structure: "مقاطع صوت داخلي متبوعة بالفعل",
+    },
+    diction_register: "فصيح مع إدراج مفردات عامية مدروسة",
+    originality_flags: [
+      {
+        aspect: "تشابه مع أعمال تحقيق تلفزيوني",
+        severity: "low",
+        note: "تظهر بعض العبارات المستعارة من أعمال معروفة، يوصى بإعادة صياغتها.",
+      },
+    ],
+  },
 });
 
 const createRecommendationDetail = (): ModuleDetailSection => ({
@@ -513,6 +726,40 @@ const createRecommendationDetail = (): ModuleDetailSection => ({
       ],
     },
   ],
+  recommendations_generator: {
+    prioritized_actions: [
+      {
+        id: "rec_prioritize_midpoint",
+        priority: Priority.HIGH,
+        category: Category.STORY_STRUCTURE,
+        effort: 12,
+        impact: "يعزز قوس سامر ويدعم التحولات البصرية.",
+      },
+    ],
+    roadmap: {
+      phases: [
+        {
+          id: "phase_focus_characters",
+          name: "إعادة ضبط قوس البطل",
+          duration_weeks: 2,
+          focus: "تحسين المشاهد المحورية قبل منتصف الفيلم.",
+        },
+        {
+          id: "phase_polish_dialogue",
+          name: "تدقيق الحوار",
+          duration_weeks: 1,
+          focus: "تحسين الإيقاع وتوزيع التلميحات.",
+        },
+      ],
+    },
+    success_metrics: [
+      {
+        metric: "معدل رضا فريق التطوير",
+        target: "80% أو أعلى",
+        measurement: "استطلاع داخلي بعد تسليم النسخة المعدلة.",
+      },
+    ],
+  },
 });
 
 const createVoiceDetail = (): ModuleDetailSection => ({
@@ -543,6 +790,20 @@ const createVoiceDetail = (): ModuleDetailSection => ({
       ],
     },
   ],
+  voice_interaction_analyzer: {
+    voiceover_usage: "يظهر الراوي الداخلي في 40% من المشاهد مع تركيز على المشاهد الانتقالية.",
+    phone_radio_conventions: "يتم ترميز المكالمات الهاتفية بخط مائل، ويقترح إضافة إشارات صوتية للتمييز.",
+    clarity_issues: [
+      {
+        scene: "18",
+        description: "تداخل بين صوت الراوي وحوار ليلى يسبب إرباكاً.",
+      },
+    ],
+    mix_guidelines: [
+      "تخفيض صوت الراوي بنسبة 15% أثناء الحوارات الثنائية.",
+      "إضافة مؤثر صوتي بسيط عند الانتقال للمكالمات اللاسلكية.",
+    ],
+  },
 });
 
 const createForeshadowingDetail = (): ModuleDetailSection => ({
@@ -581,6 +842,33 @@ const createForeshadowingDetail = (): ModuleDetailSection => ({
       intensity: 75,
     },
   ],
+  foreshadowing_detector: {
+    clues: [
+      {
+        scene: "15",
+        text: "إشارة سريعة للقلادة أثناء حديث عابر.",
+        subtlety: 6,
+        payoff_scene: "87",
+        linkage_strength: 8,
+        type: "visual",
+      },
+      {
+        scene: "33",
+        text: "ذكر ملفوظ لشخصية ترتدي القلادة نفسها.",
+        subtlety: 7,
+        payoff_scene: "87",
+        linkage_strength: 7,
+        type: "dialogue",
+      },
+    ],
+    missed_payoffs: [
+      {
+        clue_id: "scene_48_note",
+        expected_payoff_scene: "77",
+        recommendation: "إضافة لقطة رد فعل توضح علاقة المذكرة بالقضية الأولى.",
+      },
+    ],
+  },
 });
 
 const createRecommendations = (
