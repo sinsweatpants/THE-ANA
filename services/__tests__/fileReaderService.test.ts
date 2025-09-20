@@ -54,12 +54,15 @@ class MockFileReader {
 
   private handleOutcome(outcome: HandlerOutcome<string | ArrayBuffer>) {
     if ('error' in outcome) {
-      this.onerror?.(outcome.error as unknown as ProgressEvent<FileReader>);
+      this.onerror?.call(
+        this as unknown as FileReader,
+        outcome.error as unknown as ProgressEvent<FileReader>,
+      );
       return;
     }
 
     this.result = outcome.result;
-    this.onload?.({} as ProgressEvent<FileReader>);
+    this.onload?.call(this as unknown as FileReader, {} as ProgressEvent<FileReader>);
   }
 }
 

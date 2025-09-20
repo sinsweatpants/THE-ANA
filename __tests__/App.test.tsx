@@ -152,7 +152,7 @@ describe('App integration workflow', () => {
 
     expect(resolveSubmission).toBeDefined();
     await act(async () => {
-      resolveSubmission!({ data: null, rawText: 'استجابة' });
+      resolveSubmission!({ rawText: 'استجابة' });
     });
 
     await waitFor(() => {
