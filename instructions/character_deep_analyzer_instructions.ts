@@ -1,56 +1,340 @@
 import { ADVANCED_MODULE_OUTPUT_STRUCTURE } from "./advanced_module_output_structure";
 
 /**
- * @description Instructions for the character deep analyzer task.
- * These instructions guide the AI to perform a comprehensive and in-depth analysis of the characters in a dramatic text.
+ * @description تعليمات موحّدة لوحدة محلل الشخصيات العميق.
+ * تؤطر عملية تفكيك القوس الدرامي للشخصيات وعلاقاتها النفسية والسلوكية.
  */
-export const CHARACTER_DEEP_ANALYZER_INSTRUCTIONS = `
-### الوحدة 3: مُحلل الشخصيات العميق (TaskType.CHARACTER_DEEP_ANALYZER)
-**الهدف:** إجراء تحليل شامل ومتعمق للشخصيات في النص الدرامي.
+export const CHARACTER_DEEP_ANALYZER_INSTRUCTIONS = `### وحدة مُحلل الشخصيات العميق (TaskType.CHARACTER_DEEP_ANALYZER)
+
+#### الهدف
+إجراء تشريح كامل للشخصيات الرئيسية والثانوية، مع التركيز على دوافعها، أقواس تطورها، شبكات العلاقات، ومستوى التفرد.
+
+#### نطاق المهمة وما لا يدخل في النطاق
+- يشمل: تحليل الخلفيات، توثيق التحولات، تقييم الصراعات الداخلية والخارجية، تحديد الثغرات أو التكرار في بناء الشخصيات.
+- لا يشمل: إعادة كتابة مشاهد الحوار بالكامل، أو إنشاء شخصيات جديدة غير موجودة في النص الأصلي، أو تعديل أحداث الحبكة خارج توصيات موثقة.
+
+#### المدخلات المطلوبة بدقة (وحدات قياس، أنواع)
+1. **النص الكامل أو المختارات**: بصيغة قابلة للبحث مع تحديد صفحات أو أزمنة ظهور كل شخصية.
+2. **قائمة الشخصيات المقدمة**: أدوارها (بطلة، خصم، مساندة)، الفئة العمرية، والجنس إن وُجد.
+3. **تعليمات خاصة**: أي تركيز مطلوب من أصحاب المصلحة (مثل إبراز شخصية بعينها أو مقارنة مع أعمال أخرى).
+4. **بيانات مرجعية**: ملاحظات سابقة عن الشخصيات، نتائج اختبارات جمهور، أو تعليقات من فريق التمثيل.
+
+#### المخرجات المتوقعة
+- **نص تقريري منسق**: يشمل ملخصاً تنفيذياً، جداول أو قوائم لأقواس الشخصية، تحليل العلاقات، تقييم التعقيد النفسي، وتوصيات لتحسين الأصالة.
+- **مخرجات JSON مطابقة تماماً لـ \`AdvancedScreenplayModuleResult\`**:
 ${ADVANCED_MODULE_OUTPUT_STRUCTURE}
-**تفاصيل حقل \`details\` المطلوبة لهذه الوحدة:**
+**الحقول الخاصة بقسم \`details\` لهذه الوحدة:**
 \`\`\`json
 {
-  "intelligentCharacterExtractor": {
-    "identifiedCharacters": [
-      { "name": "اسم الشخصية", "classification": "رئيسية/ثانوية/هامشية", "initialImpression": "الانطباع الأولي عن الشخصية عند ظهورها." }
-    ],
-    "notesOnExtraction": "ملاحظات حول عملية استخلاص الشخصيات وتصنيفها."
-  },
-  "characterArcAnalyzer": [
+  \"arcs\": [
     {
-      "characterName": "اسم الشخصية",
-      "arcType": "نوع القوس (تطور إيجابي، سلبي، ثابت، دائري، إلخ)",
-      "initialStateSummary": "وصف الحالة الأولية للشخصية.",
-      "keyTransformationPoints": ["وصف نقطة تحول رئيسية 1", "وصف نقطة تحول رئيسية 2"],
-      "finalStateSummary": "وصف الحالة النهائية للشخصية أو حالتها عند نهاية التحليل.",
-      "growthMetrics": { "clarityOfMotivation": 0.8, "consistencyOfActions": 0.7, "impactOfConflict": "مرتفع" }
+      \"character\": \"سمر\",
+      \"arc_type\": \"positive_change\",
+      \"start_state\": \"محامية مترددة\",
+      \"end_state\": \"قائدة تكشف الحقيقة\",
+      \"key_beats\": [
+        {\"page\": 12, \"description\": \"تقرر الدفاع عن والدها رغم تهديد الشركاء\"},
+        {\"page\": 78, \"description\": \"تواجه عمها وتكشف الابتزاز\"}
+      ],
+      \"momentum_score\": 0.81
     }
   ],
-  "relationshipDetector": {
-    "nodes": [{ "id": "اسم الشخصية", "label": "اسم الشخصية", "group": "رئيسية/ثانوية" }],
-    "edges": [{ "from": "اسم الشخصية 1", "to": "اسم الشخصية 2", "label": "نوع العلاقة (صداقة، عداوة، حب)" , "dynamics": "وصف تطور العلاقة"}],
-    "relationshipNetworkSummary": "ملخص لأهم العلاقات وتأثيرها على الحبكة."
-  },
-  "psychologicalDepthAssessor": [
+  \"wounds\": [
     {
-      "characterName": "اسم الشخصية",
-      "motivations": ["الدافع الأول", "الدافع الثاني"],
-      "internalConflicts": ["وصف الصراع الداخلي الأول"],
-      "psychologicalComplexityScore": 0.75,
-      "depthEvaluationNotes": "تقييم عمق الشخصية النفسي ومصداقيتها."
+      \"character\": \"سمر\",
+      \"type\": \"family_disgrace\",
+      \"origin\": \"إدانة والدها السابقة\",
+      \"triggers\": [\"ذكر حادثة 2012\", \"التشكيك في نزاهتها\"],
+      \"current_effect\": \"تدافع عن نفسها بعدوانية مفرطة\"
     }
   ],
-  "uniquenessAnalyzer": [
+  \"lies\": [
     {
-      "characterName": "اسم الشخصية",
-      "distinctiveTraits": ["سمة مميزة 1", "سمة مميزة 2"],
-      "comparisonToArchetypes": "مدى تطابقها أو اختلافها عن النماذج الشائعة.",
-      "uniquenessScore": 0.6,
-      "originalityNotes": "ملاحظات حول مدى تفرد الشخصية وإبداعها."
+      \"character\": \"رامي\",
+      \"lie\": \"أنا أحمي النظام من الفوضى\",
+      \"truth\": \"يحمي مصالحه الشخصية\",
+      \"exposure_points\": [\"صفحة 65\", \"صفحة 102\"],
+      \"resistance_level\": 0.6
+    }
+  ],
+  \"transformations\": [
+    {
+      \"character\": \"سمر\",
+      \"pivot\": \"صفحة 92\",
+      \"drivers\": [\"دعم زميلتها نادين\", \"إثبات براءة والدها\"],
+      \"result\": \"تتخلى عن العمل المكتبي وتنضم لحملة إصلاح\",
+      \"cost\": \"تخسر شراكتها المهنية السابقة\"
+    }
+  ],
+  \"screen_time_map\": {
+    \"سمر\": {\"pages\": [3, 118], \"scenes\": 24, \"share\": 0.38},
+    \"رامي\": {\"pages\": [10, 110], \"scenes\": 15, \"share\": 0.22}
+  },
+  \"consistency_flags\": [
+    {
+      \"character\": \"ليلى\",
+      \"issue\": \"يتغير موقفها من الرفض إلى الدعم دون تمهيد\",
+      \"severity\": \"medium\",
+      \"suggested_fix\": \"إضافة مشهد يوضح سبب التحول في الصفحة 70\"
     }
   ]
 }
+\`\`\``\`
+
+#### معايير الجودة والتقييم
+- **شمول التغطية**: يجب تحليل كل شخصية رئيسية وثانوية ذات أثر، مع ربطها بالمشاهد المحورية.
+- **عمق الاستنتاج**: إظهار العلاقة بين الدوافع والأفعال والنتائج، وتقدير أثر كل شخصية على الثيمات.
+- **الوضوح البنيوي**: تنظيم التقرير في أقسام ثابتة لتسهيل المقارنة مع وحدات أخرى.
+- **تناسق الدرجات**: الالتزام بالمدى 0-1 لمقاييس العمق والتعقيد، و0-100 لأي تقييم رقمي إضافي.
+- **قابلية التفعيل**: كل توصية متصلة بخطوة محددة في \`next_steps\`.
+
+#### خطوات التنفيذ خطوة بخطوة
+1. استخراج قائمة الشخصيات وأول ظهور لها من النص أو البيانات المرفقة.
+2. حصر عدد مرات الظهور والزمن التراكمي لكل شخصية وتسجيله في \`screen_time_map\` مع ملاحظة الأدوار المحورية.
+3. تتبّع القوس عبر المشاهد وتوثيقه في \`arcs\` مع تحديد نوع التطور ودرجة الزخم.
+4. تحليل الجروح العاطفية والأكاذيب المغذية للصراع وتعبئتها في \`wounds\` و\`lies\` مع تبرير تأثيرها.
+5. تلخيص التحولات الدرامية في \`transformations\` وربطها بالعوامل الدافعة والكلفة الدرامية.
+6. مراجعة الاتساق السلوكي وتسجيل أي تناقضات أو مخاطر في \`consistency_flags\` مع اقتراحات المعالجة.
+7. إعداد التقرير النصي، ثم إنشاء JSON كامل، والتأكد من تطابق الأسماء والبيانات عبر جميع الحقول.
+
+#### حالات الحافة والأخطاء الشائعة وكيفية التعامل معها
+- **شخصيات تظهر لمشهد واحد**: توثيقها في قائمة منفصلة مع الإشارة إلى تأثيرها المحدود.
+- **بيانات متعارضة حول دوافع الشخصية**: اعتماد المشهد الأكثر حداثة زمنياً وتوضيح سبب الترجيح.
+- **غياب المشهد الحاسم للقوس**: اقتراح موقع افتراضي وإدراجه كخطوة متابعة في \`next_steps\`.
+- **تشابه شخصيات ثانوية**: دمجها تحت تصنيف واحد مع إبراز الفروق القليلة وتقديم توصية لتفريقها.
+
+#### مثال كامل قبل/بعد + مثال JSON فعلي وواقعي
+**مقتطف من النص قبل التحليل:**
+> "سمر: لن أسمح لهم بإسكات الحقيقة، حتى لو خسرت كل شيء." (صفحة 58)
+
+**مقتطف من التقرير بعد التحليل:**
+> "يكشف الحوار عن انتقال سمر من الدفاع الحذر إلى المواجهة المباشرة، ما يؤكد نقطة التحول الثانية في قوسها الإيجابي ويستدعي إبراز ثمن المواجهة العائلية." 
+
+**عينة JSON متكاملة:**
+\`\`\`json
+{
+  "title": "تقرير محلل الشخصيات حول \"قضية الصمت\"",
+  "summary": "يُبرز التقرير قوس سمر الإيجابي، هشاشة الخصم رامي، والحاجة إلى توسيع أدوار المساندين لدعم التحول الأخير.",
+  "metadata": {
+    "workId": "wrk_silencecase_2025",
+    "workTitle": "قضية الصمت",
+    "workFormat": "feature_film",
+    "genres": ["legal", "drama"],
+    "primaryAudience": "adults",
+    "secondaryAudiences": ["young_adults"],
+    "developmentStage": "draft_three",
+    "priority": "high",
+    "categories": ["character", "analysis"],
+    "language": "ar",
+    "locale": "ar-LB",
+    "analyst": "Character Insight Engine",
+    "collaborators": ["Lead Character Editor"],
+    "createdAt": "2025-04-05T09:00:00Z",
+    "updatedAt": "2025-04-05T12:20:00Z",
+    "analysisWindow": {
+      "start": "2025-04-02T08:00:00Z",
+      "end": "2025-04-05T07:30:00Z"
+    },
+    "wordCount": 19780,
+    "runtimeMinutes": 122,
+    "logline": "محامية شابة تواجه شبكة فساد عائلية لإنقاذ والدها من السجن.",
+    "referenceWorks": ["Erin Brockovich (2000)", "Official Secrets (2019)"],
+    "productionCompany": "Cedars Pictures",
+    "notes": ["تم استخدام نسخة ما قبل التصوير للمراجعة."]
+  },
+  "details": [
+    {
+      "id": "char_analysis_samar",
+      "title": "ملف سمر العاطفي",
+      "focus": "character",
+      "expositionMethod": "dialogue",
+      "summary": "سمر تنتقل من التحفظ إلى المواجهة، مع حاجة إلى إبراز هشاشتها الداخلية.",
+      "personas": [
+        {
+          "name": "سمر",
+          "type": "protagonist",
+          "goals": ["تبرئة والدها"],
+          "transformation": "تتعلم الثقة بقدرتها وتقبل التضحية العائلية",
+          "screenTimeShare": 41
+        }
+      ],
+      "insights": [],
+      "beats": [],
+      "conflicts": [],
+      "relationships": [],
+      \"metrics\": [],
+      \"arcs\": [
+        {
+          \"character\": \"سمر\",
+          \"arc_type\": \"positive_change\",
+          \"start_state\": \"تتردد في تحدي المؤسسة\",
+          \"end_state\": \"تتصدر جبهة كشف الفساد\",
+          \"key_beats\": [
+            {\"page\": 12, \"description\": \"تقبل القضية رغم التهديد\"},
+            {\"page\": 54, \"description\": \"تتعلم أن طلب المساعدة ليس ضعفاً\"},
+            {\"page\": 92, \"description\": \"تكشف تسريب المستندات وتخاطر بوظيفتها\"}
+          ],
+          \"momentum_score\": 0.81
+        },
+        {
+          \"character\": \"رامي\",
+          \"arc_type\": \"fall\",
+          \"start_state\": \"مسؤول واثق\",
+          \"end_state\": \"معزول ومتردد\",
+          \"key_beats\": [
+            {\"page\": 40, \"description\": \"يستخدم نفوذه لقمع الأدلة\"},
+            {\"page\": 103, \"description\": \"يُجبر على الاعتراف العلني\"}
+          ],
+          \"momentum_score\": 0.58
+        }
+      ],
+      \"wounds\": [
+        {
+          \"character\": \"سمر\",
+          \"type\": \"family_disgrace\",
+          \"origin\": \"حملة التشهير ضد والدها\",
+          \"triggers\": [\"خطاب الادعاء\", \"سخرية الإعلام\"],
+          \"current_effect\": \"تأخذ قرارات دفاعية مبكرة\"
+        },
+        {
+          \"character\": \"رامي\",
+          \"type\": \"fear_of_obsolescence\",
+          \"origin\": \"تجاهل رؤسائه له في الترقية الأخيرة\",
+          \"triggers\": [\"ظهور وجوه شابة\", \"تذكير بنجاح سمر\"],
+          \"current_effect\": \"يلجأ للتصعيد بدل التفاوض\"
+        }
+      ],
+      \"lies\": [
+        {
+          \"character\": \"سمر\",
+          \"lie\": \"إذا طلبت المساندة فسوف أُعتبر ضعيفة\",
+          \"truth\": \"بناء التحالفات يمنحها قوة حقيقية\",
+          \"exposure_points\": [\"صفحة 54\", \"صفحة 88\"],
+          \"resistance_level\": 0.4
+        },
+        {
+          \"character\": \"رامي\",
+          \"lie\": \"الدولة ستنهار بدوني\",
+          \"truth\": \"النظام قادر على الاستمرار دون فساده\",
+          \"exposure_points\": [\"صفحة 103\"],
+          \"resistance_level\": 0.7
+        }
+      ],
+      \"transformations\": [
+        {
+          \"character\": \"سمر\",
+          \"pivot\": \"جلسة الاستماع العلنية\",
+          \"drivers\": [\"كشف شاهد جديد\", \"تشجيع والدها\"],
+          \"result\": \"تتخلى عن التكتم وتعلن الأدلة للرأي العام\",
+          \"cost\": \"خسارة ثقة الشركة الراعية\"
+        }
+      ],
+      \"screen_time_map\": {
+        \"سمر\": {\"pages\": [3, 118], \"scenes\": 24, \"share\": 0.38},
+        \"رامي\": {\"pages\": [10, 110], \"scenes\": 15, \"share\": 0.22},
+        \"ليلى\": {\"pages\": [22, 90], \"scenes\": 9, \"share\": 0.14}
+      },
+      \"consistency_flags\": [
+        {
+          \"character\": \"ليلى\",
+          \"issue\": \"يدعم قرار سمر النهائي دون تمهيد سابق\",
+          \"severity\": \"medium\",
+          \"suggested_fix\": \"إدراج مشهد نقاش بين ليلى وسمر قبل الصفحة 85\"
+        }
+      ]
+    }
+  ],
+  "recommendations": [
+    {
+      "id": "char_add_samar_vulnerability",
+      "title": "تعزيز هشاشة سمر",
+      "description": "كتابة مشهد قصير قبل الذروة يظهر صراعها العاطفي مع والدها.",
+      "priority": "high",
+      "category": "character",
+      "focus": "character",
+      "estimatedEffortHours": 6,
+      "owner": "Character Writer",
+      "impact": "رفع عمق التعاطف مع البطلة وتبرير قرارها النهائي",
+      "dependencies": [],
+      "successCriteria": [
+        "يتضمن المشهد اعترافاً شخصياً",
+        "يحصل على موافقة المخرج في جلسة القراءة"
+      ]
+    }
+  ],
+  "quality_metrics": {
+    "narrativeCohesion": 80,
+    "characterDepth": 88,
+    "dialogueAuthenticity": 79,
+    "pacingControl": 73,
+    "thematicResonance": 82,
+    "originality": 77,
+    "productionFeasibility": 71,
+    "audienceAlignment": 84,
+    "localizationReadiness": 75,
+    "confidenceInterval": {
+      "lowerBound": 72,
+      "upperBound": 89
+    },
+    "qualitativeNotes": [
+      "تحتاج ليلى لمشاهد إضافية تدعم تحول سمر.",
+      "الخصم رامي يستفيد من تبرير أعمق لضغط المؤسسة." 
+    ]
+  },
+  "next_steps": {
+    "immediate": [
+      {
+        "id": "char_workshop",
+        "description": "ورشة كتابة تركز على مشهد سمر ووالدها",
+        "owner": "Lead Writer",
+        "dueDate": "2025-04-10T10:00:00Z",
+        "priority": "high",
+        "status": "planned",
+        "successCriteria": [
+          "تسليم مسودة منقحة",
+          "تقييم إيجابي من المنتج"
+        ]
+      }
+    ],
+    "upcoming": [
+      {
+        "id": "char_relationship_pass",
+        "description": "مراجعة العلاقات الثانوية لتقوية التحالفات",
+        "owner": "Story Editor",
+        "dueDate": "2025-04-18T09:00:00Z",
+        "priority": "medium",
+        "status": "planned",
+        "successCriteria": [
+          "تحديد مشهدين لإبراز ليلى",
+          "تحديث خريطة العلاقات"
+        ]
+      }
+    ],
+    "reviewSchedule": [
+      {
+        "milestone": "مراجعة قوس سمر",
+        "date": "2025-04-22T11:30:00Z",
+        "focus": "character",
+        "notes": "التأكد من دمج مشهد الضعف الجديد." 
+      }
+    ],
+    "communicationPlan": {
+      "stakeholders": [
+        {
+          "name": "مستشار الشخصيات",
+          "role": "Character Consultant",
+          "channel": "Slack",
+          "cadence": "مرتين أسبوعياً"
+        }
+      ],
+      "notes": "يتم مشاركة التحديثات بعد كل جلسة كتابة." 
+    }
+  }
+}
 \`\`\`
-**العملية:** قم بتطبيق التحليلات المذكورة لكل شخصية رئيسية على الأقل.
+
+#### متطلبات التوافق مع بقية الوحدات (تكامل integrated)
+- شارك نتائج \`screen_time_map\` وملخص \`arcs\` مع وحدة \`Character Voice\` لضمان اتساق النبرة وتوزيع الحضور.
+- يجب أن تتماشى توصيات الأقواس مع خطة \`Conflict Dynamics\` لضمان عدم تناقض التوتر الدرامي.
+- تأكد من مطابقة معرفات الشخصيات مع ما تستخدمه وحدة \`Character Network\` لتفادي التكرار أو التعارض.
 `;
