@@ -1,105 +1,81 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# THE-ANA – Advanced Narrative Assistant
 
-# المحلل الدرامي والمبدع المحاكي (Drama Analytica & Creative Emissary)
+THE-ANA is a production-ready writing companion that blends deep narrative analysis with guided creative generation. It offers dialogue power analysis, contradiction detection, originality benchmarking, and creative utilities that expand plots, deepen characters, and enrich scenes. All capabilities are exposed through a FastAPI service backed by SQLite storage and resilient NLP tooling.
 
-**رؤى درامية ومحاكاة أسلوبية مدعومة بالذكاء الاصطناعي**
+## Features
 
-هذا التطبيق هو أداة متقدمة لتحليل النصوص الدرامية والإبداعية، وتقديم رؤى نقدية، وتوليد محتوى جديد يحاكي أسلوب المؤلف الأصلي. يستخدم التطبيق نماذج Gemini من Google لتقديم مجموعة واسعة من الخدمات، من التحليل البنيوي والنقدي إلى المحاكاة الإبداعية والتنبؤ بمسارات الحبكة.
+### Analytical modules
+- **Dynamic Dialogue Analyzer** – maps speaker turns, power balances, and emotional arcs, complete with actionable recommendations.
+- **Narrative Contradiction Detector** – flags factual, temporal, and character descriptor conflicts with severity scores.
+- **Originality & Benchmarking Analyzer** – evaluates trope density, structure adherence, and heuristic similarity to known works.
 
-## الميزات الرئيسية
+### Generative modules
+- **Plot Seed Generator** – delivers five curated plot starters with conflict profiles, stakes, and uniqueness factors.
+- **Character Deepener** – expands raw descriptions into psychologically grounded dossiers with enhancement metrics.
+- **Sensory Detail Enhancer** – injects targeted sensory language while tracking coverage and quality improvements.
 
-- **تحليل شامل**: يقدم التطبيق تحليلات معمقة للنصوص، بما في ذلك بنية الشخصيات، وشبكات الصراع، والإيقاع الدرامي، والبصمة الأسلوبية.
-- **إبداع محاكاتي**: يمكن للتطبيق إنشاء محتوى جديد (مشاهد، حوارات، فصول) يحاكي بدقة الأسلوب الأدبي للمؤلف الأصلي.
-- **وحدات متخصصة**: يوفر التطبيق وحدات تحليل متخصصة لتقييم جوانب محددة مثل الجودة الأدبية، القابلية للإنتاج، والسياق الثقافي والتاريخي.
-- **سير عمل متكامل**: يدمج التحليل النقدي مع الإبداع المحاكاتي لتقديم توصيات وتحسينات عملية.
-- **واجهة تفاعلية**: واجهة مستخدم سهلة الاستخدام تتيح تحميل الملفات، واختيار المهام، وعرض النتائج بشكل واضح ومنظم.
+### Platform services
+- **FastAPI web service** with typed request/response models, open CORS policy, and structured logging.
+- **SQLite persistence** for projects, texts, analytical outputs, character dossiers, and generation runs.
+- **Graceful fallbacks** whenever spaCy models, transformer pipelines, or NLTK resources cannot be downloaded.
 
-## التقنيات المستخدمة
+## Installation
 
-- **React** و **TypeScript** لبناء واجهة المستخدم.
-- **Zustand** لإدارة الحالة العامة للتطبيق.
-- **Google Gemini** كمحرك للذكاء الاصطناعي.
-- **Tailwind CSS** لتصميم الواجهة.
-- **Vite** كأداة بناء للمشروع.
+1. Ensure Python 3.11 or later is available.
+2. Upgrade pip and install the project:
+   ```bash
+   pip install -U pip
+   pip install .
+   # alternatively, using uv
+   # uv pip install .
+   ```
+3. The first application start will attempt to fetch required NLTK and spaCy resources. If downloads are blocked, lightweight heuristics are used automatically.
 
-## التشغيل المحلي
+## Running the service
 
-**المتطلبات الأساسية:**
-- [Node.js](https://nodejs.org/) (إصدار 18 أو أحدث)
-- مفتاح Gemini API
+Launch the API with:
+```bash
+uvicorn ana_api:app --host 0.0.0.0 --port 8000 --reload
+```
 
-**خطوات التشغيل:**
+### Health check
+- `GET /api/health` returns readiness information for the database, NLP stack, and analyzer/generator components.
 
-1.  **استنساخ المستودع:**
-    ```bash
-    git clone https://github.com/your-username/drama-analytica.git
-    cd drama-analytica
-    ```
+### Core endpoints
+- `POST /api/analyze` – run any combination of dialogue dynamics, contradiction detection, and originality benchmarking.
+- `POST /api/generate/plot-seeds` – request diversified plot seeds.
+- `POST /api/generate/character-deepening` – expand a character description.
+- `POST /api/generate/sensory-enhancement` – augment a scene with sensory detail.
+- `POST /api/projects` / `GET /api/projects` – register and list writing projects.
+- `GET /` – simple HTML landing page with endpoint documentation.
 
-2.  **تثبيت التبعيات:**
-    ```bash
-    npm install
-    ```
+All responses include persistent record identifiers so that outputs can be retrieved from the SQLite database (`ana_data.db` by default, configurable through `ANA_DB_PATH`). Logs are written to `ana.log`; adjust the `ANA_LOG_PATH` variable if required.
 
-3.  **إعداد مفتاح API:**
-    - قم بإنشاء ملف جديد في جذر المشروع باسم `.env.local`.
-    - أضف السطر التالي إلى الملف مع استبدال `YOUR_API_KEY` بمفتاح Gemini API الخاص بك:
-      ```
-      API_KEY=YOUR_API_KEY
-      ```
+## Testing
 
-4.  **تشغيل التطبيق:**
-    ```bash
-    npm run dev
-    ```
-    سيتم تشغيل التطبيق على `http://localhost:5173` (أو منفذ آخر إذا كان 5173 مشغولاً).
+Run the automated suite with:
+```bash
+pytest -q
+```
 
-## كيفية الاستخدام
+The tests cover analyzer behaviour, generator variety, and API integration (via `httpx.AsyncClient`).
 
-1.  **تحميل الملفات**: قم بسحب وإفلات الملفات (نصوص، صور، PDF، DOCX) في منطقة التحميل، أو انقر لتحديد الملفات من جهازك.
-2.  **اختيار الخدمة**: اختر الخدمة المطلوبة من قائمة المهام المتاحة. تنقسم المهام إلى فئات مثل "المهام الأساسية"، "التحليلات"، و "الوكلاء".
-3.  **متطلبات إضافية (اختياري)**: يمكنك إضافة متطلبات خاصة أو معلومات إضافية لتوجيه عملية التحليل أو الإبداع.
-4.  **بدء المعالجة**: انقر على زر "ابدأ المعالجة" لبدء المهمة.
-5.  **عرض النتائج**: سيتم عرض النتائج في قسم خاص بعد اكتمال المعالجة، مع إمكانية نسخها أو تنزيلها.
+## Notes on external resources
 
-## وحدات الذكاء الاصطناعي (الوكلاء)
+- spaCy attempts to load `en_core_web_sm`. If the model is unavailable and download fails, the service falls back to a blank English pipeline.
+- The emotion classifier uses a transformer pipeline when available. Failures trigger keyword-based heuristics without interrupting analysis.
+- NLTK sentiment analysis degrades gracefully to punctuation-based scoring if resources cannot be retrieved.
 
-يحتوي التطبيق على مجموعة من وكلاء الذكاء الاصطناعي المتخصصين، كل منهم مصمم لأداء مهمة محددة. فيما يلي قائمة بالوكلاء المتاحين وقدراتهم:
+## Data storage overview
 
-| اسم الوكيل (ID) | الوصف |
-| :--- | :--- |
-| **CritiqueArchitect AI** (`analysis`) | يقدم تحليلًا نقديًا معمقًا للنصوص الدرامية، مع التركيز على البنية والشخصيات والموضوعات. |
-| **MimesisGen AI** (`creative`) | ينتج محتوى إبداعيًا جديدًا يحاكي بدقة الأسلوب الأدبي للمؤلف الأصلي. |
-| **SynthesisOrchestrator AI** (`integrated`) | يدمج التحليل النقدي مع الإبداع المحاكاتي لتقديم توصيات وتحسينات عملية. |
-| **NarrativeContinuum AI** (`completion`) | يستكمل النصوص غير المكتملة بناءً على سياق محدد ونطاق مطلوب. |
-| **TemporalDynamics AI** (`rhythm_mapping`) | يرسم خرائط التوتر الدرامي والإيقاع السردي لتحديد نقاط الذروة والانخفاض في الطاقة السردية. |
-| **SocialGraph AI** (`character_network`) | يطبق نظرية الرسوم البيانية لكشف هياكل القوة والتأثير بين الشخصيات. |
-| **Voiceprint AI** (`dialogue_forensics`) | يحلل الخصائص الصوتية الفريدة لكل شخصية لضمان اتساق الحوار. |
-| **ConceptMiner AI** (`thematic_mining`) | يستخرج الموضوعات الكامنة والرسائل الضمنية في النص. |
-| **AuthorDNA AI** (`style_fingerprint`) | يستخرج البصمة الأدبية الفريدة للمؤلف من خلال تحليل الأسلوب. |
-| **TensionField AI** (`conflict_dynamics`) | يطبق نماذج رياضية لمحاكاة تطور التوترات والصراعات في البنية الدرامية. |
-| **ContextTransformer AI** (`adaptive_rewriting`) | يعيد هيكلة النصوص لتناسب سياقات متعددة مع الحفاظ على الجوهر الدلالي. |
-| **SceneArchitect AI** (`scene_generator`) | ينشئ مشاهد درامية متكاملة بناءً على سياق محدد. |
-| **PersonaSynth AI** (`character_voice`) | يحاكي الأصوات الشخصية لضمان أن كل شخصية تحتفظ ببصمتها اللغوية الفريدة. |
-| **CosmosForge AI** (`world_builder`) | ينشئ عوالم درامية متكاملة ومتسقة داخلياً. |
-| **NarrativeOracle AI** (`plot_predictor`) | يستشرف التطورات المحتملة للحبكة ويقيم احتمالية المسارات البديلة. |
-| **DramaEngine AI** (`tension_optimizer`) | يضبط منحنيات التوتر والإثارة لتعزيز التأثير الدرامي. |
-| **EmpathyMatrix AI** (`audience_resonance`) | يتنبأ بالاستجابة العاطفية والفكرية للجمهور تجاه المحتوى. |
-| **MediaTransmorph AI** (`platform_adapter`) | يعيد تشكيل المحتوى ليناسب متطلبات المنصات المختلفة. |
-| **PsycheScope AI** (`character_deep_analyzer`) | يحلل الدوافع اللاواعية للشخصيات باستخدام نماذج علم النفس الحاسوبي. |
-| **ConversationLens AI** (`dialogue_advanced_analyzer`) | يفحص طبقات المعنى في الحوار ويكشف عن النص الفرعي. |
-| **CinemaVision AI** (`visual_cinematic_analyzer`) | يحلل العناصر السينمائية المضمنة في النص ويقيم قابلية التصوير. |
-| **PhilosophyMiner AI** (`themes_messages_analyzer`) | يستخرج الطبقات المعنوية العميقة والرسائل الفلسفية المضمرة. |
-| **ChronoContext AI** (`cultural_historical_analyzer`) | يحلل الدقة الثقافية والتاريخية للنص ويتعامل مع القضايا الحساسة. |
-| **ProductionOracle AI** (`producibility_analyzer`) | يحلل قابلية الإنتاج ويقدر المتطلبات والميزانية. |
-| **AudienceCompass AI** (`target_audience_analyzer`) | يحدد ويحلل الجمهور المثالي للعمل وتوقعاتهم. |
-| **AestheticsJudge AI** (`literary_quality_analyzer`) | يقيم الجودة الأدبية والفنية للنص، بما في ذلك الأصالة والبلاغة والتماسك السردي. |
-| **WisdomSynthesizer AI** (`recommendations_generator`) | يقدم اقتراحات تحسين مفصلة للنص الدرامي. |
+| Table | Purpose |
+| --- | --- |
+| `projects` | Registered writing initiatives and optional metadata. |
+| `texts` | Source texts submitted for analysis. |
+| `analysis_results` | Stored outputs from each analyzer run with confidence values. |
+| `characters` | Character dossiers and associated scoring metadata. |
+| `generation_results` | Plot seed and sensory enhancement payloads with quality scores. |
 
----
+## Front-end assets
 
-<p align="center">
-  <em>هذا المشروع هو عرض توضيحي لقدرات الذكاء الاصطناعي في مجال التحليل الأدبي والإبداع.</em>
-</p>
+A minimal stylesheet is provided under `static/` to support the HTML landing page. The existing React assets in the repository remain available for future UI integration.
