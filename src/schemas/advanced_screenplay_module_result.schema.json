@@ -622,6 +622,3062 @@
                   ],
                   "additionalProperties": false
                 }
+              },
+              "audience_resonance": {
+                "type": "object",
+                "properties": {
+                  "segments": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "segmentId": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "descriptor": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "sizeEstimate": {
+                          "type": "number",
+                          "exclusiveMinimum": 0
+                        },
+                        "engagementDrivers": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "minItems": 1
+                        },
+                        "dropOffRisks": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "minItems": 1
+                        },
+                        "preferredChannels": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "minLength": 1
+                          }
+                        }
+                      },
+                      "required": [
+                        "segmentId",
+                        "descriptor",
+                        "engagementDrivers",
+                        "dropOffRisks"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "minItems": 1
+                  },
+                  "persona_fit": {
+                    "type": "object",
+                    "properties": {
+                      "primaryPersona": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "alignmentScore": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1
+                      },
+                      "supportingPersonas": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "minItems": 1
+                      },
+                      "gaps": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      }
+                    },
+                    "required": [
+                      "primaryPersona",
+                      "alignmentScore",
+                      "supportingPersonas",
+                      "gaps"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "cultural_sensitivity": {
+                    "type": "object",
+                    "properties": {
+                      "issues": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "description": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "severity": {
+                              "type": "string",
+                              "enum": [
+                                "low",
+                                "medium",
+                                "high"
+                              ]
+                            },
+                            "regions": {
+                              "type": "array",
+                              "items": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "minItems": 1
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "description",
+                            "severity",
+                            "regions"
+                          ],
+                          "additionalProperties": false
+                        },
+                        "minItems": 1
+                      },
+                      "fixes": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "issueId": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "action": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "owner": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "required": [
+                            "issueId",
+                            "action"
+                          ],
+                          "additionalProperties": false
+                        },
+                        "minItems": 1
+                      }
+                    },
+                    "required": [
+                      "issues",
+                      "fixes"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "hook_strength": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "retention_risk_points": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "timestamp": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "severity": {
+                          "type": "string",
+                          "enum": [
+                            "low",
+                            "medium",
+                            "high"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "timestamp",
+                        "description",
+                        "severity"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "minItems": 1
+                  }
+                },
+                "required": [
+                  "segments",
+                  "persona_fit",
+                  "cultural_sensitivity",
+                  "hook_strength",
+                  "retention_risk_points"
+                ],
+                "additionalProperties": false
+              },
+              "character_deep_analyzer": {
+                "type": "object",
+                "properties": {
+                  "arcs": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "character": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "trajectory": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "status": {
+                          "type": "string",
+                          "enum": [
+                            "stable",
+                            "growing",
+                            "regressing"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "character",
+                        "trajectory",
+                        "status"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "minItems": 1
+                  },
+                  "wounds": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "character": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "wound": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "manifestation": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "character",
+                        "wound",
+                        "manifestation"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "minItems": 1
+                  },
+                  "lies": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "character": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "lie": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "truth": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "character",
+                        "lie",
+                        "truth"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "minItems": 1
+                  },
+                  "transformations": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "character": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "from": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "to": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "catalyst": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "character",
+                        "from",
+                        "to",
+                        "catalyst"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "minItems": 1
+                  },
+                  "screen_time_map": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "number",
+                      "minimum": 0
+                    }
+                  },
+                  "consistency_flags": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "character": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "severity": {
+                          "type": "string",
+                          "enum": [
+                            "low",
+                            "medium",
+                            "high"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "character",
+                        "description",
+                        "severity"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "minItems": 1
+                  }
+                },
+                "required": [
+                  "arcs",
+                  "wounds",
+                  "lies",
+                  "transformations",
+                  "screen_time_map",
+                  "consistency_flags"
+                ],
+                "additionalProperties": false
+              },
+              "character_network": {
+                "type": "object",
+                "properties": {
+                  "nodes": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "label": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "role": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "weight": {
+                          "type": "number",
+                          "minimum": 0
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "label"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "minItems": 1
+                  },
+                  "edges": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "source": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "target": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "relationship": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "weight": {
+                          "type": "number",
+                          "minimum": 0
+                        }
+                      },
+                      "required": [
+                        "source",
+                        "target",
+                        "relationship"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "minItems": 1
+                  },
+                  "centrality": {
+                    "type": "object",
+                    "properties": {
+                      "degree": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "number",
+                          "minimum": 0
+                        }
+                      },
+                      "betweenness": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "number",
+                          "minimum": 0
+                        }
+                      },
+                      "closeness": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "number",
+                          "minimum": 0
+                        }
+                      }
+                    },
+                    "required": [
+                      "degree",
+                      "betweenness",
+                      "closeness"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "communities": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "members": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "minItems": 1
+                        },
+                        "descriptor": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "members"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "minItems": 1
+                  },
+                  "conflict_hotspots": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "between": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "minItems": 2
+                        },
+                        "summary": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "intensity": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        },
+                        "scenes": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "minLength": 1
+                          }
+                        }
+                      },
+                      "required": [
+                        "between",
+                        "summary",
+                        "intensity"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "required": [
+                  "nodes",
+                  "edges",
+                  "centrality",
+                  "communities",
+                  "conflict_hotspots"
+                ],
+                "additionalProperties": false
+              },
+              "character_voice": {
+                "type": "object",
+                "properties": {
+                  "voice_features": {
+                    "type": "object",
+                    "properties": {
+                      "lexicon": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "minItems": 1
+                      },
+                      "avg_sentence_len": {
+                        "type": "number",
+                        "exclusiveMinimum": 0
+                      },
+                      "punctuation_profile": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "number",
+                          "minimum": 0
+                        }
+                      },
+                      "idioms": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      }
+                    },
+                    "required": [
+                      "lexicon",
+                      "avg_sentence_len",
+                      "punctuation_profile",
+                      "idioms"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "style_markers": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "marker": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "evidence": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "marker",
+                        "evidence"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "minItems": 1
+                  },
+                  "exemplars": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "scene": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "excerpt": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "note": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "scene",
+                        "excerpt"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "minItems": 1
+                  }
+                },
+                "required": [
+                  "voice_features",
+                  "style_markers",
+                  "exemplars"
+                ],
+                "additionalProperties": false
+              },
+              "completion_instructions": {
+                "type": "object",
+                "properties": {
+                  "finalization_checklist": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "status": {
+                          "type": "string",
+                          "enum": [
+                            "pending",
+                            "in_progress",
+                            "done"
+                          ]
+                        },
+                        "owner": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "description",
+                        "status"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "minItems": 1
+                  },
+                  "blocking_issues": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "severity": {
+                          "type": "string",
+                          "enum": [
+                            "low",
+                            "medium",
+                            "high"
+                          ]
+                        },
+                        "mitigation": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "description",
+                        "severity"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "release_notes": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "finalization_checklist",
+                  "blocking_issues",
+                  "release_notes"
+                ],
+                "additionalProperties": false
+              },
+              "conflict_dialogue_generator": {
+                "type": "object",
+                "properties": {
+                  "scenarios": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "setup": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "conflict_level": {
+                          "type": "string",
+                          "enum": [
+                            "low",
+                            "medium",
+                            "high"
+                          ]
+                        },
+                        "summary": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "setup",
+                        "conflict_level",
+                        "summary"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "minItems": 1
+                  },
+                  "variations_by_heat": {
+                    "type": "object",
+                    "properties": {
+                      "low": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "medium": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "high": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      }
+                    },
+                    "required": [
+                      "low",
+                      "medium",
+                      "high"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "power_shift_map": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "turn": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "dominant_character": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "turn",
+                        "dominant_character",
+                        "description"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "interruption_metrics": {
+                    "type": "object",
+                    "properties": {
+                      "total_interruptions": {
+                        "type": "integer",
+                        "minimum": 0
+                      },
+                      "avg_gap_seconds": {
+                        "type": "number",
+                        "minimum": 0
+                      },
+                      "dominant_interruptor": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    },
+                    "required": [
+                      "total_interruptions",
+                      "avg_gap_seconds"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "scenarios",
+                  "variations_by_heat",
+                  "power_shift_map",
+                  "interruption_metrics"
+                ],
+                "additionalProperties": false
+              },
+              "conflict_dynamics": {
+                "type": "object",
+                "properties": {
+                  "conflict_types": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "minItems": 1
+                  },
+                  "triggers": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "minItems": 1
+                  },
+                  "escalation_curve": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "phase": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "intensity": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        }
+                      },
+                      "required": [
+                        "phase",
+                        "intensity"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "resolution_paths": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
+                },
+                "required": [
+                  "conflict_types",
+                  "triggers",
+                  "escalation_curve",
+                  "resolution_paths"
+                ],
+                "additionalProperties": false
+              },
+              "creative_instructions": {
+                "type": "object",
+                "properties": {
+                  "idea_matrix": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "axis_a": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "axis_b": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "concept": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "viability": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        }
+                      },
+                      "required": [
+                        "axis_a",
+                        "axis_b",
+                        "concept",
+                        "viability"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "minItems": 1
+                  },
+                  "hybridizations": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "sources": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "minItems": 1
+                        },
+                        "description": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "risk": {
+                          "type": "string",
+                          "enum": [
+                            "low",
+                            "medium",
+                            "high"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "sources",
+                        "description",
+                        "risk"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "discard_rationale": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "idea": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "reason": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "idea",
+                        "reason"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "required": [
+                  "idea_matrix",
+                  "hybridizations",
+                  "discard_rationale"
+                ],
+                "additionalProperties": false
+              },
+              "cultural_historical_analyzer": {
+                "type": "object",
+                "properties": {
+                  "authenticity_score": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "missteps": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "severity": {
+                          "type": "string",
+                          "enum": [
+                            "low",
+                            "medium",
+                            "high"
+                          ]
+                        },
+                        "recommended_fix": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "description",
+                        "severity",
+                        "recommended_fix"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "sources": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "reference": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "notes": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "reference"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "minItems": 1
+                  },
+                  "localization_guidelines": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "region": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "notes": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "region",
+                        "notes"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "required": [
+                  "authenticity_score",
+                  "missteps",
+                  "sources",
+                  "localization_guidelines"
+                ],
+                "additionalProperties": false
+              },
+              "dialogue_advanced_analyzer": {
+                "type": "object",
+                "properties": {
+                  "naturalness": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "distinctiveness": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "subtext": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "power_dynamics": {
+                    "type": "object",
+                    "properties": {
+                      "segments": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "scene": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "dominant_character": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "shift": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "notes": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "required": [
+                            "scene",
+                            "dominant_character"
+                          ],
+                          "additionalProperties": false
+                        },
+                        "minItems": 1
+                      }
+                    },
+                    "required": [
+                      "segments"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "interruptions": {
+                    "type": "object",
+                    "properties": {
+                      "counts_by_char": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "integer",
+                          "minimum": 0
+                        }
+                      },
+                      "total": {
+                        "type": "integer",
+                        "minimum": 0
+                      }
+                    },
+                    "required": [
+                      "counts_by_char",
+                      "total"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "exposition_balance": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  }
+                },
+                "required": [
+                  "naturalness",
+                  "distinctiveness",
+                  "subtext",
+                  "power_dynamics",
+                  "interruptions",
+                  "exposition_balance"
+                ],
+                "additionalProperties": false
+              },
+              "dialogue_forensics": {
+                "type": "object",
+                "properties": {
+                  "clichés": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "scene": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "excerpt": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "note": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "scene",
+                        "excerpt"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "info_dumps": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/definitions/AdvancedScreenplayModuleResult/properties/details/items/properties/dialogue_forensics/properties/clichés/items"
+                    }
+                  },
+                  "anachronisms": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/definitions/AdvancedScreenplayModuleResult/properties/details/items/properties/dialogue_forensics/properties/clichés/items"
+                    }
+                  },
+                  "redundancy_map": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "scene": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "lines": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "recommendation": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "scene",
+                        "lines",
+                        "recommendation"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "required": [
+                  "clichés",
+                  "info_dumps",
+                  "anachronisms",
+                  "redundancy_map"
+                ],
+                "additionalProperties": false
+              },
+              "foreshadowing_detector": {
+                "type": "object",
+                "properties": {
+                  "clues": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "scene": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "text": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "subtlety": {
+                          "type": "number",
+                          "minimum": 1,
+                          "maximum": 10
+                        },
+                        "payoff_scene": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "linkage_strength": {
+                          "type": "number",
+                          "minimum": 1,
+                          "maximum": 10
+                        },
+                        "type": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "scene",
+                        "text",
+                        "subtlety",
+                        "payoff_scene",
+                        "linkage_strength",
+                        "type"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "minItems": 1
+                  },
+                  "missed_payoffs": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "clue_id": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "expected_payoff_scene": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "recommendation": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "clue_id",
+                        "expected_payoff_scene",
+                        "recommendation"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "required": [
+                  "clues",
+                  "missed_payoffs"
+                ],
+                "additionalProperties": false
+              },
+              "integrated_instructions": {
+                "type": "object",
+                "properties": {
+                  "module_coherence_report": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "contradictions": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "module": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "severity": {
+                          "type": "string",
+                          "enum": [
+                            "low",
+                            "medium",
+                            "high"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "module",
+                        "description",
+                        "severity"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "priority_alignment": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "module": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "priority": {
+                          "type": "string",
+                          "enum": [
+                            "low",
+                            "medium",
+                            "high",
+                            "critical"
+                          ]
+                        },
+                        "status": {
+                          "type": "string",
+                          "enum": [
+                            "aligned",
+                            "misaligned",
+                            "pending"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "module",
+                        "priority",
+                        "status"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "dependency_graph": {
+                    "type": "object",
+                    "properties": {
+                      "nodes": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "minItems": 1
+                      },
+                      "edges": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "from": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "to": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "relation": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "required": [
+                            "from",
+                            "to",
+                            "relation"
+                          ],
+                          "additionalProperties": false
+                        }
+                      }
+                    },
+                    "required": [
+                      "nodes",
+                      "edges"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "module_coherence_report",
+                  "contradictions",
+                  "priority_alignment",
+                  "dependency_graph"
+                ],
+                "additionalProperties": false
+              },
+              "literary_quality_analyzer": {
+                "type": "object",
+                "properties": {
+                  "imagery_density": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "metaphor_map": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "motif": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "occurrences": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "tone": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "motif",
+                        "occurrences",
+                        "tone"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "rhythm_profile": {
+                    "type": "object",
+                    "properties": {
+                      "cadence": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "sentence_variance": {
+                        "type": "number",
+                        "minimum": 0
+                      },
+                      "dominant_structure": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    },
+                    "required": [
+                      "cadence",
+                      "sentence_variance",
+                      "dominant_structure"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "diction_register": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "originality_flags": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "aspect": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "severity": {
+                          "type": "string",
+                          "enum": [
+                            "low",
+                            "medium",
+                            "high"
+                          ]
+                        },
+                        "note": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "aspect",
+                        "severity",
+                        "note"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "required": [
+                  "imagery_density",
+                  "metaphor_map",
+                  "rhythm_profile",
+                  "diction_register",
+                  "originality_flags"
+                ],
+                "additionalProperties": false
+              },
+              "platform_adapter": {
+                "type": "object",
+                "properties": {
+                  "platform_profile": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "compliance_requirements": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "region": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "notes": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "region",
+                        "notes"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "edits_required": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "severity": {
+                          "type": "string",
+                          "enum": [
+                            "low",
+                            "medium",
+                            "high"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "description",
+                        "severity"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "runtime_adjustments": {
+                    "type": "object",
+                    "properties": {
+                      "current_runtime": {
+                        "type": "number",
+                        "minimum": 0
+                      },
+                      "target_runtime": {
+                        "type": "number",
+                        "minimum": 0
+                      },
+                      "notes": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    },
+                    "required": [
+                      "current_runtime",
+                      "target_runtime",
+                      "notes"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "platform_profile",
+                  "compliance_requirements",
+                  "edits_required",
+                  "runtime_adjustments"
+                ],
+                "additionalProperties": false
+              },
+              "plot_predictor": {
+                "type": "object",
+                "properties": {
+                  "next_events": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "event": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "probability": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        },
+                        "confidence": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        }
+                      },
+                      "required": [
+                        "event",
+                        "probability"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "probability_map": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1
+                    }
+                  },
+                  "predictability_risk": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "twist_options": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "description": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "impact": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "risk": {
+                          "type": "string",
+                          "enum": [
+                            "low",
+                            "medium",
+                            "high"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "description",
+                        "impact",
+                        "risk"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "required": [
+                  "next_events",
+                  "probability_map",
+                  "predictability_risk",
+                  "twist_options"
+                ],
+                "additionalProperties": false
+              },
+              "producibility_analyzer": {
+                "type": "object",
+                "properties": {
+                  "budget_tier": {
+                    "type": "string",
+                    "enum": [
+                      "low",
+                      "medium",
+                      "high"
+                    ]
+                  },
+                  "schedule_buckets": {
+                    "type": "object",
+                    "properties": {
+                      "by_location": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "label": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "items": {
+                              "type": "array",
+                              "items": {
+                                "type": "string",
+                                "minLength": 1
+                              }
+                            }
+                          },
+                          "required": [
+                            "label",
+                            "items"
+                          ],
+                          "additionalProperties": false
+                        }
+                      },
+                      "by_cast": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/definitions/AdvancedScreenplayModuleResult/properties/details/items/properties/producibility_analyzer/properties/schedule_buckets/properties/by_location/items"
+                        }
+                      }
+                    },
+                    "required": [
+                      "by_location",
+                      "by_cast"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "risk_register": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "prob": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        },
+                        "impact": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "mitigation": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "prob",
+                        "impact",
+                        "mitigation"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "logistics_notes": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
+                },
+                "required": [
+                  "budget_tier",
+                  "schedule_buckets",
+                  "risk_register",
+                  "logistics_notes"
+                ],
+                "additionalProperties": false
+              },
+              "recommendations_generator": {
+                "type": "object",
+                "properties": {
+                  "prioritized_actions": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "priority": {
+                          "type": "string",
+                          "enum": [
+                            "low",
+                            "medium",
+                            "high",
+                            "critical"
+                          ]
+                        },
+                        "category": {
+                          "type": "string",
+                          "enum": [
+                            "story_structure",
+                            "character",
+                            "dialogue",
+                            "visual_style",
+                            "themes",
+                            "world_building",
+                            "market_positioning",
+                            "cultural_context",
+                            "production",
+                            "sound_design",
+                            "pacing"
+                          ]
+                        },
+                        "effort": {
+                          "type": "number",
+                          "minimum": 0
+                        },
+                        "impact": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "priority",
+                        "category",
+                        "effort",
+                        "impact"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "minItems": 1
+                  },
+                  "roadmap": {
+                    "type": "object",
+                    "properties": {
+                      "phases": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "name": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "duration_weeks": {
+                              "type": "number",
+                              "minimum": 0
+                            },
+                            "focus": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "name",
+                            "duration_weeks",
+                            "focus"
+                          ],
+                          "additionalProperties": false
+                        },
+                        "minItems": 1
+                      }
+                    },
+                    "required": [
+                      "phases"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "success_metrics": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "metric": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "target": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "measurement": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "metric",
+                        "target",
+                        "measurement"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "required": [
+                  "prioritized_actions",
+                  "roadmap",
+                  "success_metrics"
+                ],
+                "additionalProperties": false
+              },
+              "rhythm_mapping": {
+                "type": "object",
+                "properties": {
+                  "beats": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "index": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "opening_image",
+                            "inciting_incident",
+                            "turning_point",
+                            "midpoint",
+                            "pinch_point",
+                            "climax",
+                            "resolution",
+                            "tag",
+                            "reversal",
+                            "dark_night"
+                          ]
+                        },
+                        "tension": {
+                          "type": "number",
+                          "minimum": 1,
+                          "maximum": 10
+                        },
+                        "page_range": {
+                          "type": "object",
+                          "properties": {
+                            "start": {
+                              "type": "integer",
+                              "minimum": 0
+                            },
+                            "end": {
+                              "type": "integer",
+                              "minimum": 0
+                            }
+                          },
+                          "required": [
+                            "start",
+                            "end"
+                          ],
+                          "additionalProperties": false
+                        }
+                      },
+                      "required": [
+                        "index",
+                        "type",
+                        "tension",
+                        "page_range"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "minItems": 1
+                  },
+                  "tension_graph": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "beat_index": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "tension": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 10
+                        }
+                      },
+                      "required": [
+                        "beat_index",
+                        "tension"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "pacing_notes": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
+                },
+                "required": [
+                  "beats",
+                  "tension_graph",
+                  "pacing_notes"
+                ],
+                "additionalProperties": false
+              },
+              "scene_generator": {
+                "type": "object",
+                "properties": {
+                  "prompts_used": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "generated_scenes": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "slug": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "slugline": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "body": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "rationale": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "slug",
+                        "slugline",
+                        "body",
+                        "rationale"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "minItems": 1
+                  },
+                  "constraints_respected": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
+                },
+                "required": [
+                  "prompts_used",
+                  "generated_scenes",
+                  "constraints_respected"
+                ],
+                "additionalProperties": false
+              },
+              "scene_optimizer": {
+                "type": "object",
+                "properties": {
+                  "issues_detected": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "severity": {
+                          "type": "string",
+                          "enum": [
+                            "low",
+                            "medium",
+                            "high"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "description",
+                        "severity"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "suggested_edits": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "expected_gain": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "description",
+                        "expected_gain"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "before_after_samples": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "issue_id": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "before": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "after": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "issue_id",
+                        "before",
+                        "after"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "impact_estimate": {
+                    "type": "object",
+                    "properties": {
+                      "pacing": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1
+                      },
+                      "clarity": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1
+                      },
+                      "emotional_intensity": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1
+                      }
+                    },
+                    "required": [
+                      "pacing",
+                      "clarity",
+                      "emotional_intensity"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "issues_detected",
+                  "suggested_edits",
+                  "before_after_samples",
+                  "impact_estimate"
+                ],
+                "additionalProperties": false
+              },
+              "style_fingerprint": {
+                "type": "object",
+                "properties": {
+                  "stylometry": {
+                    "type": "object",
+                    "properties": {
+                      "function_words": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "number",
+                          "minimum": 0
+                        }
+                      },
+                      "ngrams": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "number",
+                          "minimum": 0
+                        }
+                      },
+                      "POS_profile": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "number",
+                          "minimum": 0
+                        }
+                      }
+                    },
+                    "required": [
+                      "function_words",
+                      "ngrams",
+                      "POS_profile"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "comparative_corpus_refs": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "signature_traits": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "trait": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "evidence": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "trait",
+                        "evidence"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "required": [
+                  "stylometry",
+                  "comparative_corpus_refs",
+                  "signature_traits"
+                ],
+                "additionalProperties": false
+              },
+              "target_audience_analyzer": {
+                "type": "object",
+                "properties": {
+                  "rating_guidance": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "triggers_flags": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "trigger": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "severity": {
+                          "type": "string",
+                          "enum": [
+                            "low",
+                            "medium",
+                            "high"
+                          ]
+                        },
+                        "scenes": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "minLength": 1
+                          }
+                        }
+                      },
+                      "required": [
+                        "trigger",
+                        "severity",
+                        "scenes"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "suitability_score": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "demographic_fit": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "segment": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "alignment": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        },
+                        "notes": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "segment",
+                        "alignment",
+                        "notes"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "required": [
+                  "rating_guidance",
+                  "triggers_flags",
+                  "suitability_score",
+                  "demographic_fit"
+                ],
+                "additionalProperties": false
+              },
+              "tension_optimizer": {
+                "type": "object",
+                "properties": {
+                  "slack_points": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "point": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "rationale": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "point",
+                        "rationale"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "hotspot_suggestions": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "scene": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "suggestion": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "expected_tension": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        }
+                      },
+                      "required": [
+                        "scene",
+                        "suggestion",
+                        "expected_tension"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "redistribution_plan": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "from": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "to": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "action": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "from",
+                        "to",
+                        "action"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "revised_tension_curve": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "index": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "tension": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        }
+                      },
+                      "required": [
+                        "index",
+                        "tension"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "required": [
+                  "slack_points",
+                  "hotspot_suggestions",
+                  "redistribution_plan",
+                  "revised_tension_curve"
+                ],
+                "additionalProperties": false
+              },
+              "thematic_mining": {
+                "type": "object",
+                "properties": {
+                  "theme_candidates": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "theme": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "strength": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        }
+                      },
+                      "required": [
+                        "theme",
+                        "strength"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "evidence_map": {
+                    "type": "object",
+                    "properties": {
+                      "by_scene": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "minLength": 1
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "by_scene"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "counterpoints": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "theme": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "theme",
+                        "description"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "clarity_score": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  }
+                },
+                "required": [
+                  "theme_candidates",
+                  "evidence_map",
+                  "counterpoints",
+                  "clarity_score"
+                ],
+                "additionalProperties": false
+              },
+              "themes_messages_analyzer": {
+                "type": "object",
+                "properties": {
+                  "explicit_messages": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "implicit_messages": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "alignment_with_themes": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "risk_of_misreading": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "explicit_messages",
+                  "implicit_messages",
+                  "alignment_with_themes",
+                  "risk_of_misreading"
+                ],
+                "additionalProperties": false
+              },
+              "visual_cinematic_analyzer": {
+                "type": "object",
+                "properties": {
+                  "shot_suggestions": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "scene": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "suggestion": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "lens": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "scene",
+                        "suggestion"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "camera_moves": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "scene": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "move": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "purpose": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "scene",
+                        "move",
+                        "purpose"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "lighting_notes": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "scene": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "note": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "scene",
+                        "note"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "action_sequence_quality": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "sequence": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "score": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        },
+                        "notes": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "sequence",
+                        "score",
+                        "notes"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "required": [
+                  "shot_suggestions",
+                  "camera_moves",
+                  "lighting_notes",
+                  "action_sequence_quality"
+                ],
+                "additionalProperties": false
+              },
+              "voice_interaction_analyzer": {
+                "type": "object",
+                "properties": {
+                  "voiceover_usage": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "phone_radio_conventions": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "clarity_issues": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "scene": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "scene",
+                        "description"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "mix_guidelines": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
+                },
+                "required": [
+                  "voiceover_usage",
+                  "phone_radio_conventions",
+                  "clarity_issues",
+                  "mix_guidelines"
+                ],
+                "additionalProperties": false
+              },
+              "what_if_scenario_analyzer": {
+                "type": "object",
+                "properties": {
+                  "scenarios": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "change": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "rationale": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "ripple_effects": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "minLength": 1
+                          }
+                        },
+                        "risks": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "minLength": 1
+                          }
+                        },
+                        "benefits": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "minLength": 1
+                          }
+                        }
+                      },
+                      "required": [
+                        "change",
+                        "rationale",
+                        "ripple_effects",
+                        "risks",
+                        "benefits"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "minItems": 1
+                  },
+                  "decision_matrix": {
+                    "type": "object",
+                    "properties": {
+                      "criteria": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "options": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "option": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "score": {
+                              "type": "number",
+                              "minimum": 0,
+                              "maximum": 1
+                            },
+                            "notes": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "required": [
+                            "option",
+                            "score"
+                          ],
+                          "additionalProperties": false
+                        }
+                      }
+                    },
+                    "required": [
+                      "criteria",
+                      "options"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "scenarios",
+                  "decision_matrix"
+                ],
+                "additionalProperties": false
+              },
+              "world_builder_instructions": {
+                "type": "object",
+                "properties": {
+                  "world_bible": {
+                    "type": "object",
+                    "properties": {
+                      "geography": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "culture": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "rules": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "economy": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "institutions": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    },
+                    "required": [
+                      "geography",
+                      "culture",
+                      "rules",
+                      "economy",
+                      "institutions"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "consistency_checks": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "aspect": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "status": {
+                          "type": "string",
+                          "enum": [
+                            "open",
+                            "closed"
+                          ]
+                        },
+                        "notes": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "aspect",
+                        "status"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "visual_motifs": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "motif": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "motif",
+                        "description"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "required": [
+                  "world_bible",
+                  "consistency_checks",
+                  "visual_motifs"
+                ],
+                "additionalProperties": false
+              },
+              "analysis_instructions": {
+                "type": "object",
+                "properties": {
+                  "scope_map": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "methods_used": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "evidence_samples": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "description": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "confidence": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "description",
+                        "confidence"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "reliability_notes": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
+                },
+                "required": [
+                  "scope_map",
+                  "methods_used",
+                  "evidence_samples",
+                  "reliability_notes"
+                ],
+                "additionalProperties": false
               }
             },
             "required": [

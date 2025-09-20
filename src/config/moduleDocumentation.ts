@@ -35,16 +35,16 @@ export const MODULE_DOCUMENTATION: ModuleDocumentationEntry[] = [
     ],
     detailFields: [
       {
-        field: "details[].personas[]",
-        description: "تعريف بالشخصيات، أهدافها، ونسبة ظهورها على الشاشة.",
+        field: "details[].character_deep_analyzer.arcs",
+        description: "مسارات التحول العاطفي لكل شخصية محورية.",
       },
       {
-        field: "details[].relationships[]",
-        description: "تحليل ديناميكيات العلاقات وقوتها الدرامية.",
+        field: "details[].character_deep_analyzer.screen_time_map",
+        description: "توزيع زمن الشاشة لضمان عدالة التركيز.",
       },
       {
-        field: "details[].conflicts[]",
-        description: "تحديد مصادر الصراع المرتبطة بكل شخصية وتحولاتها.",
+        field: "details[].character_deep_analyzer.consistency_flags",
+        description: "تنبيهات الاتساق السلوكي التي تتطلب مراجعة.",
       },
     ],
     focus: AnalysisType.CHARACTER,
@@ -65,12 +65,16 @@ export const MODULE_DOCUMENTATION: ModuleDocumentationEntry[] = [
     ],
     detailFields: [
       {
-        field: "details[].insights[]",
-        description: "استنتاجات حول فاعلية السطور ودقة التلميح تحت السطور.",
+        field: "details[].dialogue_advanced_analyzer.power_dynamics.segments",
+        description: "مقاطع تغير السيطرة الكلامية داخل المشهد.",
       },
       {
-        field: "details[].metrics[]",
-        description: "مقاييس كمية لعدد السطور وطول المشهد وتأثيره العاطفي.",
+        field: "details[].dialogue_advanced_analyzer.interruptions",
+        description: "تحليل المقاطعات وتوزيعها على الشخصيات.",
+      },
+      {
+        field: "details[].dialogue_advanced_analyzer.exposition_balance",
+        description: "قياس التوازن بين الحوار التفسيري والتلميحي.",
       },
     ],
     focus: AnalysisType.DIALOGUE,
@@ -91,12 +95,16 @@ export const MODULE_DOCUMENTATION: ModuleDocumentationEntry[] = [
     ],
     detailFields: [
       {
-        field: "details[].beats[]",
-        description: "الضربات البصرية الرئيسية وتأثيرها على المشاهد.",
+        field: "details[].visual_cinematic_analyzer.shot_suggestions",
+        description: "اقتراحات العدسات وتكوين اللقطة الداعمة للثيمة.",
       },
       {
-        field: "details[].insights[]",
-        description: "قراءة متعمقة للرموز البصرية ودورها في السرد.",
+        field: "details[].visual_cinematic_analyzer.camera_moves",
+        description: "حركة الكاميرا الموصى بها وهدفها الدرامي.",
+      },
+      {
+        field: "details[].visual_cinematic_analyzer.action_sequence_quality",
+        description: "تقييم مشاهد الحركة وما يلزم لتحسينها.",
       },
     ],
     focus: AnalysisType.VISUAL,
@@ -117,12 +125,16 @@ export const MODULE_DOCUMENTATION: ModuleDocumentationEntry[] = [
     ],
     detailFields: [
       {
-        field: "details[].insights[]",
-        description: "تفسير كل رمز أو ثيمة وارتباطه بالبنية الدرامية.",
+        field: "details[].themes_messages_analyzer.explicit_messages",
+        description: "الرسائل المباشرة التي يصرح بها العمل.",
       },
       {
-        field: "details[].metrics[]",
-        description: "مؤشرات كمية لانتشار الثيمة عبر المشاهد.",
+        field: "details[].themes_messages_analyzer.implicit_messages",
+        description: "الرسائل الضمنية التي تُستشف من الرموز والسياق.",
+      },
+      {
+        field: "details[].themes_messages_analyzer.risk_of_misreading",
+        description: "نقاط الخطر في تفسير الثيمة وكيفية توضيحها.",
       },
     ],
     focus: AnalysisType.THEME,
@@ -143,12 +155,16 @@ export const MODULE_DOCUMENTATION: ModuleDocumentationEntry[] = [
     ],
     detailFields: [
       {
-        field: "details[].insights[]",
-        description: "الملاحظات المتعلقة بالأصالة اللغوية والسياق الاجتماعي.",
+        field: "details[].cultural_historical_analyzer.missteps",
+        description: "مناطق الخطأ أو الحساسية الثقافية التي تستوجب التدخل.",
       },
       {
-        field: "details[].insights[].recommendedActions",
-        description: "إجراءات التحقق الميداني أو الاستشاري اللازمة.",
+        field: "details[].cultural_historical_analyzer.localization_guidelines",
+        description: "إرشادات التوطين لكل سوق جغرافي مستهدف.",
+      },
+      {
+        field: "details[].cultural_historical_analyzer.sources",
+        description: "المراجع والاستشارات التي دعمت التحليل.",
       },
     ],
     focus: AnalysisType.CULTURAL,
@@ -169,12 +185,16 @@ export const MODULE_DOCUMENTATION: ModuleDocumentationEntry[] = [
     ],
     detailFields: [
       {
-        field: "details[].insights[]",
-        description: "تحليل مفصل للتكاليف المرتفعة ومصادر الضغط اللوجستي.",
+        field: "details[].producibility_analyzer.risk_register",
+        description: "سجل المخاطر الإنتاجية ونسب احتمالها.",
       },
       {
-        field: "details[].metrics[]",
-        description: "مقاييس مقارنة بين الخطة الحالية والخيارات البديلة.",
+        field: "details[].producibility_analyzer.schedule_buckets",
+        description: "تقسيم الجدول بحسب الموقع أو التوزيع التمثيلي.",
+      },
+      {
+        field: "details[].producibility_analyzer.logistics_notes",
+        description: "ملاحظات لوجستية يجب التخطيط لها مسبقاً.",
       },
     ],
     focus: AnalysisType.PRODUCTION,
@@ -195,12 +215,16 @@ export const MODULE_DOCUMENTATION: ModuleDocumentationEntry[] = [
     ],
     detailFields: [
       {
-        field: "details[].insights[]",
-        description: "تحليل توقعات الجمهور وتوزيع الاهتمام عبر المشاهد.",
+        field: "details[].target_audience_analyzer.rating_guidance",
+        description: "إرشادات التصنيف العمري والملاحظات المصاحبة لكل سوق.",
       },
       {
-        field: "details[].insights[].recommendedActions",
-        description: "خطوات تسويقية أو سردية لضمان الارتباط العاطفي.",
+        field: "details[].target_audience_analyzer.triggers_flags",
+        description: "المحفزات الحساسة لكل شريحة جمهور وكيفية التعامل معها.",
+      },
+      {
+        field: "details[].target_audience_analyzer.demographic_fit",
+        description: "قياس التوافق مع الفئات الديموغرافية المستهدفة.",
       },
     ],
     focus: AnalysisType.AUDIENCE,
@@ -221,12 +245,16 @@ export const MODULE_DOCUMENTATION: ModuleDocumentationEntry[] = [
     ],
     detailFields: [
       {
-        field: "details[].insights[]",
-        description: "تحليل نوعي للجمل الطويلة، الاستعارات، وفاعليتها.",
+        field: "details[].literary_quality_analyzer.metaphor_map",
+        description: "خريطة الاستعارات والرموز المتكررة داخل النص.",
       },
       {
-        field: "details[].metrics[]",
-        description: "مؤشرات كمية لعدد الصفحات لكل فصل ومعدل التقدم الدرامي.",
+        field: "details[].literary_quality_analyzer.rhythm_profile",
+        description: "تحليل الإيقاع السردي وتنوع الجمل.",
+      },
+      {
+        field: "details[].literary_quality_analyzer.originality_flags",
+        description: "تنبيهات الأصالة التي تشير إلى الحاجة لإعادة الصياغة.",
       },
     ],
     focus: AnalysisType.STRUCTURE,
@@ -247,12 +275,16 @@ export const MODULE_DOCUMENTATION: ModuleDocumentationEntry[] = [
     ],
     detailFields: [
       {
-        field: "details[].insights[]",
-        description: "تجميع الاستنتاجات الرئيسة من الوحدات الفرعية مع تصنيفها.",
+        field: "details[].recommendations_generator.prioritized_actions",
+        description: "الإجراءات ذات التأثير العالي مرتبة بحسب الأولوية.",
       },
       {
-        field: "details[].metrics[]",
-        description: "نقاط مقارنة بين العائد الإبداعي والجهد المطلوب.",
+        field: "details[].recommendations_generator.roadmap",
+        description: "خارطة الطريق التنفيذية الموزعة على مراحل.",
+      },
+      {
+        field: "details[].recommendations_generator.success_metrics",
+        description: "معايير القياس التي تضمن متابعة أثر التعديلات.",
       },
     ],
     focus: AnalysisType.RECOMMENDATION,
@@ -273,12 +305,16 @@ export const MODULE_DOCUMENTATION: ModuleDocumentationEntry[] = [
     ],
     detailFields: [
       {
-        field: "details[].insights[]",
-        description: "تحليل لكل شخصية حول وضوح الصوت وتعبيره العاطفي.",
+        field: "details[].voice_interaction_analyzer.voiceover_usage",
+        description: "كيفية توزيع الراوي أو التعليق الصوتي عبر المشاهد.",
       },
       {
-        field: "details[].insights[].recommendedActions",
-        description: "خطوات تدريبية أو تعليمات أداء للتسجيل القادم.",
+        field: "details[].voice_interaction_analyzer.clarity_issues",
+        description: "نقاط الغموض أو التداخلات الصوتية التي يجب علاجها.",
+      },
+      {
+        field: "details[].voice_interaction_analyzer.mix_guidelines",
+        description: "إرشادات المكساج لضبط مستويات الصوت والمؤثرات.",
       },
     ],
     focus: AnalysisType.VOICE,
@@ -299,12 +335,12 @@ export const MODULE_DOCUMENTATION: ModuleDocumentationEntry[] = [
     ],
     detailFields: [
       {
-        field: "details[].beats[]",
-        description: "تحديد الضربات التي يجب أن يتواجد فيها التلميح.",
+        field: "details[].foreshadowing_detector.clues",
+        description: "قائمة التلميحات المبكرة ودرجة خفائها وربطها بالمكافأة.",
       },
       {
-        field: "details[].insights[]",
-        description: "شرح العلاقة بين التلميح والذروة الدرامية.",
+        field: "details[].foreshadowing_detector.missed_payoffs",
+        description: "التلميحات التي لم تحقق أثرها المقصود مع مقترحات الإكمال.",
       },
     ],
     focus: AnalysisType.FORESHADOWING,
