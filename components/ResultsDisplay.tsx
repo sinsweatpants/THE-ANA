@@ -1,6 +1,6 @@
 
 
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { TaskType, GeminiTaskResultData } from '../types'; 
 import { ClipboardDocumentIcon } from '../constants';
 import { ENHANCED_TASK_DESCRIPTIONS as TASK_DESCRIPTIONS } from '../ai/orchestration';
@@ -108,6 +108,7 @@ interface ResultsDisplayProps {
   rawText?: string | null;
   error?: string | null;
   selectedTaskType: TaskType | null;
+  confidenceScore?: number | null;
 }
 
 /**
@@ -115,7 +116,12 @@ interface ResultsDisplayProps {
  * @param {ResultsDisplayProps} props - The props for the component.
  * @returns {React.ReactElement | null} The rendered results display element or null if there is no data.
  */
-export const ResultsDisplay: React.FC<ResultsDisplayProps> = ({ resultData, rawText, error, selectedTaskType }) => {
+export const ResultsDisplay: React.FC<ResultsDisplayProps> = ({ resultData, rawText, error, selectedTaskType, confidenceScore }) => {
+  const [userFeedback, setUserFeedback] = useState<'up' | 'down' | null>(null);
+
+  useEffect(() => {
+    setUserFeedback(null);
+  }, [selectedTaskType, resultData, rawText]);
   if (error) {
     return <ResultSection title="خطأ في المعالجة" content={error} isError />;
   }
@@ -183,8 +189,54 @@ export const ResultsDisplay: React.FC<ResultsDisplayProps> = ({ resultData, rawT
   return (
     <div className="w-full space-y-8 mt-8">
       <ResultSection title={displayTitle} content={mainDisplayContent} />
-      
-      {fullJsonData && mainDisplayContent !== fullJsonData && ( 
+
+      {typeof confidenceScore === 'number' && (
+        <div className="p-4 rounded-xl border border-panel-border bg-slate-800 shadow-inner space-y-3">
+          <div className="flex items-center justify-between">
+            <div>
+              <h4 className="text-lg font-semibold text-primary-light">درجة الثقة المبدئية</h4>
+              <p className="text-slate-300 text-sm">{Math.round(confidenceScore * 100)}%</p>
+            </div>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => setUserFeedback('up')}
+                className={`px-4 py-2 rounded-lg border transition-colors duration-200 text-lg focus:outline-none focus:ring-2 focus:ring-primary ${
+                  userFeedback === 'up'
+                    ? 'bg-green-600/20 border-green-400 text-green-300'
+                    : 'bg-slate-700 border-slate-600 hover:bg-slate-600 hover:border-slate-500 text-slate-200'
+                }`}
+                aria-pressed={userFeedback === 'up'}
+                aria-label="تقييم إيجابي"
+              >
+                👍
+              </button>
+              <button
+                type="button"
+                onClick={() => setUserFeedback('down')}
+                className={`px-4 py-2 rounded-lg border transition-colors duration-200 text-lg focus:outline-none focus:ring-2 focus:ring-primary ${
+                  userFeedback === 'down'
+                    ? 'bg-red-600/20 border-red-400 text-red-300'
+                    : 'bg-slate-700 border-slate-600 hover:bg-slate-600 hover:border-slate-500 text-slate-200'
+                }`}
+                aria-pressed={userFeedback === 'down'}
+                aria-label="تقييم سلبي"
+              >
+                👎
+              </button>
+            </div>
+          </div>
+          {userFeedback && (
+            <p className="text-xs text-slate-400">
+              {userFeedback === 'up'
+                ? 'سجّلنا إعجابك بهذه النتيجة. شكرًا لملاحظاتك!'
+                : 'سجّلنا عدم رضاك عن هذه النتيجة. سنستخدم ملاحظاتك لتحسين التجربة.'}
+            </p>
+          )}
+        </div>
+      )}
+
+      {fullJsonData && mainDisplayContent !== fullJsonData && (
         <div className={`p-6 rounded-xl shadow-xl border bg-slate-800 border-panel-border backdrop-blur-xs bg-panel`}>
           <div className="flex justify-between items-center mb-4">
             <h3 className={`text-2xl font-semibold text-primary-light`}>البيانات الكاملة (JSON)</h3>

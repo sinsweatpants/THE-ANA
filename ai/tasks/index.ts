@@ -25,3 +25,8 @@ export { executeProducibilityAnalysis } from './producibilityAnalysis';
 export { executeTargetAudienceAnalysis } from './targetAudienceAnalysis';
 export { executeLiteraryQualityAnalysis } from './literaryQualityAnalysis';
 export { executeRecommendationsGeneration } from './recommendationsGeneration';
+export { executeVoiceInteractionAnalysis } from './voiceInteractionAnalysis';
+export { executeForeshadowingDetection } from './foreshadowingDetection';
+export { executeWhatIfScenarioAnalysis } from './whatIfScenarioAnalysis';
+export { executeConflictDialogueGeneration } from './conflictDialogueGeneration';
+export { executeSceneOptimization } from './sceneOptimization';

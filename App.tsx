@@ -34,11 +34,16 @@ import {
   executeRecommendationsGeneration,
   executeRhythmMappingAnalysis,
   executeSceneGeneration,
+  executeSceneOptimization,
   executeStyleFingerprintAnalysis,
   executeTargetAudienceAnalysis,
   executeThematicMiningAnalysis,
   executeThemesMessagesAnalysis,
   executeTensionOptimization,
+  executeVoiceInteractionAnalysis,
+  executeForeshadowingDetection,
+  executeWhatIfScenarioAnalysis,
+  executeConflictDialogueGeneration,
   executeVisualCinematicAnalysis,
   executeWorldBuilding,
 } from './ai/tasks';
@@ -295,6 +300,21 @@ const App: React.FC = () => {
         case TaskType.RECOMMENDATIONS_GENERATOR:
           result = await executeRecommendationsGeneration(baseParams);
           break;
+        case TaskType.VOICE_INTERACTION_ANALYZER:
+          result = await executeVoiceInteractionAnalysis(baseParams);
+          break;
+        case TaskType.FORESHADOWING_DETECTOR:
+          result = await executeForeshadowingDetection(baseParams);
+          break;
+        case TaskType.WHAT_IF_SCENARIO_ANALYZER:
+          result = await executeWhatIfScenarioAnalysis(baseParams);
+          break;
+        case TaskType.CONFLICT_DIALOGUE_GENERATOR:
+          result = await executeConflictDialogueGeneration(baseParams);
+          break;
+        case TaskType.SCENE_OPTIMIZER:
+          result = await executeSceneOptimization(baseParams);
+          break;
         default:
           throw new Error(`Unsupported task: ${selectedTask}`);
       }
@@ -540,8 +560,9 @@ const App: React.FC = () => {
             <ResultsDisplay
               resultData={geminiResult.data}
               rawText={geminiResult.rawText}
-              error={null} 
+              error={null}
               selectedTaskType={selectedTask}
+              confidenceScore={geminiResult.confidenceScore}
             />
           )}
         </div>

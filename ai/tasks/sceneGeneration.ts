@@ -1,8 +1,9 @@
-import { TaskCategory, TaskType, GeminiServiceResponse } from '../../types';
+import { TaskCategory, TaskType, GeminiServiceResponse, ProcessedFile } from '../../types';
 import { SCENE_GENERATOR_INSTRUCTIONS } from '../../instructions/scene_generator_instructions';
 import { AIAgentConfig } from '../types';
 import { TaskRuntimeParams } from './taskTypes';
 import { executeTask } from './taskRunner';
+import { executeTensionOptimization } from './tensionOptimization';
 
 /**
  * @description Configuration for the SceneArchitect AI agent.
@@ -52,10 +53,71 @@ export const SCENE_GENERATOR_AGENT_CONFIG: AIAgentConfig = {
     confidenceThreshold: 0.80
 };
 
-export const executeSceneGeneration = (params: TaskRuntimeParams): Promise<GeminiServiceResponse> =>
-  executeTask({
+const extractSceneText = (result: GeminiServiceResponse): string => {
+  if (!result) {
+    return '';
+  }
+
+  if (typeof result.data === 'string' && result.data.trim().length > 0) {
+    return result.data;
+  }
+
+  if (result.rawText && result.rawText.trim().length > 0) {
+    return result.rawText;
+  }
+
+  if (result.data && typeof result.data === 'object' && 'content' in result.data) {
+    const content = (result.data as Record<string, unknown>).content;
+    if (typeof content === 'string' && content.trim().length > 0) {
+      return content;
+    }
+  }
+
+  return '';
+};
+
+export const executeSceneGeneration = async (params: TaskRuntimeParams): Promise<GeminiServiceResponse> => {
+  const baseResult = await executeTask({
     ...params,
     taskType: TaskType.SCENE_GENERATOR,
     agentConfig: SCENE_GENERATOR_AGENT_CONFIG,
     instructions: SCENE_GENERATOR_INSTRUCTIONS,
   });
+
+  const shouldAutoOptimize = params.specialRequirements?.includes('تحسين تلقائي');
+  if (!shouldAutoOptimize) {
+    return baseResult;
+  }
+
+  const generatedScene = extractSceneText(baseResult);
+  if (!generatedScene || generatedScene.trim().length === 0) {
+    return baseResult;
+  }
+
+  const encodedLength = typeof TextEncoder !== 'undefined'
+    ? new TextEncoder().encode(generatedScene).length
+    : generatedScene.length;
+
+  const syntheticFile: ProcessedFile = {
+    name: 'generated_scene.txt',
+    mimeType: 'text/plain',
+    content: generatedScene,
+    isBase64: false,
+    size: encodedLength,
+  };
+
+  const optimizationParams: TaskRuntimeParams = {
+    ...params,
+    processedFiles: [syntheticFile],
+    additionalInfo: `${params.additionalInfo ? `${params.additionalInfo}\n` : ''}النص أعلاه هو المشهد المولد ويجب تحسين توتره تلقائيًا.`.trim(),
+  };
+
+  const optimizationResult = await executeTensionOptimization(optimizationParams);
+
+  return {
+    ...optimizationResult,
+    rawText: optimizationResult.rawText ?? baseResult.rawText,
+    data: optimizationResult.data ?? optimizationResult.rawText ?? baseResult.data,
+    confidenceScore: optimizationResult.confidenceScore ?? baseResult.confidenceScore,
+  };
+};

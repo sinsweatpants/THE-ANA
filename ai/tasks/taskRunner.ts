@@ -5,7 +5,7 @@ import { AIAgentConfig } from '../types';
 import { buildPromptParts } from './promptBuilder';
 import { TASKS_EXPECTING_JSON_RESPONSE } from '../../constants';
 
-interface ExecuteTaskOptions extends TaskRuntimeParams {
+export interface ExecuteTaskOptions extends TaskRuntimeParams {
   taskType: TaskType;
   agentConfig: AIAgentConfig;
   instructions: string;
@@ -27,4 +27,17 @@ export const executeTask = async (options: ExecuteTaskOptions): Promise<GeminiSe
     shouldExpectJson: TASKS_EXPECTING_JSON_RESPONSE.includes(taskType),
     maxOutputTokens: 65000,
   });
+};
+
+export const executeTaskSequence = async (
+  sequence: ExecuteTaskOptions[],
+): Promise<GeminiServiceResponse[]> => {
+  const results: GeminiServiceResponse[] = [];
+
+  for (const taskOptions of sequence) {
+    const outcome = await executeTask(taskOptions);
+    results.push(outcome);
+  }
+
+  return results;
 };
