@@ -55,18 +55,23 @@ const taskOptionsList: TaskOption[] = [
   { id: TaskType.THEMATIC_MINING, label: "التنقيب عن الموضوعات", icon: <MagnifyingGlassIcon className="w-5 h-5" />, category: TASK_CATEGORY_MAP[TaskType.THEMATIC_MINING], description: ENHANCED_TASK_DESCRIPTIONS[TaskType.THEMATIC_MINING] },
   { id: TaskType.STYLE_FINGERPRINT, label: "بصمة الأسلوب", icon: <CodeBracketIcon className="w-5 h-5" />, category: TASK_CATEGORY_MAP[TaskType.STYLE_FINGERPRINT], description: ENHANCED_TASK_DESCRIPTIONS[TaskType.STYLE_FINGERPRINT] },
   { id: TaskType.CONFLICT_DYNAMICS, label: "ديناميكيات الصراع", icon: <ChartBarIcon className="w-5 h-5" />, category: TASK_CATEGORY_MAP[TaskType.CONFLICT_DYNAMICS], description: ENHANCED_TASK_DESCRIPTIONS[TaskType.CONFLICT_DYNAMICS] },
-  
+  { id: TaskType.VOICE_INTERACTION_ANALYZER, label: "تحليل التفاعل الصوتي", icon: <UsersIcon className="w-5 h-5" />, category: TASK_CATEGORY_MAP[TaskType.VOICE_INTERACTION_ANALYZER], description: ENHANCED_TASK_DESCRIPTIONS[TaskType.VOICE_INTERACTION_ANALYZER] },
+  { id: TaskType.FORESHADOWING_DETECTOR, label: "كاشف التلميحات المسبقة", icon: <LightBulbIcon className="w-5 h-5" />, category: TASK_CATEGORY_MAP[TaskType.FORESHADOWING_DETECTOR], description: ENHANCED_TASK_DESCRIPTIONS[TaskType.FORESHADOWING_DETECTOR] },
+
   // Advanced creative (existing)
   { id: TaskType.ADAPTIVE_REWRITING, label: "إعادة الكتابة التكيفية", icon: <ArrowsRightLeftIcon className="w-5 h-5" />, category: TASK_CATEGORY_MAP[TaskType.ADAPTIVE_REWRITING], description: ENHANCED_TASK_DESCRIPTIONS[TaskType.ADAPTIVE_REWRITING] },
   { id: TaskType.SCENE_GENERATOR, label: "مولد المشاهد", icon: <FilmIcon className="w-5 h-5" />, category: TASK_CATEGORY_MAP[TaskType.SCENE_GENERATOR], description: ENHANCED_TASK_DESCRIPTIONS[TaskType.SCENE_GENERATOR] },
   { id: TaskType.CHARACTER_VOICE, label: "محاكي صوت الشخصيات", icon: <UsersIcon className="w-5 h-5" />, category: TASK_CATEGORY_MAP[TaskType.CHARACTER_VOICE], description: ENHANCED_TASK_DESCRIPTIONS[TaskType.CHARACTER_VOICE] },
   { id: TaskType.WORLD_BUILDER, label: "باني العوالم", icon: <GlobeAltIcon className="w-5 h-5" />, category: TASK_CATEGORY_MAP[TaskType.WORLD_BUILDER], description: ENHANCED_TASK_DESCRIPTIONS[TaskType.WORLD_BUILDER] },
-  
+  { id: TaskType.CONFLICT_DIALOGUE_GENERATOR, label: "مولد حوار الصراع", icon: <UsersIcon className="w-5 h-5" />, category: TASK_CATEGORY_MAP[TaskType.CONFLICT_DIALOGUE_GENERATOR], description: ENHANCED_TASK_DESCRIPTIONS[TaskType.CONFLICT_DIALOGUE_GENERATOR] },
+  { id: TaskType.SCENE_OPTIMIZER, label: "محسِّن المشاهد", icon: <ClipboardDocumentIcon className="w-5 h-5" />, category: TASK_CATEGORY_MAP[TaskType.SCENE_OPTIMIZER], description: ENHANCED_TASK_DESCRIPTIONS[TaskType.SCENE_OPTIMIZER] },
+
   // Predictive and generative (existing)
   { id: TaskType.PLOT_PREDICTOR, label: "متنبئ مسار الحبكة", icon: <BeakerIcon className="w-5 h-5" />, category: TASK_CATEGORY_MAP[TaskType.PLOT_PREDICTOR], description: ENHANCED_TASK_DESCRIPTIONS[TaskType.PLOT_PREDICTOR] },
   { id: TaskType.TENSION_OPTIMIZER, label: "محسن التوتر الدرامي", icon: <BeakerIcon className="w-5 h-5" />, category: TASK_CATEGORY_MAP[TaskType.TENSION_OPTIMIZER], description: ENHANCED_TASK_DESCRIPTIONS[TaskType.TENSION_OPTIMIZER] },
   { id: TaskType.AUDIENCE_RESONANCE, label: "محلل صدى الجمهور", icon: <UsersIcon className="w-5 h-5" />, category: TASK_CATEGORY_MAP[TaskType.AUDIENCE_RESONANCE], description: ENHANCED_TASK_DESCRIPTIONS[TaskType.AUDIENCE_RESONANCE] },
   { id: TaskType.PLATFORM_ADAPTER, label: "محول المنصات", icon: <ArrowsRightLeftIcon className="w-5 h-5" />, category: TASK_CATEGORY_MAP[TaskType.PLATFORM_ADAPTER], description: ENHANCED_TASK_DESCRIPTIONS[TaskType.PLATFORM_ADAPTER] },
+  { id: TaskType.WHAT_IF_SCENARIO_ANALYZER, label: "محلل سيناريوهات ماذا لو", icon: <BeakerIcon className="w-5 h-5" />, category: TASK_CATEGORY_MAP[TaskType.WHAT_IF_SCENARIO_ANALYZER], description: ENHANCED_TASK_DESCRIPTIONS[TaskType.WHAT_IF_SCENARIO_ANALYZER] },
 
   // New Advanced Modules (Units 3-11)
   { id: TaskType.CHARACTER_DEEP_ANALYZER, label: "مُحلل الشخصيات العميق (و3)", icon: <UsersIcon className="w-5 h-5" />, category: TASK_CATEGORY_MAP[TaskType.CHARACTER_DEEP_ANALYZER], description: ENHANCED_TASK_DESCRIPTIONS[TaskType.CHARACTER_DEEP_ANALYZER] },
@@ -97,6 +102,10 @@ const groupedTasks = taskOptionsList.reduce((acc, task) => {
  */
 const categoryOrder: TaskCategory[] = [
   TaskCategory.CORE,
+  TaskCategory.ANALYSIS,
+  TaskCategory.CREATIVE,
+  TaskCategory.PREDICTIVE,
+  TaskCategory.ADVANCED_MODULES,
   TaskCategory.ANALYSES,
   TaskCategory.AGENTS,
 ];

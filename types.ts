@@ -48,6 +48,15 @@ export enum TaskType {
   LITERARY_QUALITY_ANALYZER = 'literary_quality_analyzer',
   // الوحدة 11: مولد التوصيات والتحسينات
   RECOMMENDATIONS_GENERATOR = 'recommendations_generator',
+
+  // --- قسم جديد: وكلاء التحليل المبتكر ---
+  VOICE_INTERACTION_ANALYZER = 'voice_interaction_analyzer',
+  FORESHADOWING_DETECTOR = 'foreshadowing_detector',
+  WHAT_IF_SCENARIO_ANALYZER = 'what_if_scenario_analyzer',
+
+  // --- قسم جديد: وكلاء التوليد المتقدم ---
+  CONFLICT_DIALOGUE_GENERATOR = 'conflict_dialogue_generator',
+  SCENE_OPTIMIZER = 'scene_optimizer',
 }
 
 /**
@@ -57,7 +66,11 @@ export enum TaskType {
 export enum TaskCategory {
   CORE = 'المهام الأساسية',
   ANALYSES = 'التحليلات',
-  AGENTS = 'الوكلاء'
+  AGENTS = 'الوكلاء',
+  ANALYSIS = 'التحليل المتقدم',
+  CREATIVE = 'المهام الإبداعية',
+  PREDICTIVE = 'المهام التنبؤية',
+  ADVANCED_MODULES = 'الوحدات المتخصصة',
 }
 
 /**
@@ -617,6 +630,7 @@ export interface GeminiServiceResponse {
   data?: GeminiTaskResultData;
   rawText?: string; // Always include the raw text for fallback or simplified display
   error?: string;
+  confidenceScore?: number;
 }
 
 /**

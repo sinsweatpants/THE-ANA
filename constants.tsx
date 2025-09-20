@@ -29,6 +29,11 @@ import { PRODUCIBILITY_ANALYZER_INSTRUCTIONS } from './instructions/producibilit
 import { TARGET_AUDIENCE_ANALYZER_INSTRUCTIONS } from './instructions/target_audience_analyzer_instructions';
 import { LITERARY_QUALITY_ANALYZER_INSTRUCTIONS } from './instructions/literary_quality_analyzer_instructions';
 import { RECOMMENDATIONS_GENERATOR_INSTRUCTIONS } from './instructions/recommendations_generator_instructions';
+import { VOICE_INTERACTION_ANALYZER_INSTRUCTIONS } from './instructions/voice_interaction_analyzer_instructions';
+import { FORESHADOWING_DETECTOR_INSTRUCTIONS } from './instructions/foreshadowing_detector_instructions';
+import { WHAT_IF_SCENARIO_ANALYZER_INSTRUCTIONS } from './instructions/what_if_scenario_analyzer_instructions';
+import { CONFLICT_DIALOGUE_GENERATOR_INSTRUCTIONS } from './instructions/conflict_dialogue_generator_instructions';
+import { SCENE_OPTIMIZER_INSTRUCTIONS } from './instructions/scene_optimizer_instructions';
 
 /** @description The title of the application. */
 export const APP_TITLE = "المحلل الدرامي والمبدع المحاكي";
@@ -98,6 +103,11 @@ export const TASK_LABELS: Record<TaskType, string> = {
   [TaskType.TARGET_AUDIENCE_ANALYZER]: 'تحليل الجمهور المستهدف',
   [TaskType.LITERARY_QUALITY_ANALYZER]: 'تحليل الجودة الأدبية',
   [TaskType.RECOMMENDATIONS_GENERATOR]: 'مولد التوصيات',
+  [TaskType.VOICE_INTERACTION_ANALYZER]: 'تحليل التفاعل الصوتي',
+  [TaskType.FORESHADOWING_DETECTOR]: 'كاشف التلميحات المسبقة',
+  [TaskType.WHAT_IF_SCENARIO_ANALYZER]: 'محلل سيناريوهات "ماذا لو"',
+  [TaskType.CONFLICT_DIALOGUE_GENERATOR]: 'مولد حوار الصراع',
+  [TaskType.SCENE_OPTIMIZER]: 'محسِّن المشاهد',
 };
 
 /**
@@ -108,30 +118,38 @@ export const TASK_CATEGORY_MAP: Record<TaskType, TaskCategory> = {
   [TaskType.CREATIVE]: TaskCategory.CORE,
   [TaskType.INTEGRATED]: TaskCategory.CORE,
   [TaskType.COMPLETION]: TaskCategory.CORE,
-  [TaskType.RHYTHM_MAPPING]: TaskCategory.ANALYSES,
-  [TaskType.CHARACTER_NETWORK]: TaskCategory.ANALYSES,
-  [TaskType.DIALOGUE_FORENSICS]: TaskCategory.ANALYSES,
-  [TaskType.THEMATIC_MINING]: TaskCategory.ANALYSES,
-  [TaskType.STYLE_FINGERPRINT]: TaskCategory.ANALYSES,
-  [TaskType.CONFLICT_DYNAMICS]: TaskCategory.ANALYSES,
-  [TaskType.ADAPTIVE_REWRITING]: TaskCategory.ANALYSES,
-  [TaskType.SCENE_GENERATOR]: TaskCategory.ANALYSES,
-  [TaskType.CHARACTER_VOICE]: TaskCategory.ANALYSES,
-  [TaskType.WORLD_BUILDER]: TaskCategory.ANALYSES,
-  [TaskType.PLOT_PREDICTOR]: TaskCategory.ANALYSES,
-  [TaskType.TENSION_OPTIMIZER]: TaskCategory.ANALYSES,
-  [TaskType.AUDIENCE_RESONANCE]: TaskCategory.ANALYSES,
-  [TaskType.PLATFORM_ADAPTER]: TaskCategory.ANALYSES,
-  // New Modules Category Mapping
-  [TaskType.CHARACTER_DEEP_ANALYZER]: TaskCategory.AGENTS,
-  [TaskType.DIALOGUE_ADVANCED_ANALYZER]: TaskCategory.AGENTS,
-  [TaskType.VISUAL_CINEMATIC_ANALYZER]: TaskCategory.AGENTS,
-  [TaskType.THEMES_MESSAGES_ANALYZER]: TaskCategory.AGENTS,
-  [TaskType.CULTURAL_HISTORICAL_ANALYZER]: TaskCategory.AGENTS,
-  [TaskType.PRODUCIBILITY_ANALYZER]: TaskCategory.AGENTS,
-  [TaskType.TARGET_AUDIENCE_ANALYZER]: TaskCategory.AGENTS,
-  [TaskType.LITERARY_QUALITY_ANALYZER]: TaskCategory.AGENTS,
-  [TaskType.RECOMMENDATIONS_GENERATOR]: TaskCategory.AGENTS,
+
+  [TaskType.RHYTHM_MAPPING]: TaskCategory.ANALYSIS,
+  [TaskType.CHARACTER_NETWORK]: TaskCategory.ANALYSIS,
+  [TaskType.DIALOGUE_FORENSICS]: TaskCategory.ANALYSIS,
+  [TaskType.THEMATIC_MINING]: TaskCategory.ANALYSIS,
+  [TaskType.STYLE_FINGERPRINT]: TaskCategory.ANALYSIS,
+  [TaskType.CONFLICT_DYNAMICS]: TaskCategory.ANALYSIS,
+  [TaskType.VOICE_INTERACTION_ANALYZER]: TaskCategory.ANALYSIS,
+  [TaskType.FORESHADOWING_DETECTOR]: TaskCategory.ANALYSIS,
+
+  [TaskType.ADAPTIVE_REWRITING]: TaskCategory.CREATIVE,
+  [TaskType.SCENE_GENERATOR]: TaskCategory.CREATIVE,
+  [TaskType.CHARACTER_VOICE]: TaskCategory.CREATIVE,
+  [TaskType.WORLD_BUILDER]: TaskCategory.CREATIVE,
+  [TaskType.CONFLICT_DIALOGUE_GENERATOR]: TaskCategory.CREATIVE,
+  [TaskType.SCENE_OPTIMIZER]: TaskCategory.CREATIVE,
+
+  [TaskType.PLOT_PREDICTOR]: TaskCategory.PREDICTIVE,
+  [TaskType.TENSION_OPTIMIZER]: TaskCategory.PREDICTIVE,
+  [TaskType.AUDIENCE_RESONANCE]: TaskCategory.PREDICTIVE,
+  [TaskType.PLATFORM_ADAPTER]: TaskCategory.PREDICTIVE,
+  [TaskType.WHAT_IF_SCENARIO_ANALYZER]: TaskCategory.PREDICTIVE,
+
+  [TaskType.CHARACTER_DEEP_ANALYZER]: TaskCategory.ADVANCED_MODULES,
+  [TaskType.DIALOGUE_ADVANCED_ANALYZER]: TaskCategory.ADVANCED_MODULES,
+  [TaskType.VISUAL_CINEMATIC_ANALYZER]: TaskCategory.ADVANCED_MODULES,
+  [TaskType.THEMES_MESSAGES_ANALYZER]: TaskCategory.ADVANCED_MODULES,
+  [TaskType.CULTURAL_HISTORICAL_ANALYZER]: TaskCategory.ADVANCED_MODULES,
+  [TaskType.PRODUCIBILITY_ANALYZER]: TaskCategory.ADVANCED_MODULES,
+  [TaskType.TARGET_AUDIENCE_ANALYZER]: TaskCategory.ADVANCED_MODULES,
+  [TaskType.LITERARY_QUALITY_ANALYZER]: TaskCategory.ADVANCED_MODULES,
+  [TaskType.RECOMMENDATIONS_GENERATOR]: TaskCategory.ADVANCED_MODULES,
 };
 
 
@@ -217,6 +235,11 @@ export const TASK_SPECIFIC_INSTRUCTIONS: Record<TaskType, string> = {
   [TaskType.TARGET_AUDIENCE_ANALYZER]: TARGET_AUDIENCE_ANALYZER_INSTRUCTIONS,
   [TaskType.LITERARY_QUALITY_ANALYZER]: LITERARY_QUALITY_ANALYZER_INSTRUCTIONS,
   [TaskType.RECOMMENDATIONS_GENERATOR]: RECOMMENDATIONS_GENERATOR_INSTRUCTIONS,
+  [TaskType.VOICE_INTERACTION_ANALYZER]: VOICE_INTERACTION_ANALYZER_INSTRUCTIONS,
+  [TaskType.FORESHADOWING_DETECTOR]: FORESHADOWING_DETECTOR_INSTRUCTIONS,
+  [TaskType.WHAT_IF_SCENARIO_ANALYZER]: WHAT_IF_SCENARIO_ANALYZER_INSTRUCTIONS,
+  [TaskType.CONFLICT_DIALOGUE_GENERATOR]: CONFLICT_DIALOGUE_GENERATOR_INSTRUCTIONS,
+  [TaskType.SCENE_OPTIMIZER]: SCENE_OPTIMIZER_INSTRUCTIONS,
 };
 
 /**
@@ -236,6 +259,8 @@ export const TASKS_EXPECTING_JSON_RESPONSE: TaskType[] = [
   TaskType.AUDIENCE_RESONANCE,
   TaskType.PLATFORM_ADAPTER,
   TaskType.WORLD_BUILDER, // This one is creative but has a complex JSON structure
+  TaskType.VOICE_INTERACTION_ANALYZER,
+  TaskType.FORESHADOWING_DETECTOR,
   TaskType.CHARACTER_DEEP_ANALYZER,
   TaskType.DIALOGUE_ADVANCED_ANALYZER,
   TaskType.VISUAL_CINEMATIC_ANALYZER,

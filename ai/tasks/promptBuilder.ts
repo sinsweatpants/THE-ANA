@@ -41,7 +41,15 @@ const determineTaskRole = (taskType: TaskType): string => {
       return `بصفتك ${taskLabel} من المستوى المتقدم، استخدم خبراتك الجوهرية لتحقيق نتائج دقيقة.`;
     case TaskCategory.ANALYSES:
       return `بصفتك محلل درامي متخصص في "${taskLabel}", طبق خبراتك المتقدمة لاستخلاص رؤى معمقة.`;
+    case TaskCategory.ANALYSIS:
+      return `بصفتك محلل درامي متخصص في "${taskLabel}", طبق خبراتك المتقدمة لاستخلاص رؤى معمقة.`;
+    case TaskCategory.CREATIVE:
+      return `بصفتك خبيرًا إبداعيًا في "${taskLabel}", حافظ على روح النص الأصلي وقدم حلولاً سردية متجددة.`;
+    case TaskCategory.PREDICTIVE:
+      return `بصفتك مستشرفًا دراميًا لمهمة "${taskLabel}", قدّم أفضل التوقعات والسيناريوهات المدعومة بالمنطق.`;
     case TaskCategory.AGENTS:
+      return `أنت خبير متخصص في "${taskLabel}", التزم بالمعايير الاحترافية للوحدة وتقديم نتائج منظمة.`;
+    case TaskCategory.ADVANCED_MODULES:
       return `أنت خبير متخصص في "${taskLabel}", التزم بالمعايير الاحترافية للوحدة وتقديم نتائج منظمة.`;
     default:
       return `اعمل كخبير متخصص في "${taskLabel}" وقدم أفضل ما لديك بناءً على المعطيات.`;

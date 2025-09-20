@@ -141,6 +141,7 @@ export const generateContent = async (params: GenerateContentParams, retries: nu
     });
 
     const rawTextOutput = response.text;
+    const confidenceScore = 0.9;
 
     if (!rawTextOutput) {
         if (response.candidates && response.candidates[0] && response.candidates[0].finishReason !== "STOP") {
@@ -160,21 +161,21 @@ export const generateContent = async (params: GenerateContentParams, retries: nu
     if (jsonStr.startsWith('{') || jsonStr.startsWith('[')) {
       try {
         const parsedData: GeminiTaskResultData = JSON.parse(jsonStr);
-        return { data: parsedData, rawText: rawTextOutput };
+        return { data: parsedData, rawText: rawTextOutput, confidenceScore };
       } catch (e) {
         // First parse failed, try to fix it.
         const fixedJsonStr = attemptToFixJson(jsonStr);
         try {
             const parsedData: GeminiTaskResultData = JSON.parse(fixedJsonStr);
-            return { data: parsedData, rawText: rawTextOutput };
+            return { data: parsedData, rawText: rawTextOutput, confidenceScore };
         } catch (e2) {
             console.error("فشل في تحليل JSON حتى بعد محاولة الإصلاح:", e2, "\nالنص الأصلي:", rawTextOutput, "\nالنص الذي تمت محاولة إصلاحه:", fixedJsonStr);
             // If it was *supposed* to be JSON, show the user the specific error.
             if (shouldExpectJson) {
-                return { data: rawTextOutput, rawText: rawTextOutput, error: "تم استلام نص غير متوقع بدلاً من JSON. يتم عرض النص الخام." };
+                return { data: rawTextOutput, rawText: rawTextOutput, error: "تم استلام نص غير متوقع بدلاً من JSON. يتم عرض النص الخام.", confidenceScore };
             }
             // Otherwise, for creative tasks, just fall back to raw text without an error.
-            return { data: rawTextOutput, rawText: rawTextOutput };
+            return { data: rawTextOutput, rawText: rawTextOutput, confidenceScore };
         }
       }
     }
@@ -182,11 +183,11 @@ export const generateContent = async (params: GenerateContentParams, retries: nu
     // If it doesn't look like JSON, treat it as raw text.
     // If we were expecting JSON but got something else entirely, flag it.
     if (shouldExpectJson) {
-        return { data: rawTextOutput, rawText: rawTextOutput, error: "تم استلام نص غير متوقع بدلاً من JSON. يتم عرض النص الخام." };
+        return { data: rawTextOutput, rawText: rawTextOutput, error: "تم استلام نص غير متوقع بدلاً من JSON. يتم عرض النص الخام.", confidenceScore };
     }
 
     // Otherwise, it's a valid text response for a creative task.
-    return { data: rawTextOutput, rawText: rawTextOutput };
+    return { data: rawTextOutput, rawText: rawTextOutput, confidenceScore };
 
   } catch (e: any) {
     console.error(`خطأ في معالجة النصوص مع Gemini (محاولة ${retries}/${MAX_RETRIES}):`, e);

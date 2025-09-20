@@ -22,17 +22,22 @@ import { CULTURAL_HISTORICAL_ANALYZER_AGENT_CONFIG } from '../tasks/culturalHist
 import { PRODUCIBILITY_ANALYZER_AGENT_CONFIG } from '../tasks/producibilityAnalysis';
 import { TARGET_AUDIENCE_ANALYZER_AGENT_CONFIG } from '../tasks/targetAudienceAnalysis';
 import { LITERARY_QUALITY_ANALYZER_AGENT_CONFIG } from '../tasks/literaryQualityAnalysis';
+import { VOICE_INTERACTION_ANALYZER_AGENT_CONFIG } from '../tasks/voiceInteractionAnalysis';
+import { FORESHADOWING_DETECTOR_AGENT_CONFIG } from '../tasks/foreshadowingDetection';
 
 // Generators
 import { ADAPTIVE_REWRITING_AGENT_CONFIG } from '../tasks/adaptiveRewriting';
 import { SCENE_GENERATOR_AGENT_CONFIG } from '../tasks/sceneGeneration';
 import { CHARACTER_VOICE_AGENT_CONFIG } from '../tasks/characterVoiceGeneration';
 import { WORLD_BUILDER_AGENT_CONFIG } from '../tasks/worldBuilding';
+import { CONFLICT_DIALOGUE_GENERATOR_AGENT_CONFIG } from '../tasks/conflictDialogueGeneration';
+import { SCENE_OPTIMIZER_AGENT_CONFIG } from '../tasks/sceneOptimization';
 
 // Predictors
 import { PLOT_PREDICTOR_AGENT_CONFIG } from '../tasks/plotPrediction';
 import { TENSION_OPTIMIZER_AGENT_CONFIG } from '../tasks/tensionOptimization';
 import { AUDIENCE_RESONANCE_AGENT_CONFIG } from '../tasks/audienceResonance';
+import { WHAT_IF_SCENARIO_ANALYZER_AGENT_CONFIG } from '../tasks/whatIfScenarioAnalysis';
 
 // Adapters
 import { PLATFORM_ADAPTER_AGENT_CONFIG } from '../tasks/platformAdaptation';
@@ -59,15 +64,20 @@ export const AGENT_CONFIGS = Object.freeze<AIAgentConfig[]>([
   THEMATIC_MINING_AGENT_CONFIG,
   STYLE_FINGERPRINT_AGENT_CONFIG,
   CONFLICT_DYNAMICS_AGENT_CONFIG,
+  VOICE_INTERACTION_ANALYZER_AGENT_CONFIG,
+  FORESHADOWING_DETECTOR_AGENT_CONFIG,
   // === CREATIVE GENERATION AGENTS ===
   ADAPTIVE_REWRITING_AGENT_CONFIG,
   SCENE_GENERATOR_AGENT_CONFIG,
   CHARACTER_VOICE_AGENT_CONFIG,
   WORLD_BUILDER_AGENT_CONFIG,
+  CONFLICT_DIALOGUE_GENERATOR_AGENT_CONFIG,
+  SCENE_OPTIMIZER_AGENT_CONFIG,
   // === PREDICTIVE & OPTIMIZATION AGENTS ===
   PLOT_PREDICTOR_AGENT_CONFIG,
   TENSION_OPTIMIZER_AGENT_CONFIG,
   AUDIENCE_RESONANCE_AGENT_CONFIG,
+  WHAT_IF_SCENARIO_ANALYZER_AGENT_CONFIG,
   PLATFORM_ADAPTER_AGENT_CONFIG,
   // === ADVANCED SPECIALIZED MODULES ===
   CHARACTER_DEEP_ANALYZER_AGENT_CONFIG,
