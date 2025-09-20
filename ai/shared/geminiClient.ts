@@ -30,20 +30,23 @@ const DEFAULT_MODEL = 'models/gemini-2.5-pro';
 
 let ai: GoogleGenAI | null = null;
 
-const resolveApiKey = (): string | undefined => {
-  let browserKey: string | undefined;
-  try {
-    browserKey = (import.meta as ImportMeta).env?.GEMINI_API_KEY;
-  } catch (error) {
-    browserKey = undefined;
-  }
+type MetaWithEnv = ImportMeta & {
+  env?: Record<string, string | undefined>;
+};
 
+const resolveApiKey = (): string | undefined => {
+  const metaEnv =
+    typeof import.meta !== 'undefined' && 'env' in import.meta
+      ? (import.meta as MetaWithEnv).env
+      : undefined;
+
+  const browserKey = metaEnv?.GEMINI_API_KEY ?? metaEnv?.API_KEY;
   if (browserKey && browserKey.length > 0) {
     return browserKey;
   }
 
-  if (typeof process !== 'undefined') {
-    const nodeKey = process.env?.GEMINI_API_KEY || process.env?.API_KEY;
+  if (typeof process !== 'undefined' && typeof process.env !== 'undefined') {
+    const nodeKey = process.env.GEMINI_API_KEY || process.env.API_KEY;
     if (nodeKey && nodeKey.length > 0) {
       return nodeKey;
     }
